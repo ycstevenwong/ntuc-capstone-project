@@ -1,6 +1,5 @@
-package com.example.project.Pojo;
+package com.example.project.model;
 
-import com.example.project.Enum.AccountStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,18 +11,18 @@ import java.math.BigDecimal;
  */
 @Data
 @Entity
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
     @Id
     @Column(name = "account_number")
-    private String accountNumber;
+    private Long accountNumber;
 
     @Column(name = "balance")
     private BigDecimal balance;
 
-    @Column(name="account_status")
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private AccountStatusEnum status;
+    private AccountStatus status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -32,6 +31,4 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "account_type_id")
     private AccountType accountType;
-
-
 }

@@ -1,6 +1,5 @@
-package com.example.project.Pojo;
+package com.example.project.model;
 
-import com.example.project.Enum.AccountTypeEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +12,7 @@ import java.util.Set;
  */
 @Data
 @Entity
-@Table(name = "account_type")
+@Table(name = "account_types")
 public class AccountType {
 
     @Id
@@ -21,9 +20,8 @@ public class AccountType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "account_type_name")
-    @Enumerated(EnumType.STRING)
-    private AccountTypeEnum accountTypeName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "interest_rate")
     private double interestRate;
