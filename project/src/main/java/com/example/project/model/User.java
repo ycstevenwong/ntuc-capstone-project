@@ -78,4 +78,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Account> accounts = new HashSet<>(0);
+
+    @OneToMany(mappedBy = "user")
+    private Set<AccountOpenRequest> requests= new HashSet<>(0);
 }
