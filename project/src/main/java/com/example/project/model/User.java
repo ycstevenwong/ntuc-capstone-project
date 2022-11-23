@@ -79,3 +79,4 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Account> accounts = new HashSet<>(0);
 }
+
