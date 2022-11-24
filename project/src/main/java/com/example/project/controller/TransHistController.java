@@ -46,6 +46,8 @@ public class TransHistController {
     public String display(@Param("accountNum") Long accountNum, Model model) {
         List<TransactionRecord> recordList = displayDeposit(accountNum);
         recordList.addAll(displayWithdrawal(accountNum));
+
+        // sort based on time
         Collections.sort(recordList, new Comparator<TransactionRecord>() {
             public int compare(TransactionRecord m1, TransactionRecord m2) {
                 return m1.getTime().compareTo(m2.getTime());
@@ -66,7 +68,7 @@ public class TransHistController {
     public List<TransactionRecord> displayDeposit(@Param("accountNum") long accountNum) {
         List<Transaction> depositList = (List<Transaction>) transHistRepo.findAll();
         List<TransactionRecord> transactionRecords = new ArrayList<>();
-        
+
         for (Transaction transaction : depositList) {
             if (transaction.getDeposit_account().equals(accountNum)) {
                 Optional<Account> receipent_account = accountRepo.findById(accountNum);
