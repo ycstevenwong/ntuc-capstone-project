@@ -64,3 +64,4 @@ build/
 # Application Properties
 application.properties
 
+/.metadata/

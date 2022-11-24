@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction Page</title>
+  </head>
+  <body>
+    <h1>Transaction Page</h1>
+    <table>
+      <h2>Combined</h2>
+      <thead>
+        <tr>
+          <th>Transaction Id</th>
+          <th>From Account</th>
+          <th>To Account</th>
+          <th>Amount</th>
+          <th>Date/Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="trans: ${transactionList}">
+          <!--/ Note that the cust is a local variable I ownself name one, ie: temp variable to loop through /-->
+          <td th:text="${trans.id}"></td>
+          <td th:text="${trans.fromAccount}"></td>
+          <td th:text="${trans.toAccount}"></td>
+          <td th:text="${trans.amount}"></td>
+          <td th:text="${trans.time}"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <h2>Split</h2>
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Account</th>
+          <th>Amount</th>
+          <th>Date/Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="trans: ${depositList}">
+          <!--/ Note that the cust is a local variable I ownself name one, ie: temp variable to loop through /-->
+          <td th:text="${trans.fromAccount}"></td>
+          <td th:text="${trans.toAccount}"></td>
+          <td th:text="${trans.amount}"></td>
+          <td th:text="${trans.time}"></td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Account</th>
+          <th>Amount</th>
+          <th>Date/Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="trans: ${withdrawList}">
+          <!--/ Note that the cust is a local variable I ownself name one, ie: temp variable to loop through /-->
+          <td th:text="${trans.fromAccount}"></td>
+          <td th:text="${trans.toAccount}"></td>
+          <td th:text="- ${trans.amount}"></td>
+          <td th:text="${trans.time}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

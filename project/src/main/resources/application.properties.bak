@@ -1,8 +1,0 @@
-spring.datasource.url=jdbc:mysql://localhost:3306/project?createDatabaseIfNotExist=true
-spring.datasource.username=
-spring.datasource.password=
-spring.jpa.hibernate.ddl-auto=update
-
-# Use for inserting dummy data from data.sql
-spring.jpa.defer-datasource-initialization=true
-spring.sql.init.mode=always

@@ -1,9 +1,6 @@
 package com.example.project.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,16 +8,15 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author Fusheng Tan
  * @Version 1.0
  */
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -87,10 +83,12 @@ public class User {
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> userRoles = new HashSet<>(0);
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>(0);
 
-    @OneToMany(mappedBy = "user")
-    private Set<AccountOpenRequest> requests = new HashSet<>(0);
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<AccountOpenRequest> requests = new ArrayList<>(0);
+
+    
 }
 
