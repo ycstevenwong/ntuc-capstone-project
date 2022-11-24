@@ -1,7 +1,5 @@
 package com.example.project.controller;
 
-public class TransactionController {
-	
-
+public class DepositTransferController {
 
 }
