@@ -1,17 +1,21 @@
 package com.example.project.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @Author Fusheng Tan
  * @Version 1.0
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "accounts")
 public class Account {
@@ -21,10 +25,9 @@ public class Account {
 
     @Column(name = "balance")
     private BigDecimal balance;
-
+    
     @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private AccountStatus status;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,4 +36,15 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "account_type_id")
     private AccountType accountType;
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountNumber=" + accountNumber +
+                ", balance=" + balance +
+                ", status='" + status + '\'' +
+                ", user=" + user +
+                ", accountType=" + accountType +
+                '}';
+    }
 }
