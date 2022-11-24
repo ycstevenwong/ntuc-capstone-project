@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class AccountOpenRequest {
     @Id
     @Column(name = "request_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long requestId;
 
     @ManyToOne
@@ -26,4 +27,5 @@ public class AccountOpenRequest {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AccountOpenStatus status;
+
 }

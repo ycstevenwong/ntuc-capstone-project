@@ -5,5 +5,5 @@ package com.example.project.model;
  * @Version 1.0
  */
 public enum Gender {
-    MALE, FEMALE
+    MALE, FEMALE,TRANSGENDER,OTHERS
 }
