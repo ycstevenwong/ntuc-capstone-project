@@ -1,3 +1,8 @@
+-- Add this two in application.properties
+
+--spring.jpa.defer-datasource-initialization=true
+--spring.sql.init.mode=always
+
 Delete from project.users_roles where 1;
 Delete from project.transactions where 1;
 Delete from project.accounts where 1;
