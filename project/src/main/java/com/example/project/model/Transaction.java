@@ -37,8 +37,8 @@ public class Transaction {
     private BigDecimal amount;
 
     @Column(name = "fromAccount")
-    private Long fromAccount;
+    private Long withdraw_account;
 
     @Column(name = "toAccount")
-    private Long toAccount;
+    private Long deposit_account;
 }
