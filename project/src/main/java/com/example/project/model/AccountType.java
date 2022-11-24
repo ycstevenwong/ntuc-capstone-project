@@ -1,6 +1,9 @@
 package com.example.project.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,7 +13,10 @@ import java.util.Set;
  * @Author Fusheng Tan
  * @Version 1.0
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "account_types")
 public class AccountType {
@@ -28,4 +34,5 @@ public class AccountType {
 
     @OneToMany(mappedBy = "accountType")
     private Set<Account> accounts = new HashSet<>(0);
+
 }
