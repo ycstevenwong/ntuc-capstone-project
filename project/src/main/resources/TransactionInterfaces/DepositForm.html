@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Deposit Form</title>
+</head>
+<body>
+<div align="center">
+<form th:action="@/deposit" th:object="">
+<!-- Declare deposit Amount -->
+<label> Enter Deposit Amount </label>
+<input type="text" name="deposit_amount" class="" placeholder="Enter Deposit Amount" />
+<!-- Select Account Option -->
+<select name="account_id">
+<option value="">--Please select Account ID--</option>
+    <option value="recurringAccount">Recurring Account </option>
+    <option value="fixedDeposit">Fixed Deposit Account </option>
+</select>
+</form>
+</div>
+</body>
+</html>
