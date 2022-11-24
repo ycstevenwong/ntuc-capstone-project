@@ -93,3 +93,4 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<AccountOpenRequest> requests = new HashSet<>(0);
 }
+
