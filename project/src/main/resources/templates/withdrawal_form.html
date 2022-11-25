@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<div align="center">
-<h1> Withdrawal Form </h1>
-<form action="#" th:action="@{/transact/withdrawal}" method="post" th:object="${withdrawal}">
-<table>
-<tr>
-<td> Withdrawal Amount: </td>
-<td> <input type = "text" th:field="*{amount}" /></td>
-</tr>
-<tr> 
-<td> From Account: </td>
-<td> <td> <input type = "text" th:field="*{accountNumber}" /></td>
-</tr>
-<tr>
-<td colspan="2"><input type="submit" value="Save"></td>
-</tr>
-</table>
-</form>
-</div>
-</body>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <div align="center">
+      <h1>Withdrawal Form</h1>
+      <form
+        action="#"
+        th:action="@{/transact/withdrawal}"
+        method="post"
+        th:object="${withdrawal}"
+      >
+        <table>
+          <tr>
+            <td>Withdrawal Amount:</td>
+            <td><input type="text" th:field="*{amount}" /></td>
+          </tr>
+          <tr>
+            <td>From Account:</td>
+            <td></td>
+            <td><input type="text" th:field="*{accountNumber}" /></td>
+          </tr>
+          <tr>
+            <td colspan="2"><input type="submit" value="Save" /></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
 </html>

@@ -23,10 +23,10 @@ VALUES (NULL, '200', 'DEPOSIT', current_timestamp(), '010');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
 VALUES (NULL, '500', 'DEPOSIT', current_timestamp(), '010');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
-VALUES (NULL, '1000', 'WITHDRAW', current_timestamp(), '012');
+VALUES (NULL, '-1000', 'WITHDRAW', current_timestamp(), '012');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
-VALUES (NULL, '1000', 'DEPOSIT', current_timestamp(), '012');
+VALUES (NULL, '-1000', 'DEPOSIT', current_timestamp(), '012');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
-VALUES (NULL, '0.01', 'WITHDRAW', current_timestamp(), '011');
+VALUES (NULL, '-0.01', 'WITHDRAW', current_timestamp(), '011');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
-VALUES (NULL, '10', 'WITHDRAW', current_timestamp(), '011');
+VALUES (NULL, '-10', 'WITHDRAW', current_timestamp(), '011');

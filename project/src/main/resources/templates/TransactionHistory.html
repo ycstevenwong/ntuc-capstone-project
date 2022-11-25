@@ -16,6 +16,8 @@
   </style>
   <body>
     <table>
+    </table>
+    <table>
       <h2>Transaction History</h2>
       <thead>
         <tr>
@@ -26,23 +28,37 @@
           <th>account ID</th>
         </tr>
       </thead>
-      <H2 th:text="${currentBalance}"></H2>
+      <h2 th:text="${currentBalance}"></h2>
       <tr th:each="trans: ${transactionList}">
-          <!--/ Note that the cust is a local variable I ownself name one, ie: temp variable to loop through /-->
-          <td th:text="${trans.getId}"></td>
-          <td th:text="${trans.getAmount}"></td>
-          <td th:text="${trans.getDescription}"></td>
-          <td th:text="${trans.getTime}"></td>
-          <td th:text="${trans.getAccount.getAccountNumber}"></td>
-        </tr>
-      </tbody>
+        <!--/ Note that the cust is a local variable I ownself name one, ie: temp variable to loop through /-->
+        <td th:text="${trans.getId}"></td>
+        <td th:text="${trans.getAmount}"></td>
+        <td th:text="${trans.getDescription}"></td>
+        <td th:text="${trans.getTime}"></td>
+        <td th:text="${trans.getAccount.getAccountNumber}"></td>
+      </tr>
     </table>
-</body>
+    <br />
+    <form action="deposit">
+      <input
+        type="hidden"
+        th:name="accountNumber"
+        th:value="${accountNumber}"
+      />
+      <input type="text" th:name="amount" />
+      <input type="submit" value="transfer" />
+    </form>
+    <form action="withdraw">
+      <input
+        type="hidden"
+        th:name="accountNumber"
+        th:value="${accountNumber}"
+      />
+      <input type="text" th:name="amount" />
+      <input type="submit" value="wtihdraw" />
+    </form>
+  </body>
 </html>
-
-
-
-
 
 <!-- 
 <form th:action="trnf" >
