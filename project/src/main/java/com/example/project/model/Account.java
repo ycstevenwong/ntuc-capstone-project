@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author Fusheng Tan
@@ -25,26 +27,18 @@ public class Account {
 
     @Column(name = "balance")
     private BigDecimal balance;
-    
+
     @Column(name = "status")
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "account_type_id")
     private AccountType accountType;
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountNumber=" + accountNumber +
-                ", balance=" + balance +
-                ", status='" + status + '\'' +
-                ", user=" + user +
-                ", accountType=" + accountType +
-                '}';
-    }
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    private List<Transaction> transactions = new ArrayList<>(0);
 }

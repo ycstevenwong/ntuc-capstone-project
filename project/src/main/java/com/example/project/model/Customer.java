@@ -8,7 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @Author Fusheng Tan
@@ -21,20 +23,16 @@ import java.util.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "customer")
+public class Customer {
     @Id
-    @Column(name = "user_id")
+    @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nric", unique = true)
     @NotEmpty(message = "You can not leave the NRIC blank!")
     private String nric;
-
-    @Column(name = "pwd")
-    @NotEmpty(message = "Please fill in your password!")
-    private String pwd;
 
     @Column(name = "name", length = 32)
     @NotEmpty(message = "You can not leave the Name blank!")
@@ -79,16 +77,8 @@ public class User {
     @Column(name = "register_time", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     public Timestamp timestamp;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> userRoles = new HashSet<>(0);
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>(0);
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<AccountOpenRequest> requests = new ArrayList<>(0);
-
-    
 }
 
