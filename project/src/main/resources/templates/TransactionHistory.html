@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+  <body>
+    <table>
+      <h2>Transaction History</h2>
+      <thead>
+        <tr>
+          <th>Transaction Id</th>
+          <th>Transaction Amount</th>
+          <th>Description</th>
+          <th>Time of transaction</th>
+          <th>account ID</th>
+        </tr>
+      </thead>
+      <H2 th:text="${currentBalance}"></H2>
+      <tr th:each="trans: ${transactionList}">
+          <!--/ Note that the cust is a local variable I ownself name one, ie: temp variable to loop through /-->
+          <td th:text="${trans.getId}"></td>
+          <td th:text="${trans.getAmount}"></td>
+          <td th:text="${trans.getDescription}"></td>
+          <td th:text="${trans.getTime}"></td>
+          <td th:text="${trans.getAccount.getAccountNumber}"></td>
+        </tr>
+      </tbody>
+    </table>
+</body>
+</html>
+
+
+
+
+
+<!-- 
+<form th:action="trnf" >
+    <input type="text" name="asd">
+    <input type="text" name="accountNum">
+    <input type="submit" value="submit">
+</form> -->

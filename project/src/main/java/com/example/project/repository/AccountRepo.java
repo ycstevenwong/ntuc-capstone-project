@@ -1,6 +1,9 @@
 package com.example.project.repository;
 
 import com.example.project.model.Account;
+
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,4 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Version 1.0
  */
 public interface AccountRepo extends JpaRepository<Account, Long> {
+
+    Optional<Account> findByAccountNumber(Long accountNumber);
+
 }
