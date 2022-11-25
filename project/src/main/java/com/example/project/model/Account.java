@@ -23,6 +23,7 @@ import java.util.List;
 public class Account {
     @Id
     @Column(name = "account_number")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountNumber;
 
     @Column(name = "balance")
