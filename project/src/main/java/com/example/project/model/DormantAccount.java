@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 
 /**
  * @Author Fusheng Tan
@@ -25,10 +24,10 @@ import java.math.BigDecimal;
 public class DormantAccount {
     @Id
     @Column(name = "dormant_account_number")
-    private Long accountNumber;
+    private Long dormantAccountNumber;
 
-    @Column(name = "balance")
-    private BigDecimal balance;
+    @Column(name = "customer_id")
+    private Long id;
 
     @Column(name = "status")
     private String status;
