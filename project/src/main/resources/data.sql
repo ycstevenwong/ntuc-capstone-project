@@ -3,104 +3,83 @@
 --spring.jpa.defer-datasource-initialization=true
 --spring.sql.init.mode=always
 
-Delete from project.users_roles where 1;
+Delete from project.dormant_accounts where 1;
 Delete from project.transactions where 1;
+Delete from project.transactions where 1;
+Delete from project.employee where 1;
 Delete from project.accounts where 1;
-Delete from project.account_open_request where 1;
 Delete from project.account_types where 1;
-Delete from project.roles where 1;
-Delete from project.user where 1;
+Delete from project.customer where 1;
+-- Insert customer table
+
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('1', 'Singapore Block A', '18', '2004-01-01', 'steven@test.com', 'MALE', 'Steven', 'Gabriel', 'S54321', 'S12345', '11111111', current_timestamp());
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('2', 'Singapore Block B', '18', '2004-02-02', 'gabriel@test.com', 'MALE', 'Gabriel', 'Steven', 'S12345', 'S54321', '22222222', current_timestamp());
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('3', 'Singapore Block C', '18', '2004-03-03', 'jiayi@test.com', 'FEMALE', 'Jia Yi', 'Ming Ming', 'S09876', 'S67890', '33333333', current_timestamp());
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('4', 'Singapore Block D', '18', '2004-04-04', 'ming2@test.com', 'FEMALE', 'Ming Ming', 'Gabriel', 'S67890', 'S09876', '44444444', current_timestamp());
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('5', 'Singapore Block E', '18', '2004-05-05', 'qz@test.com', 'MALE', 'Qi Zhi', 'Si Qi', 'T54321', 'T12345', '55555555', current_timestamp());
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('6', 'Singapore Block F', '18', '2004-06-06', 'sq@test.com', 'FEMALE', 'Si Qi', 'Qi Zhi', 'T12345', 'T54321', '66666666', current_timestamp());
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('7', 'Singapore Block G', '18', '2004-07-07', 'fusheng@test.com', 'MALE', 'Fu Sheng', 'Keith', 'T09876', 'T67890', '77777777', current_timestamp());
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('8', 'Singapore Block H', '18', '2004-08-08', 'keith@test.com', 'MALE', 'Keith', 'Fu Sheng', 'T67890', 'T09876', '88888888', current_timestamp());
+INSERT INTO `project`.`customer` (`customer_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `register_time`) 
+VALUES ('9', 'Singapore Block I', '18', '2004-09-09', 'bowen@test.com', 'MALE', 'Bowen', 'Steven', 'S12345', 'T11111', '99999999', current_timestamp());
+
+-- Insert Employee Table
+INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`)
+VALUES ('1', 'password', current_timestamp());
+INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`)
+VALUES ('2', 'password', current_timestamp());
+INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`)
+VALUES ('3', 'password', current_timestamp());
 
 
+-- Insert Account Types Table
+INSERT INTO `project`.`account_types` (`account_type_id`, `interest_rate`, `name`) 
+VALUES ('1', '0.07', 'Saving Deposit');
+INSERT INTO `project`.`account_types` (`account_type_id`, `interest_rate`, `name`) 
+VALUES ('2', '0.10', 'Recurring Deposit');
 
--- Insert user table
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('1', 'Singapore Block A', '18', '2004-01-01', 'steven@gmail.com', 'MALE', 'Steven', 'Gabriel', 'S12345', 'S54321', '12345678', 'password', current_timestamp());
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('2', 'Singapore Block B', '18', '2004-02-02', 'gabriel@gmail.com', 'MALE', 'Gabriel', 'Steven', 'S54321', 'S12345', '87654321', 'password', current_timestamp());
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('3', 'Singapore Block C', '18', '2004-03-03', 'mingming@gmail.com', 'FEMALE', 'Ming Ming', 'Jia Yi', 'S67890', 'S09876', '66666666', 'password', current_timestamp());
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('4', 'Singapore Block D', '18', '2004-06-06', 'jiayi@gmail.com', 'FEMALE', 'Jia Yi', 'Ming Ming', 'S09876', 'S67890', '88888888', 'password', current_timestamp());
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('5', 'Singapore Block E', '18', '2004-07-07', 'siqi@gmail.com', 'FEMALE', 'Si Qi', 'Qi Zhi', 'T12345', 'T54321', '77777777', 'password', current_timestamp());
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('6', 'Singapore Block F', '18', '2004-08-08', 'qizhi@gmail.com', 'MALE', 'Qi Zhi', 'Si Qi', 'T54321', 'T12345', '99999999', 'password', current_timestamp());
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('7', 'Singapore Block G', '18', '2004-09-09', 'fusheng@gmail.com', 'MALE', 'Fu Sheng', 'Bowen', 'T67890', 'T09876', '11111111', 'password', current_timestamp());
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('8', 'Singapore Block H', '18', '2004-10-10', 'bowen@gmail.com', 'MALE', 'Bowen', 'Fu Sheng', 'T09876', 'T67890', '22222222', 'password', current_timestamp());
-INSERT INTO `project`.`user` (`user_id`, `address`, `age`, `birth_date`, `email_address`, `gender`, `name`, `nominee_name`, `nominee_nric`, `nric`, `phone`, `pwd`, `register_time`) 
-VALUES ('9', 'Singapore Block I', '18', '2004-11-11', 'keith@gmail.com', 'MALE', 'Keith', 'Steven', 'S12345', 'T11111', '33333333', 'password', current_timestamp());
 
--- Insert roles table
-INSERT INTO `project`.`roles` (`role_id`, `name`)
-VALUES ('1', 'Admin');
-INSERT INTO `project`.`roles` (`role_id`, `name`)
-VALUES ('2', 'User');
+-- Insert Accounts Table
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('1', '5000', 'OPEN', '1', '1');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('2', '15000', 'OPEN', '1', '2');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('3', '25000', 'OPEN', '1', '3');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('4', '9000', 'OPEN', '1', '4');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('5', '0', 'CLOSED', '1', '5');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('6', '6000', 'OPEN', '1', '6');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('7', '7000', 'OPEN', '1', '7');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('8', '8000', 'CLOSED', '1', '8');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`) 
+VALUES ('9', '9000', 'OPEN', '1', '9');
 
--- Insert account_types table
-INSERT INTO `project`.`account_types` (`account_type_id`, `interest_rate`, `name`)
-VALUES ('1', '0.07', 'Recurring Deposit');
-INSERT INTO `project`.`account_types` (`account_type_id`, `interest_rate`, `name`)
-VALUES ('2', '0.10', 'Fixed Deposit');
 
--- Insert user_roles table
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('1', '1');
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('2', '1');
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('3', '1');
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('4', '1');
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('5', '1');
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('6', '1');
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('7', '1');
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('8', '1');
-INSERT INTO `project`.`users_roles` (`user_id`, `role_id`)
-VALUES ('9', '1');
+-- Insert Dormant Accounts Table
+INSERT INTO `project`.`dormant_accounts` (`dormant_account_number`, `customer_id`, `status`)
+VALUES ('1', '5', 'CLOSED');
+INSERT INTO `project`.`dormant_accounts` (`dormant_account_number`, `customer_id`, `status`) 
+VALUES ('2', '8', 'CLOSED');
 
--- Insert account_open_request table
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('1', 'PENDING', 'Recurring Deposit', '1');
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('2', 'REJECTED', 'Fixed Deposit', '2');
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('3', 'APPROVED', 'Fixed Deposit', '3');
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('4', 'APPROVED', 'Recurring Deposit', '4');
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('5', 'APPROVED', 'Fixed Deposit', '5');
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('6', 'APPROVED', 'Recurring Deposit', '6');
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('7', 'APPROVED', 'Fixed Deposit', '7');
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('8', 'APPROVED', 'Recurring Deposit', '8');
-INSERT INTO `project`.`account_open_request` (`request_id`, `status`, `account_type`, `user_id`) 
-VALUES ('9', 'APPROVED', 'Fixed Deposit', '9');
-
--- Insert accounts table
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `user_id`) 
-VALUES ('010', '5000', 'OPEN', '1', '4');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `user_id`) 
-VALUES ('011', '15000', 'CLOSED', '2', '3');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `user_id`) 
-VALUES ('012', '6000', 'OPEN', '2', '5');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `user_id`) 
-VALUES ('013', '7000', 'OPEN', '1', '8');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `user_id`) 
-VALUES ('014', '10000', 'CLOSED', '1', '6');
-
--- Insert transactions table
-INSERT INTO `project`.`transactions` (`transaction_id`, `amount`, `from_account`, `time`, `to_account`) 
-VALUES ('1', '200', '010', current_timestamp(), '012');
-INSERT INTO `project`.`transactions` (`transaction_id`, `amount`, `from_account`, `time`, `to_account`) 
-VALUES ('2', '500', '012', current_timestamp(), '014');
-INSERT INTO `project`.`transactions` (`transaction_id`, `amount`, `from_account`, `time`, `to_account`) 
-VALUES ('3', '1000', '013', current_timestamp(), '012');
+-- Insert Transactions Table
+INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
+VALUES ('1', '500', 'education', current_timestamp(), '1');
+INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
+VALUES ('2', '-500', 'xio shuan fei', current_timestamp(), '2');
+INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
+VALUES ('3', '1500', 'household', current_timestamp(), '3');
+INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
+VALUES ('4', '-400', 'expensive food', current_timestamp(), '4');
