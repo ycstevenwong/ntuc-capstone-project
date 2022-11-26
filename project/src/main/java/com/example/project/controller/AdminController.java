@@ -54,12 +54,15 @@ public class AdminController {
 		return "redirect:/admin/view";	
 	}
 
+	// Show Edit Page when click Edit button
 	@GetMapping("/edit/{id}")
 	public String editAccountType(@PathVariable Long id,Model model){
 		Optional<AccountType> ac = adminRepo.findById(id);
 		model.addAttribute("ac", ac);
 		return "AccountType/editAccountType";
 	}
+
+	// Save the Account Type to Database click Submit button
 	@PutMapping("/save")
 	public String saveAccountType(@Valid AccountType editedAccountType, BindingResult result){
 		Long id = editedAccountType.getId();
