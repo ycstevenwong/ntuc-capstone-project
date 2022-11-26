@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,10 +20,11 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 @Controller
 public class NewsController {
-
+    @Autowired
+    private Environment env;
     @RequestMapping("/news")
     public ModelAndView viewNews() throws UnirestException{
-        String apiKey = "49ee89a591mshdfab1f0ab341bfcp1eb0bbjsnc51a1f6f5633";
+        String apiKey = env.getProperty("news.api.key");
         String host = "contextualwebsearch-websearch-v1.p.rapidapi.com";
         String pageSize = "10";
         String queryCategory = "finance";
