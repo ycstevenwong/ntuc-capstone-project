@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account Type</title>
+</head>
+<body>
+    <form th:action="@{/admin/save}" th:object="${ac}" th:method="put">
+		<input type="text" id="id" name="id" th:field="*{id}" hidden>
+		<label for="name">Name:</label><br>
+		<input type="text" id="name" name="name" th:field="*{name}"><br>
+		<p th:error="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+		<label for="interestRate">Interest Rate:</label><br>
+		<input type="text" id="interestRate" name="interestRate" th:field="*{interestRate}"><br><br>
+		<input type="submit" value="Submit">
+		<p th:error="*{interestRate}" th:if="${#fields.hasErrors('interestRate')}"></p>
+	</form>
+</body>
+</html>

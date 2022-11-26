@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Account Type</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Account Name</th>
+                <th>Account Interest Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="accountType : ${accountTypesList}">
+                <td th:text="${accountType.name}"></td>
+                <td th:text="${accountType.interestRate}"></td>
+                <td><a th:href="@{/admin/edit/__${accountType.id}__}">Edit</a></td>
+            </tr>
+        </tbody>
+        
+    </table>
+    <a th:href="@{/admin/add}">Add Account</a>
+</body>
+</html>
