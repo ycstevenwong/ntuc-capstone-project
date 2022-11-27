@@ -52,9 +52,11 @@ public class CustomerController {
                 .nomineeName(customer.getNomineeName()).build();
         Customer newCustomer = cService.createCustomer(c);
         // If the customer would like to open the account now
-        Optional<AccountType> type = aRepo.findByName(account.getType());
-        if (type.isPresent()) {
-            Account newAccount = Account.builder().accountType(type.get()).balance(new BigDecimal(account.getInitialBalance())).status("Available").customer(newCustomer).build();
+        Optional<AccountType> aType = aRepo.findByName(account.getType());
+        if (aType.isPresent()) {
+            // set defualt balance if the user does not input the deposit
+            BigDecimal balance = account.getInitialBalance().isBlank() ? new BigDecimal("0.00") : new BigDecimal(account.getInitialBalance());
+            Account newAccount = Account.builder().accountType(aType.get()).balance(balance).status("Available").customer(newCustomer).build();
             cService.createAccount(newAccount);
         }
         ModelAndView mav = new ModelAndView("customer-register-success");
