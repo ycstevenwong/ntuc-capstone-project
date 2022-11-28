@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View News</title>
+</head>
+<body>
+    <h1>NEWS</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr th:each="map : ${newsDetails}">
+                <div th:each="details : ${map}">
+                    <td th:text="${details.key}"></td>
+                    <td th:text="${details.value}"></td>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
