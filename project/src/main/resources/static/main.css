@@ -1,0 +1,41 @@
+body {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    font-weight: 700;
+}
+
+.btn {
+    border-radius: 0.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.fa {
+    vertical-align: middle;
+}
+
+.icon {
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.box {
+    border-radius: 0;
+}
+
+.rounded {
+    border-radius: 5%;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.btn.circle, .btn.rounded, .btn.box {
+    padding: 0.5rem;
+    line-height: 1;
+}
