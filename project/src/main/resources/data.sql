@@ -119,3 +119,7 @@ VALUES ('3', '1500', 'household', current_timestamp(), '3');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`,
                                       `account_id`)
 VALUES ('4', '-400', 'expensive food', current_timestamp(), '4');
+
+-- Insert Employee Table
+INSERT INTO `employee`
+VALUES (1, '$2a$12$e9xo1Pii3XtqyyLJZMMgtOfVlF68HtzyAij3e602jbAz81.fTERz6', '2022-11-28 17:20:56', 'test@uob.com');
