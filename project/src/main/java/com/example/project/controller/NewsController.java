@@ -22,9 +22,14 @@ public class NewsController {
     private Environment env;
     @RequestMapping("/news")
     public ModelAndView viewNews2() throws IOException{
-        String apiKey = env.getProperty("news.api.key");
         ModelAndView mv = new ModelAndView("/news/news");
-        String urlToReadNews = "https://newsapi.org/v2/top-headlines?country=sg&category=business&apiKey="+apiKey;
+        //API key is stored in application.properties
+        //If want to run this ask steven for the api key
+        String apiKey = env.getProperty("news.api.key");
+        String country = "sg";
+        //Available category: business entertainment general health science sports technology
+        String category = "business";
+        String urlToReadNews = "https://newsapi.org/v2/top-headlines?country="+country+"&category="+category+"&apiKey="+apiKey;
         URL url = new URL(urlToReadNews);
         String stringJson = IOUtils.toString(url, Charset.forName("UTF-8"));
         Map<String,String> articlesDetails = new HashMap<>();
