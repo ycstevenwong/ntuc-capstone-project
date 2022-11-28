@@ -12,7 +12,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @Author Fusheng Tan
@@ -44,7 +44,7 @@ public class CustomerDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Please pick your birth date!")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @NotEmpty(message = "Please fill in your contact number!")
     @Pattern(
@@ -58,6 +58,6 @@ public class CustomerDto {
     private String nomineeNric;
 
     private String nomineeName;
-    
+
 
 }
