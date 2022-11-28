@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Entity
 @Table(name = "customer")
 public class Customer {
@@ -45,7 +46,7 @@ public class Customer {
 
     @Column(name = "birth_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "phone")
     private String phone;

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Accounts</title>
+</head>
+
+<body>
+    <h1>Accounts</h1>
+    <h3>Find Customer</h3>
+    <form th:action="@{/accounts}">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" th:value="${name}">
+        <br>
+        <label for="name">NRIC (last 4 characters)</label>
+        <input type="text" id="nric" name="nric" maxlength="4" th:value="${secretNric}">
+        <br>
+        <label for="name">Date Of Birth</label>
+        <input type="date" id="birthDate" name="birthDate" th:value="${birthDate}">
+        <br>
+        <input type="submit" value="submit">
+    </form>
+    <h3>Customer Profile</h3>
+    <div th:if="${customer}">
+        <p>Name: <span th:text="${customer.name}"></span></p>
+        <p>NRIC: <span th:text="*{secretNric}"></span></p>
+        <p>Gender: <span th:text="*{customer.gender}"></span></p>
+    </div>
+    <div th:unless="${customer}">
+        <p>No Customer Selected</p>
+    </div>
+    <h3>Customer Accounts</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Account Id</th>
+                <th>Type</th>
+                <th>Balance</th>
+                <th span="3">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="account : ${accounts}">
+                <tr>
+                    <td><a href="#" th:text="${account.accountNumber}"></a></td>
+                    <td th:text="${account.accountType.name}"></td>
+                    <td th:text="${account.balance}"></td>
+                    <td><a href="#">Deposit</a></td>
+                    <td><a href="#">Withdraw</a></td>
+                    <td><a href="#">Close</a></td>
+                </tr>
+            </th:block>
+            <th:block th:if="${#lists.isEmpty(accounts)}">
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+    <th:block th:unless="${#lists.isEmpty(accounts)}">
+        <div class="pagination" th:with="prevPage = ${page <= 1 ? 1 : page - 1}, nextPage = ${page >= lastPage ? lastPage : page + 1}">
+            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${1}, pageLimit=${pageLimit})}">&laquo;</a>
+            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${prevPage}, pageLimit=${pageLimit})}" th:text="${prevPage}"></a>
+            <span>...</span>
+            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${page}, pageLimit=${pageLimit})}" th:text="${page}"></a>
+            <span>...</span>
+            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${nextPage}, pageLimit=${pageLimit})}" th:text="${nextPage}"></a>
+            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${lastPage}, pageLimit=${pageLimit})}">&raquo;</a>
+        </div>
+    </th:block>
+</body>
+
+</html>
