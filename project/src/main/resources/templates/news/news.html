@@ -13,14 +13,14 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Image</th>
             </tr>
         </thead>
         <tbody >
-            <tr th:each="map : ${newsDetails}">
-                <div th:each="details : ${map}">
-                    <td th:text="${details.key}"></td>
-                    <td th:text="${details.value}"></td>
-                </div>
+            <tr th:each="news : ${newsList}">
+                <td th:text="${news.title}">Title</td>
+                <td th:text="${news.description}">Description</td>
+                <td th:text="${news.imageURL}">news.newsURL</td>
             </tr>
         </tbody>
     </table>
