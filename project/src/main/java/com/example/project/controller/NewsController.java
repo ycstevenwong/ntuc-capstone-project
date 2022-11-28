@@ -3,7 +3,9 @@ package com.example.project.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -14,6 +16,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.example.project.dto.NewsDto;
 
 
 @Controller
@@ -32,18 +36,19 @@ public class NewsController {
         String urlToReadNews = "https://newsapi.org/v2/top-headlines?country="+country+"&category="+category+"&apiKey="+apiKey;
         URL url = new URL(urlToReadNews);
         String stringJson = IOUtils.toString(url, Charset.forName("UTF-8"));
-        Map<String,String> articlesDetails = new HashMap<>();
+        List<NewsDto> newsList = new ArrayList<>();
         JSONObject json = new JSONObject(stringJson);
         JSONArray articles = json.getJSONArray("articles");
         for(int i = 0; i < articles.length(); ++i){
             JSONObject article = articles.getJSONObject(i);
-            if(!article.isNull("description")){
+            if(!article.isNull("description")||!article.isNull("urlToImage")){
                 String title = article.getString("title");
                 String description = article.getString("description");
-                articlesDetails.put(title, description);
+                String newsURL = article.get("urlToImage").toString();
+                newsList.add(new NewsDto(title,description,newsURL));
             }
         }
-        mv.addObject("newsDetails", articlesDetails);
+        mv.addObject("newsList", newsList);
         return mv;
     }
 }
