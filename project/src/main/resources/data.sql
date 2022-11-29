@@ -64,12 +64,12 @@ VALUES ('9', 'Singapore Block I', '18', '2004-09-09', 'bowen@test.com', 'MALE', 
         '99999999', current_timestamp());
 
 -- Insert Employee Table
-INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`)
-VALUES ('1', 'password', current_timestamp());
-INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`)
-VALUES ('2', 'password', current_timestamp());
-INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`)
-VALUES ('3', 'password', current_timestamp());
+INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`,`email`)
+VALUES ('1', 'password', current_timestamp(), 'test1@uob.com');
+INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`,`email`)
+VALUES ('2', 'password', current_timestamp(), 'test2@uob.com');
+INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`,`email`)
+VALUES ('3', 'password', current_timestamp(), 'test3@uob.com');
 
 
 -- Insert Account Types Table
@@ -121,5 +121,5 @@ INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `d
 VALUES ('4', '-400', 'expensive food', current_timestamp(), '4');
 
 -- Insert Employee Table
-INSERT INTO `employee`
-VALUES (1, '$2a$12$e9xo1Pii3XtqyyLJZMMgtOfVlF68HtzyAij3e602jbAz81.fTERz6', '2022-11-28 17:20:56', 'test@uob.com');
+INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`,`email`)
+VALUES (4, '$2a$12$e9xo1Pii3XtqyyLJZMMgtOfVlF68HtzyAij3e602jbAz81.fTERz6', '2022-11-28 17:20:56', 'test@uob.com');
