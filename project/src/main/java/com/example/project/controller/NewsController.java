@@ -38,7 +38,7 @@ public class NewsController {
         List<NewsDto> newsList = new ArrayList<>();
         JSONObject json = new JSONObject(stringJson);
         JSONArray articles = json.getJSONArray("articles");
-        for(int i = 0; i < articles.length(); ++i){
+        for(int i = 0; i < 5; ++i){
             JSONObject article = articles.getJSONObject(i);
             if(!article.isNull("description")||!article.isNull("urlToImage")){
                 String title = article.getString("title");
