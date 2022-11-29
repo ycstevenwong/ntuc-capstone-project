@@ -32,5 +32,4 @@ public interface AccountRepo extends JpaRepository<Account, Long> {
 
     @Query(value="SELECT * FROM accounts a WHERE a.account_type_id = :id",nativeQuery=true)
     List<Account> findByAccountType(@Param("id") Long id);
-
 }
