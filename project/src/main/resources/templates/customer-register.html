@@ -6,36 +6,32 @@
 </head>
 <body>
 <div>
-    <h2>Register Page </h2>
+    <h2>Create New Customer:</h2>
     <hr/>
     <div>
-        <form method="post" th:action="@{/user/register}" th:object="${user}">
+        <form method="post" th:action="@{/customer/create}" th:object="${customer}">
             <table>
                 <tbody>
                 <tr>
                     <td><span>Name:</span></td>
                     <td><input size="42" th:field="*{name}" type="text"/></td>
-                    <p style="color:red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+                    <td><span style="color:red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
                 </tr>
                 <tr>
                     <td><span>NRIC:</span></td>
                     <td><input size="42" th:field="*{nric}" type="text"/></td>
-                    <p style="color:red" th:errors="*{nric}" th:if="${#fields.hasErrors('nric')}"></p>
+                    <td><span style="color:red" th:errors="*{nric}" th:if="${#fields.hasErrors('nric')}"></span>
                 </tr>
                 <tr>
                     <td><span>Email:</span></td>
                     <td><input size="42" th:field="*{emailAddress}" type="text"/></td>
-                    <p style="color:red" th:errors="*{emailAddress}" th:if="${#fields.hasErrors('emailAddress')}"></p>
-                </tr>
-                <tr>
-                    <td><span>Password:</span></td>
-                    <td><input size="42" th:field="*{pwd}" type="password"/></td>
-                    <p style="color:red" th:errors="*{pwd}" th:if="${#fields.hasErrors('pwd')}"></p>
+                    <td><span style="color:red" th:errors="*{emailAddress}"
+                              th:if="${#fields.hasErrors('emailAddress')}"></span>
                 </tr>
                 <tr>
                     <td><span>Age:</span></td>
                     <td><input size="42" th:field="*{age}" type="number" min=18/></td>
-                    <p style="color:red" th:errors="*{age}" th:if="${#fields.hasErrors('age')}"></p>
+                    <td><span style="color:red" th:errors="*{age}" th:if="${#fields.hasErrors('age')}"></span>
                 </tr>
                 <tr>
                     <td><span>Gender:</span>
@@ -47,18 +43,20 @@
                 </tr>
                 <tr>
                     <td><span>Birth:</span></td>
-                    <td><input size="42" th:field="${user.birthDate}" type="date"/></td>
-                    <p style="color:red" th:errors="*{birthDate}" th:if="${#fields.hasErrors('birthDate')}"></p>
+                    <td><input size="42" th:field="${customer.birthDate}" type="date"/></td>
+                    <td><span style="color:red" th:errors="*{birthDate}"
+                              th:if="${#fields.hasErrors('birthDate')}"></span>
                 </tr>
                 <tr>
                     <td><span>Phone:</span></td>
                     <td><input size="42" th:field="*{phone}" type="text"/></td>
-                    <p style="color:red" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></p>
+                    <td><span style="color:red" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></span>
                 </tr>
                 <tr>
                     <td><span>Address:</span></td>
                     <td><input size="42" th:field="*{address}" type="text"/></td>
-                    <p style="color:red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                    <td><span style="color:red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td><span>Nominee NRIC (optional):</span></td>
@@ -71,16 +69,19 @@
                 </tr>
                 </tbody>
             </table>
-            <div th:object="${accountRequest}">
+            <div th:object="${account}">
                 <table>
                     <tbody>
                     <tr>
                         <td><span>Account Type (Pick the option if you want to open an account now):</span></td>
-                        <td><input th:field="${accountRequest.type}" type="radio" value="Fixed"/> Fixed
+                        <td><input th:field="${account.type}" type="radio" value="Fixed Deposit"/> Fixed Deposit
                         </td>
-                        <td><input th:field="${accountRequest.type}" type="radio" value="Recurring"/>
-                            Recurring
+                        <td><input th:field="${account.type}" type="radio" value="Recurring Deposit"/> Recurring Deposit
                         </td>
+                    </tr>
+                    <tr>
+                        <td><span>Initial Deposit:</span></td>
+                        <td><input size="22" th:field="${account.initialBalance}" type="number"/></td>
                     </tr>
                     <tr>
                         <td><input class="blcass" type="submit" value="Create"/></td>

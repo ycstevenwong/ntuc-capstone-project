@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+  <div th:fragment="box" th:remove="tag">
+    <span class="icon fa-stack">
+      <span class="fas fa-square fa-stack-2x"></span>
+      <span class="fa-stack-1x fa-inverse" style="font-weight: 700;" th:text="${value}"></span>
+    </span>
+  </div>
+  <div th:fragment="pop" th:remove="tag">
+    <a href="#" class="btn circle" role="button" style="background-color: red;">
+      <i class="fab fa-github fa-2x"></i>
+    </a>
+  </div>
+  <div th:fragment="pip" th:remove="tag">
+    <a th:id="${id}" th:href="${href}" class="btn circle" role="button" style="background-color: green;">
+      <i th:class="${'fa-2x ' + icon}"></i>
+    </a>
+  </div>
+</body>
+
+</html>
