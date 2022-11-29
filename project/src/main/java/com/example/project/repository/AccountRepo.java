@@ -1,20 +1,15 @@
 package com.example.project.repository;
 
 import com.example.project.model.Account;
-
 import com.example.project.model.Customer;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-
 import java.util.List;
-
-
 import org.springframework.stereotype.Repository;
+
 
 
 /**
@@ -24,6 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountRepo extends JpaRepository<Account, Long> {
 
+
     @Query("select a from Account a where a.customer = :customer")
     Iterable<Account> findAllCustomerAccounts(@Param("customer") Customer customer);
 
@@ -32,4 +28,10 @@ public interface AccountRepo extends JpaRepository<Account, Long> {
 
     @Query(value="SELECT * FROM accounts a WHERE a.account_type_id = :id",nativeQuery=true)
     List<Account> findByAccountType(@Param("id") Long id);
+
+    @Query("select a from Account a where lower(a.status) <> 'closed' ")
+    public List<Account> findAllAccountsWithoutCloseStatus();
+
+    public Account findAccountByAccountNumber(Long accountNumber);
+
 }
