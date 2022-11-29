@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://wwww.thymeleaf.org">
-
 <head>
+<th:block th:replace="components/links :: base"></th:block>
 </head>
-
 <body>
   <div th:fragment="base" th:remove="tag">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">UTB</a>
-      <a href="#logo"><img th:src="@{images/logo.png}"></a>
-      <button class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding: 0.1rem 0.1rem;">
+    <a class="navbar-brand" href="#"><img src="../static/images/logorembg.png" th:src="@{/images/logorembg.png}" style="height:auto; width:120px; padding-top: 0rem; padding-bottom: 0rem;"/></a>
+ 
+   <button class="navbar-toggler" 
+       type="button" 
+       data-toggle="collapse" 
+       data-target="#navbarNav" 
+       aria-controls="navbarNav" 
+       aria-expanded="false" 
+       aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNav" >
+        <ul class="navbar-nav mr-auto" >
           <li class="nav-item active">
             <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Transaction<span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Transaction</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Register<span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Register</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
           </li>
         </ul>
       </div>
     </nav>
   </div>
-
+<th:block th:replace="components/scripts :: base"></th:block>
 </body>
-
-</html>

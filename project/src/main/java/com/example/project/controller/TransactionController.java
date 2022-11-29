@@ -12,13 +12,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/transact")
 public class TransactionController {
 
-	@PostMapping("/deposit")
-	public String deposit(@RequestParam("deposit_amount") String depositAmount,
-						@RequestParam("account_number") String accountNumber,
-						HttpSession session, 
-						RedirectAttributes redirectAttributes) {
+	@RequestMapping("/deposit")
+	public String deposit() {
 		
-		return "";
+		return "Withdrawal_example_Form";
 	}
 
 }

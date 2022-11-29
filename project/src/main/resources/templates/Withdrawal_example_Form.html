@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org">
+
+<head>
+<th:block th:replace="components/scripts :: base"></th:block>
+<div th:replace="components/links :: base"></div>
+<meta charset="ISO-8859-1">
+<title>Customer Registration</title>
+</head>
+<body>
+<div th:replace="components/nav :: base"></div>
+<h2>Add Account</h2>
+<div class="form">
+	<form action=# >
+		<label for="name">ID:</label>
+		<input type="text" id="id" name="id"></br>
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name"></br>
+		<label for="withdrawalAmount">Withdrawal Amount</label>
+		<input type="text" id="withdrawalAmount" name="withdrawalAmount"></br>
+		<input type="submit" value="Submit">
+	</form>
+	</div>
+</body>
+<footer>
+<div th:replace="components/footer :: base"></div>
+</footer>
+
+</html>
