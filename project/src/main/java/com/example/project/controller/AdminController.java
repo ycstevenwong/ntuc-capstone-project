@@ -36,18 +36,20 @@ public class AdminController {
 		List<AccountType> accountTypesList = adminRepo.findAll();
 		model.addAttribute("accountTypesList", accountTypesList);
 		model.addAttribute("totalAccountType", accountTypesList.size());
+		AccountType ac = new AccountType();
+		model.addAttribute("ac", ac);
 		// String errorMsg = "";
 		// model.addAttribute("errorMsg", errorMsg);
 		return "AccountType/viewAccountType";
 	}
 
 	//Show Account Type Form
-	@GetMapping("/addproduct")
-	public String accountTypeForm(Model model) {
-		AccountType ac = new AccountType();
-		model.addAttribute("ac", ac);
-		return "AccountType/addAccountType";
-	}
+	// @GetMapping("/addproduct")
+	// public String accountTypeForm(Model model) {
+	// 	AccountType ac = new AccountType();
+	// 	model.addAttribute("ac", ac);
+	// 	return "AccountType/addAccountType";
+	// }
 
 	//Add Account Type to Database when click Sumbit button
 	@PostMapping("/addproduct")

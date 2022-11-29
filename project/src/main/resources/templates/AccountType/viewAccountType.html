@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="components/links :: base"></th:block>
     <title>View Account Type</title>
 </head>
 <body>
+    <th:block th:replace="components/nav :: base"></th:block>
     <div th:if="${totalAccountType==0}">
         <h1>No Account Type is available</h1>
     </div>
@@ -28,6 +30,41 @@
         
     </table>
     <p th:text="${errorMsg}"></p>
-    <a th:href="@{/addproduct}">Add Account</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">
+        Add Account Type
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addTitle">Add Account Type</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <h1>Hello</h1>
+            <form th:action="@{/addproduct}" th:object="${ac}" method="post">
+                <input type="text" id="id" name="id" th:field="*{id}" hidden>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" th:field="*{name}"><br>
+                <p th:error="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+                <label for="interestRate">Interest Rate:</label><br>
+                <input type="text" id="interestRate" name="interestRate" th:field="*{interestRate}"><br><br>
+                <input type="submit" value="Submit">
+                <p th:error="*{interestRate}" th:if="${#fields.hasErrors('interestRate')}"></p>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <th:block th:replace="components/footer :: base"></th:block>
+    <th:block th:replace="components/scripts :: base"></th:block>
 </body>
 </html>
