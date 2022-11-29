@@ -70,56 +70,51 @@ INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`,`email`)
 VALUES ('2', 'password', current_timestamp(), 'test2@uob.com');
 INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`,`email`)
 VALUES ('3', 'password', current_timestamp(), 'test3@uob.com');
+INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`,`email`)
+VALUES (4, '$2a$12$e9xo1Pii3XtqyyLJZMMgtOfVlF68HtzyAij3e602jbAz81.fTERz6', '2022-11-28 17:20:56', 'test@uob.com');
 
 
 -- Insert Account Types Table
-INSERT INTO `project`.`account_types` (`account_type_id`, `interest_rate`, `name`)
-VALUES ('1', '0.07', 'Fixed Deposit');
-INSERT INTO `project`.`account_types` (`account_type_id`, `interest_rate`, `name`)
-VALUES ('2', '0.10', 'Recurring Deposit');
+INSERT INTO `project`.`account_types` (`account_type_id`, `interest_rate`, `name`, `valid_years_period`)
+VALUES ('1', '0.07', 'Saving Deposit', '2');
+INSERT INTO `project`.`account_types` (`account_type_id`, `interest_rate`, `name`, `valid_years_period`)
+VALUES ('2', '0.10', 'Recurring Deposit', '1');
 
 
 -- Insert Accounts Table
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('1', '5000', 'OPEN', '1', '1');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('2', '15000', 'OPEN', '1', '2');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('3', '25000', 'OPEN', '1', '3');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('4', '9000', 'OPEN', '1', '4');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('5', '0', 'CLOSED', '1', '5');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('6', '6000', 'OPEN', '1', '6');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('7', '7000', 'OPEN', '1', '7');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('8', '8000', 'CLOSED', '1', '8');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`)
-VALUES ('9', '9000', 'OPEN', '1', '9');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345678', '5000', 'OPEN', '1', '1', '2021-11-28 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345679', '15000', 'OPEN', '1', '2', '2020-11-28 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345680', '25000', 'OPEN', '1', '3', '2022-05-28 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345681', '9000', 'OPEN', '1', '4', '2022-04-18 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345682', '0', 'CLOSED', '1', '5', '2022-03-28 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345683', '6000', 'OPEN', '1', '6', '2022-1-28 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345684', '7000', 'OPEN', '1', '7', '2021-01-11 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345685', '8000', 'CLOSED', '1', '8', '2019-03-11 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
+VALUES ('12345686', '9000', 'OPEN', '1', '9', '2021-07-07 09:32:03', '0');
 
 
 -- Insert Dormant Accounts Table
 INSERT INTO `project`.`dormant_accounts` (`dormant_account_number`, `customer_id`, `status`)
-VALUES ('1', '5', 'CLOSED');
+VALUES ('12345682', '5', 'CLOSED');
 INSERT INTO `project`.`dormant_accounts` (`dormant_account_number`, `customer_id`, `status`)
-VALUES ('2', '8', 'CLOSED');
+VALUES ('12345685', '8', 'CLOSED');
 
 -- Insert Transactions Table
-INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`,
-                                      `account_id`)
-VALUES ('1', '500', 'education', current_timestamp(), '1');
-INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`,
-                                      `account_id`)
-VALUES ('2', '-500', 'xio shuan fei', current_timestamp(), '2');
-INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`,
-                                      `account_id`)
-VALUES ('3', '1500', 'household', current_timestamp(), '3');
-INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`,
-                                      `account_id`)
-VALUES ('4', '-400', 'expensive food', current_timestamp(), '4');
+INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
+VALUES ('1', '500', 'deposit', current_timestamp(), '12345678');
+INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
+VALUES ('2', '-500', 'withdraw', current_timestamp(), '12345679');
+INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
+VALUES ('3', '1500', 'deposit', current_timestamp(), '12345680');
+INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
+VALUES ('4', '-400', 'withdraw', current_timestamp(), '12345681');
 
--- Insert Employee Table
-INSERT INTO `project`.`employee` (`employee_id`, `pwd`, `register_time`,`email`)
-VALUES (4, '$2a$12$e9xo1Pii3XtqyyLJZMMgtOfVlF68HtzyAij3e602jbAz81.fTERz6', '2022-11-28 17:20:56', 'test@uob.com');
