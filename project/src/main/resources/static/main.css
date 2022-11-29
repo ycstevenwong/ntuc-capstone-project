@@ -45,7 +45,9 @@ body {
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
 }
-
+.carousel{
+    width: 50%;
+}
 /* News HTML page */
 .container-fluid{
     width: 80%;
@@ -82,12 +84,19 @@ body {
     .card-body .card-text {
         margin: 0;
     }
-    .card img {
-        width: 50%;
+    .card{
+        flex-direction: column;
     }
+    .card img{
+        display: none;
     }
+    .carousel{
+        width: 100%;
+    }
+}
     @media only screen and (max-width: 1200px) {
-    .card img {
-        width: 40%;
-    }
+    /* .card img {
+        width: 50%;
+        
+    } */
 }

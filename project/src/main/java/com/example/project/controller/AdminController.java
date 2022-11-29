@@ -43,14 +43,6 @@ public class AdminController {
 		return "AccountType/viewAccountType";
 	}
 
-	//Show Account Type Form
-	// @GetMapping("/addproduct")
-	// public String accountTypeForm(Model model) {
-	// 	AccountType ac = new AccountType();
-	// 	model.addAttribute("ac", ac);
-	// 	return "AccountType/addAccountType";
-	// }
-
 	//Add Account Type to Database when click Sumbit button
 	@PostMapping("/addproduct")
 	public String addAccountType(@ModelAttribute("ac") @Valid AccountType ac, BindingResult result) {
