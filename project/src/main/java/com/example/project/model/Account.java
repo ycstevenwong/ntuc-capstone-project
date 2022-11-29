@@ -40,4 +40,17 @@ public class Account {
 
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     private List<Transaction> transactions = new ArrayList<>(0);
+
+    @Override
+    public String toString() {
+        return "{" +
+                " accountNumber='" + getAccountNumber() + "'" +
+                ", balance='" + getBalance() + "'" +
+                ", status='" + getStatus() + "'" +
+                ", customer='" + getCustomer() + "'" +
+                ", accountType='" + getAccountType() + "'" +
+                ", transactions='" + getTransactions() + "'" +
+                "}";
+    }
+
 }

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction History</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" th:href="@{/css/transactionHistory.css}" />
+  </head>
+
+  <body>
+    <!-- Alert box conditional check TODO-->
+    <!-- <div th:if="${!transactionCompletion && !isFirstLoad}">
+      <th:block
+        th:replace="components/alert :: danger (message='Transaction not committed.')"
+      ></th:block>
+    </div>
+
+    <div th:if="${transactionCompletion && !isFirstLoad}">
+      <th:block th:replace="components/alert :: success (message='Transaction has been committed.')"></th:block>
+    </div> -->
+
+    <!-- Main Content Here -->
+    <div class="alignment parent__container">
+      <!-- Customer basic profile here -->
+      <div class="card">
+        <!-- Card Header Customer Profile -->
+        <div class="card-header">
+          <strong>Account Holder Profile</strong>
+        </div>
+        <!-- Card Body Customer Profile -->
+        <div class="card-body">
+          <label style="color: #000000" for="accountName"
+            ><strong> Name:</strong>
+          </label>
+
+          <span style="color: #707070">
+            <th:block th:text="${accountDetails.getName}"></th:block>
+          </span>
+
+          <br />
+          <label style="color: #000000" for="accountNRIC"
+            ><strong> NRIC:</strong>
+          </label>
+
+          <span style="color: #707070">
+            <th:block th:text="'*****' +${accountNRIC}"></th:block>
+          </span>
+
+          <br />
+          <label style="color: #000000" for="accountEmail"
+            ><strong> Email:</strong>
+          </label>
+
+          <span style="color: #707070">
+            <th:block th:text="${accountDetails.getEmailAddress}"></th:block>
+          </span>
+
+          <br />
+          <label style="color: #000000" for="accountAddress"
+            ><strong> Address:</strong>
+          </label>
+
+          <span style="color: #707070">
+            <th:block th:text="${accountDetails.getAddress}"></th:block>
+          </span>
+
+          <br />
+          <label style="color: #000000" for="accountBirthdate"
+            ><strong> Birthdate:</strong>
+          </label>
+
+          <span style="color: #707070">
+            <th:block th:text="${accountDetails.getBirthDate}"></th:block>
+          </span>
+
+          <br />
+          <label style="color: #000000" for="accountBirthdate"
+            ><strong> Age:</strong>
+          </label>
+
+          <span style="color: #707070">
+            <th:block th:text="${accountDetails.getAge}"></th:block>
+          </span>
+        </div>
+      </div>
+      <!-- Account Details -->
+      <div class="card">
+        <!-- Card Header Account Details -->
+        <div class="card-header account__details">
+          <strong>Current Saving Account (as of Today)</strong>
+          <div>
+            <!-- Deposit button to toggle modal component-->
+            <button
+              type="button"
+              class=""
+              data-toggle="modal"
+              data-target="#deposit"
+            >
+              Deposit
+            </button>
+            <!-- Withdraw button to toggle modal component-->
+            <button
+              type="button"
+              class=""
+              data-toggle="modal"
+              data-target="#withdraw"
+            >
+              Withdraw
+            </button>
+          </div>
+        </div>
+        <!-- Card Body Account Details -->
+        <div class="card-body account__details">
+          <div>
+            <strong style="font-size: 140%">
+              <u>
+                <th:block th:text="${accountType}"></th:block>
+              </u>
+            </strong>
+            <br />
+            <th:block
+              th:text="'Account Number: ' + ${accountNumber}"
+            ></th:block>
+          </div>
+          <div style="border-top: #000000">
+            <strong>
+              <h5 style="text-align: end; font-size: 140%">Balance</h5>
+            </strong>
+            <div style="font-size: 140%">
+              <th:block th:text="${currentBalance}"></th:block>
+              SGD
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Filter -->
+      <div class="search__filter">
+        <input
+          class="form-control"
+          style="width: 15rem; margin-top: 2rem"
+          id="myInput"
+          type="text"
+          placeholder="Search Past Records..."
+        />
+      </div>
+      <h2>Transaction History</h2>
+      <!-- Transaction Table -->
+      <table class="table table-bordered table-striped">
+        <thead class="table-header">
+          <tr>
+            <th>Date/Time</th>
+            <th>Transaction Amount</th>
+            <th>Description</th>
+            <th>Transaction ID</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          <tr th:each="trans: ${transactionList}">
+            <td th:text="${trans.getTime}"></td>
+            <!-- Red style for withdraw transactions -->
+            <div th:if="${trans.getDescription}=='WITHDRAW'">
+              <td style="color: red" th:text="${trans.getAmount}"></td>
+            </div>
+            <div th:if="${trans.getDescription}=='DEPOSIT'">
+              <td th:text="${trans.getAmount}"></td>
+            </div>
+            <!---->
+            <td th:text="${trans.getDescription}"></td>
+            <td th:text="${trans.getId}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ##Modal## -->
+    <!-- Deposit -->
+    <th:block
+      th:replace="components/TransactionModal :: deposit 
+      (transactionModal='deposit', transactionType='Deposit',
+        accountDetails=${accountDetails})"
+    ></th:block>
+    <!-- Withdraw -->
+    <th:block
+      th:replace="components/TransactionModal :: deposit 
+      (transactionModal='withdraw', transactionType='Withdraw',
+        accountDetails=${accountDetails})"
+    ></th:block>
+  </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- Search Filter JS-->
+  <script>
+    $(document).ready(function () {
+      $('#myInput').on('keyup', function () {
+        var value = $(this).val().toLowerCase()
+        $('#myTable tr').filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        })
+      })
+    })
+  </script>
+</html>
+
+<!-- 
+<form th:action="trnf" >
+    <input type="text" name="asd">
+    <input type="text" name="accountNum">
+    <input type="submit" value="submit">
+</form> -->

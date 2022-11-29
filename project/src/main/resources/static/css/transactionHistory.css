@@ -1,0 +1,38 @@
+.table-header {
+  background-color: #5e5858;
+  color: white;
+  text-align: center;
+}
+
+.alignment {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  padding-top: 2rem;
+}
+
+block {
+  color: red;
+}
+
+.parent__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search__filter {
+  align-self: flex-end;
+}
+
+.card {
+  margin-top: 2rem;
+}
+
+.account__details {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* bootstrap focus input */
+*:focus {
+  box-shadow: none !important;
+}
