@@ -7,7 +7,7 @@
     <title>Edit Account Type</title>
 </head>
 <body>
-    <form th:action="@{/admin/save}" th:object="${ac}" th:method="put">
+    <form th:action="@{/saveproduct}" th:object="${ac}" th:method="put">
 		<input type="text" id="id" name="id" th:field="*{id}" hidden>
 		<label for="name">Name:</label><br>
 		<input type="text" id="name" name="name" th:field="*{name}"><br>

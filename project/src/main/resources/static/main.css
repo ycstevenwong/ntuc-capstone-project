@@ -40,6 +40,12 @@ body {
     line-height: 1;
 }
 
+/* Carousel component */
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
+
 /* News HTML page */
 .container-fluid{
     width: 80%;

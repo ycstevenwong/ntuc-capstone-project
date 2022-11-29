@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.project.model.Account;
@@ -24,7 +23,6 @@ import com.example.project.service.AccountService;
 import com.example.project.service.AdminService;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	AdminService adminService;
@@ -33,7 +31,7 @@ public class AdminController {
 	@Autowired
 	AccountService accountService;
 	//View Account Type
-	@GetMapping("/view")
+	@GetMapping("/viewproduct")
 	public String viewAccountType(Model model){
 		List<AccountType> accountTypesList = adminRepo.findAll();
 		model.addAttribute("accountTypesList", accountTypesList);
@@ -44,7 +42,7 @@ public class AdminController {
 	}
 
 	//Show Account Type Form
-	@GetMapping("/add")
+	@GetMapping("/addproduct")
 	public String accountTypeForm(Model model) {
 		AccountType ac = new AccountType();
 		model.addAttribute("ac", ac);
@@ -52,17 +50,17 @@ public class AdminController {
 	}
 
 	//Add Account Type to Database when click Sumbit button
-	@PostMapping("/add")
+	@PostMapping("/addproduct")
 	public String addAccountType(@ModelAttribute("ac") @Valid AccountType ac, BindingResult result) {
 		if(result.hasErrors()) {
 			return "AccountType/addAccountType";
 		}
 		adminService.createAcccountType(ac);
-		return "redirect:/admin/view";	
+		return "redirect:/viewproduct";	
 	}
 
 	// Show Edit Page when click Edit button
-	@GetMapping("/edit/{id}")
+	@GetMapping("/editproduct/{id}")
 	public String editAccountType(@PathVariable Long id,Model model){
 		Optional<AccountType> ac = adminRepo.findById(id);
 		model.addAttribute("ac", ac);
@@ -70,16 +68,16 @@ public class AdminController {
 	}
 
 	// Save the Account Type to Database click Submit button
-	@PutMapping("/save")
+	@PutMapping("/saveproduct")
 	public String saveAccountType(@Valid AccountType editedAccountType, BindingResult result){
 		Long id = editedAccountType.getId();
 		if(result.hasErrors()) {
-			return "redirect:/admin/edit/"+id.toString();
+			return "redirect:/editproduct/"+id.toString();
 		}
 		adminService.createAcccountType(editedAccountType);
-		return "redirect:/admin/view";
+		return "redirect:/viewproduct";
 	}
-	@GetMapping("/delete/{id}")
+	@GetMapping("/deleteproduct/{id}")
 	public String deleteAccountType(@PathVariable Long id, Model model,RedirectAttributes redirectAttributes){
 		String errorMsg;
 		List<Account> accounts = accountService.findByAccountType(id);
@@ -88,12 +86,11 @@ public class AdminController {
 			errorMsg = "Not able to Delete";
 			// Use RedirectAttributes if returning to a redirect page.
 			redirectAttributes.addFlashAttribute("errorMsg", errorMsg);
-			return "redirect:/admin/view";
+			return "redirect:/viewproduct";
 		}
 		errorMsg = "";
 		model.addAttribute("errorMsg", errorMsg);
 		adminRepo.deleteById(id);
-		return "redirect:/admin/view";
+		return "redirect:/viewproduct";
 	}
 }
-
