@@ -18,7 +18,7 @@
 
 <body>
       <div th:fragment="base" th:remove="tag">
-            <footer class="bg-light text-dark fixed-bottom" style="background: linear-gradient(180deg, #B0B0B0 0%, rgba(217, 217, 217, 0) 44.27%, #F1F1F1 88.02%);">
+            <footer class="bg-light text-dark fixed-bottom" style="background: linear-gradient(180deg, #B0B0B0 0%, rgba(217, 217, 217, 0) 44.27%, #F1F1F1 88.02%); height:var(--footer-height); ">
             <div class="pic text-center" >
       		<img src="../static/images/logo.png" th:src="@{/images/logo.png}" style="height:auto; width:110px;" />
       		</div>
@@ -97,6 +97,7 @@
       <!-- Copyright -->
       </footer>
       </div>
+     
 </body>
 <th:block th:replace="components/scripts :: base"></th:block>
 </html>

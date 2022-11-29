@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://wwww.thymeleaf.org">
 <head>
+
 <th:block th:replace="components/links :: base"></th:block>
 </head>
 <body>
@@ -19,20 +20,17 @@
   </button>
   
       <div class="collapse navbar-collapse" id="navbarNav" >
-        <ul class="navbar-nav mr-auto" >
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        <ul class="navbar-nav ml-auto" >
+          <li th:class="'nav-item '+ ${isCurrentPage=='Customer'?'active':''}">
+            <a class="nav-link" href="#">Customer<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
+          <li th:class="'nav-item '+ ${isCurrentPage=='Account'?'active':''}">
+            <a class="nav-link" href="/transact/withdrawal">Account</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Transaction</a>
+          <li th:class="'nav-item '+ ${isCurrentPage=='Product'?'active':''}">
+            <a class="nav-link" href="#">Product</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
-          </li>
-          <li class="nav-item">
+          <li th:class="'nav-item '+ ${isCurrentPage=='Logout'?'active':''}">
             <a class="nav-link" href="#">Logout</a>
           </li>
         </ul>

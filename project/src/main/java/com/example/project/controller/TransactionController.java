@@ -17,5 +17,11 @@ public class TransactionController {
 		
 		return "Withdrawal_example_Form";
 	}
+	
+	@RequestMapping("/withdrawal")
+	public String withdrawal() {
+		
+		return "example_form";
+	}
 
 }
