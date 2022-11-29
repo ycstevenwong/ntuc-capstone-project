@@ -3,10 +3,9 @@ package com.example.project.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -24,8 +23,8 @@ import com.example.project.dto.NewsDto;
 public class NewsController {
     @Autowired
     private Environment env;
-    @RequestMapping("/news")
-    public ModelAndView viewNews2() throws IOException{
+    @RequestMapping("")
+    public ModelAndView viewNews2() throws IOException, ParseException{
         ModelAndView mv = new ModelAndView("/news/news");
         //API key is stored in application.properties
         //If want to run this ask steven for the api key
@@ -45,7 +44,8 @@ public class NewsController {
                 String title = article.getString("title");
                 String description = article.getString("description");
                 String newsURL = article.get("urlToImage").toString();
-                newsList.add(new NewsDto(title,description,newsURL));
+                String published =  article.getString("publishedAt");
+                newsList.add(new NewsDto(title,description,newsURL,published));
             }
         }
         mv.addObject("newsList", newsList);
