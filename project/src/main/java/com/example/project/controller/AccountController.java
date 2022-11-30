@@ -74,9 +74,10 @@ public class AccountController {
         Optional<Page<Account>> accounts = customer.map(c -> accountRepo.findAllCustomerAccountsWithPagination(c, paging));
 
         customer.ifPresent(c -> {
+            String nric = c.getNric();
             model.addAttribute("customer", c);
             model.addAttribute("name", c.getName());
-            model.addAttribute("secretNric", c.getNric().substring(c.getNric().length()-4)); // Last 4 characters
+            model.addAttribute("secretNric", nric.substring(nric.length() - 4)); // Last 4 characters
             model.addAttribute("birthDate", c.getBirthDate());
         });
 
