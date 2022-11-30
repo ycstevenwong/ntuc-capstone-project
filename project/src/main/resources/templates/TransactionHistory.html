@@ -130,7 +130,7 @@
             </strong>
             <br />
             <th:block
-              th:text="'Account Number: ' + ${num}"
+              th:text="'Account Number: ' + ${accountNumber}"
             ></th:block>
           </div>
           <div style="border-top: #000000">
@@ -182,7 +182,7 @@
       </table>
       <!-- Pagination table -->
       <div style="display: flex; justify-content: center;">
-        <th:block th:replace="components/pagination :: base"></th:block>
+        <th:block th:replace="components/pagination :: base(page=${page})"></th:block>
       </div>
     </div>
 
