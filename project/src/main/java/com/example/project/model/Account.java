@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,13 @@ public class Account {
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     private List<Transaction> transactions = new ArrayList<>(0);
 
+    @Column(name = "register_time", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp registerTime;
+
+    @Column(name = "renew_times")
+    private Integer numberOfRenew;
+
+
     @Override
     public String toString() {
         return "{" +
@@ -50,7 +58,10 @@ public class Account {
                 ", customer='" + getCustomer() + "'" +
                 ", accountType='" + getAccountType() + "'" +
                 ", transactions='" + getTransactions() + "'" +
+                ", registerTime='" + getRegisterTime() + "'" +
+                ", numberOfRenew='" + getNumberOfRenew() + "'" +
                 "}";
     }
+
 
 }

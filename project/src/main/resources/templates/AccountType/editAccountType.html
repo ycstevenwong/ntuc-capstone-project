@@ -4,18 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="components/links :: base"></th:block>
     <title>Edit Account Type</title>
 </head>
+<style>
+	.form-center{
+		display: flex;
+		justify-content: center;
+	}
+	.label-size{
+		font-size: larger;
+		font-weight: bolder;
+	}
+</style>
 <body>
-    <form th:action="@{/admin/save}" th:object="${ac}" th:method="put">
-		<input type="text" id="id" name="id" th:field="*{id}" hidden>
-		<label for="name">Name:</label><br>
-		<input type="text" id="name" name="name" th:field="*{name}"><br>
-		<p th:error="*{name}" th:if="${#fields.hasErrors('name')}"></p>
-		<label for="interestRate">Interest Rate:</label><br>
-		<input type="text" id="interestRate" name="interestRate" th:field="*{interestRate}"><br><br>
-		<input type="submit" value="Submit">
-		<p th:error="*{interestRate}" th:if="${#fields.hasErrors('interestRate')}"></p>
-	</form>
+	<th:block th:replace="components/nav :: base"></th:block>
+	<div class="form-center">
+		<form th:action="@{/saveproduct}" th:object="${ac}" th:method="put" class="mt-5">
+
+			<input type="text" id="id" name="id" th:field="*{id}" hidden>
+			<div class="form-group row">
+				<label for="name" class="col-sm-12 col-form-label text-center label-size">Name:</label>
+				<div class="col-sm-12">
+					<input type="text" class="form-control" id="name" value="John" th:field="*{name}">
+					<p th:error="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+				</div>
+			</div>
+	
+			<div class="form-group row">
+				<label for="interestRate" class="col-sm-12 col-form-label text-center label-size">Interest Rate:</label>
+				<div class="col-sm-12">
+					<input type="number" class="form-control" id="interestRate" value="0.01" th:field="*{interestRate}" min="0.01" step="0.01">
+					<p th:error="*{interestRate}" th:if="${#fields.hasErrors('interestRate')}"></p>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col text-center">
+						<input type="submit" class="btn btn-success" value="Submit" th:data-confirm-edit="|Are you sure you want to edit this account type?|"
+						onclick="if (!confirm(this.getAttribute('data-confirm-edit'))) return false">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+    
+	<th:block th:replace="components/footer :: base"></th:block>
+    <th:block th:replace="components/scripts :: base"></th:block>
 </body>
 </html>

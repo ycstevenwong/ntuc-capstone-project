@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,9 +32,12 @@ public class AccountType {
     private String name;
 
     @Column(name = "interest_rate")
+    @Min(value=(long) 0.1)
     private double interestRate;
 
     @OneToMany(mappedBy = "accountType")
     private Set<Account> accounts = new HashSet<>(0);
 
+    @Column(name = "valid_years_period")
+    private Integer validYearsOfPeriod;
 }

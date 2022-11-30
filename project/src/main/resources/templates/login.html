@@ -4,14 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-        crossorigin="anonymous" />
+    <th:block th:replace="components/links :: base"></th:block>
 </head>
 <body>
+<img th:src="@{~/images/background1.png}" id="background">
 <div class="container-fluid text-center">
     <div>
-       <img class="img-fluid" th:src="@{/images/image2.png}" style="width:200px; height:200px" />
+       <img class="img-fluid" th:src="@{~/images/logo.png}" style="width:150px; height:150px" />
     </div>
     <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
      
@@ -23,9 +22,9 @@
             <p class="text-warning">You have been logged out.</p>
         </div>
          
-        <div class="border border-secondary p-3 rounded">
-        	
-            <p>Login</p>
+        <div class="border border-secondary p-3 rounded border-gray">
+    
+            <h3>Welcome</h3>
             <p>
                 <input type="email" name="email" class="form-control" placeholder="E-mail" required autofocus/>
             </p>
@@ -33,10 +32,12 @@
                 <input type="password" name="password" class="form-control" placeholder="Password" required />
             </p>
             <p>
-                <input type="submit" value="Login" class="btn btn-primary" />
+                <input type="submit" value="Login" class="btn btn-success col-6 mx-auto" />
             </p>
         </div>
     </form>      
 </div>
+
+<th:block th:replace="components/scripts :: base"></th:block>
 </body>
 </html>

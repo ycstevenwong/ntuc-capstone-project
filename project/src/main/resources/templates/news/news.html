@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="components/links :: base"></th:block>
     <title>View News</title>
 </head>
 <body>
-    <h1>NEWS</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody >
-            <tr th:each="map : ${newsDetails}">
-                <div th:each="details : ${map}">
-                    <td th:text="${details.key}"></td>
-                    <td th:text="${details.value}"></td>
-                </div>
-            </tr>
-        </tbody>
-    </table>
+    <th:block th:replace="components/nav :: base"></th:block>
+    <th:block th:replace="components/carousel :: carousel"></th:block>
+    <div class="progress-bar">
+        <h1>NEWS</h1>
+    </div>
+    
+
+    <div id="card" class="card container-fluid big-card" th:each="news : ${newsList}">
+        <img id="cardImg" class="ml-2" th:src="@{__${news.imageURL}__}" alt="" srcset="" onerror="this.onerror=null; this.src='/images/Carosel.png'">
+        <div class="card-body">
+            <div class="card-header">
+                <h3 th:text="${news.title}"></h3>
+            </div>
+            <blockquote class="blockquote mb-0">
+            <p th:text="${news.description}"></p>
+            <footer class="blockquote-footer" th:text="${news.published}"><cite title="Source Title">Source Title</cite></footer>
+            </blockquote>
+        </div>
+    </div>
+    <th:block th:replace="components/footer :: base"></th:block>
+    <th:block th:replace="components/scripts :: base"></th:block>
+
 </body>
 </html>
