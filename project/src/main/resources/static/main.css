@@ -1,9 +1,10 @@
 body {
 	
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    --footer-height:186px;
-    margin-bottom: var(--footer-height);
-    
+    display: flex;
+  	min-height: 100vh;
+  	flex-direction: column;
+  	justify-content: space-between;
 }
 
 .navbar {
