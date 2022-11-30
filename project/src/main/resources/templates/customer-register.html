@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+	<th:block th:replace="components/scripts :: base"></th:block>
+	<div th:replace="components/links :: base"></div>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+	<div th:replace="components/nav :: base(isCurrentPage='Customer')"></div>
 <div>
     <h2>Create New Customer:</h2>
     <hr/>
@@ -93,5 +96,6 @@
         </form>
     </div>
 </div>
+<div th:replace="components/footer :: base"></div>
 </body>
 </html>

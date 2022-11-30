@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<th:block th:replace="components/scripts :: base"></th:block>
+	<div th:replace="components/links :: base"></div>
     <meta charset="UTF-8" />
     <title>Accounts</title>
 </head>
 
 <body>
+	<div th:replace="components/nav :: base(isCurrentPage='Account')"></div>
     <h1>Accounts</h1>
     <h3>Find Customer</h3>
     <form th:action="@{/accounts}">
@@ -74,6 +77,7 @@
             <a th:href="@{/accounts/{id}(id=${customer.id}, page=${lastPage}, pageLimit=${pageLimit})}">&raquo;</a>
         </div>
     </th:block>
+    <div th:replace="components/footer :: base"></div>
 </body>
 
 </html>
