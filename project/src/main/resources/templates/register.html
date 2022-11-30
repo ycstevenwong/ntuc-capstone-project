@@ -21,7 +21,7 @@
     }
 </style>
 <body>
-<h1 style="font-size:20px; text-align: center; padding-top: 5px; padding-bottom: 5px;">Register for a New Account</h1>
+<h1 style="font-size:30px; text-align: center; padding-top: 5px; padding-bottom: 5px;">Register Customer</h1>
 <form method="post" th:action="@{/customer/create}" th:object="${customer}">
 <div class="accordion" id="accordionExample">
     <div class="accordion-item">
@@ -29,7 +29,7 @@
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <img th:src="@{/images/Number1.png}" alt="" srcset="" style="width: 80px;">
 
-                <h3 style="color:#345C97; margin-bottom:0;"><b>Personal Details</b></h3>
+                <h3 style="color:#345C97; margin-bottom:0;"><b>Customer Details</b></h3>
             </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -48,7 +48,7 @@
                     <div class="form-group row ml-5">
                         <label for="nric" class="col-sm-2 col-form-label">NRIC: </label>
                         <div class="col-sm-5">
-                            <input th:field="*{nric}" type="text" maxlength="9">
+                            <input th:field="*{nric}" type="text" maxlength="9" placeholder="eg.S12345678">
                         </div>
                         <div class="col-sm-5">
                             <span style="color:red" th:errors="*{nric}" th:if="${#fields.hasErrors('nric')}"></span>
@@ -59,7 +59,7 @@
                     <div class="form-group row ml-5">
                         <label for="age" class="col-sm-2 col-form-label">Age:</label>
                         <div class="col-sm-5">
-                            <input type="number" class="form-control" id="age" min=18 th:field="*{age} ">
+                            <input type="number" class="form-control" value="18" id="age" min=18 th:field="*{age} ">
                         </div>
                         <div class="col-sm-5">
                             <span style="color:red" th:errors="*{age}" th:if="${#fields.hasErrors('age')}"></span>
@@ -105,7 +105,7 @@
                     <div class="form-group row ml-5">
                         <label for="tel" class="col-sm-2 col-form-label">Phone number: </label>
                         <div class="col-sm-5">
-                            <input size="42" th:field="*{phone}" type="text" maxlength="8">
+                            <input size="42" th:field="*{phone}" type="text" maxlength="8" placeholder="eg.82446057">
                         </div>
                         <div class="col-sm-5">
                             <span style="color:red" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></span>

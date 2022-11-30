@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Author Fusheng Tan
@@ -47,6 +48,11 @@ public class CustomerServiceImpl implements CustomerService {
     public Page<Customer> findPaginatedCustomers(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return cRepo.findAll(pageable);
+    }
+
+    @Override
+    public Optional<Customer> findCustomerById(Long id) {
+       return cRepo.findById(id);
     }
 
 

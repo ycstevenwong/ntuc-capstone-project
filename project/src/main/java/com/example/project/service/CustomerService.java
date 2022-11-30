@@ -6,6 +6,7 @@ import com.example.project.model.Employee;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Author Fusheng Tan
@@ -19,4 +20,7 @@ public interface CustomerService {
     List<Customer> findAllCustomers();
 
     Page<Customer> findPaginatedCustomers(int pageNo, int pageSize);
+
+    Optional<Customer> findCustomerById(Long id);
+
 }

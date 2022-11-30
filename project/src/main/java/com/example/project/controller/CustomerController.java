@@ -59,17 +59,18 @@ public class CustomerController {
             Account newAccount = Account.builder().accountType(aType.get()).balance(balance).status("Available").customer(newCustomer).build();
             cService.createAccount(newAccount);
         }
-        return new ModelAndView("customer-register-success");
+        return new ModelAndView("redirect:/customer/view");
     }
 
-//    @GetMapping("/edit/{id}")
-//    public ModelAndView editCustomer(@PathVariable Long id) {
-////        ModelAndView mav = new ModelAndView("staff_application_edit");
-////        Application application = appService.findApplication(id);
-////        mav.addObject("application",application);
-////        return mav;
-//    }
-
+    @PostMapping("/edit")
+    public ModelAndView editCustomer(@ModelAttribute("customer")CustomerDto customer) {
+        Customer c = Customer.builder().nric(customer.getNric()).name(customer.getName()).age(customer.getAge())
+                .gender(customer.getGender()).emailAddress(customer.getEmailAddress()).birthDate(customer.getBirthDate())
+                .phone(customer.getPhone()).address(customer.getAddress()).nomineeNric(customer.getNomineeNric())
+                .nomineeName(customer.getNomineeName()).id(customer.getId()).build();
+        Customer newCustomer = cService.createCustomer(c);
+        return new ModelAndView("redirect:/customer/view");
+    }
 
     @GetMapping("/view/page/{pageNo}")
     public String viewAllPaginatedCustomers(@PathVariable(value = "pageNo") int pageNo, Model model){
@@ -81,6 +82,7 @@ public class CustomerController {
         model.addAttribute("totalPages", paginatedCustomers.getTotalPages());
         model.addAttribute("totalItems", paginatedCustomers.getTotalElements());
         model.addAttribute("allCustomers", allCustomers);
+        model.addAttribute("customer", new CustomerDto());
         return "view_all_customers";
     }
 
