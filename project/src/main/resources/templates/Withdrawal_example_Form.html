@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org">
+
+<head>
+<th:block th:replace="components/scripts :: base"></th:block>
+<div th:replace="components/links :: base"></div>
+<meta charset="ISO-8859-1">
+<title>Customer Registration</title>
+</head>
+<body>
+<div th:replace="components/nav :: base(isCurrentPage='Customer')"></div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Personal Details
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div class='parent' style="margin: 1rem; padding: 2rem 2rem;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-1-square-fill" viewBox="0 0 16 16">
+    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Zm7.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
+    </svg>
+  <h2 class="child">Personal Details</h2>
+</div>
+  <form>
+  <div class="form-group row ml-5">
+    <label for="name" class="col-sm-2 col-form-label">Holder Name:</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="name">
+    </div>
+  </div>
+  <div class="form-group row ml-5">
+    <label for="age" class="col-sm-2 col-form-label">Age:</label>
+    <div class="col-sm-1">
+      <input type="number" class="form-control" id="age">
+    </div>
+  </div>
+  <div class="form-group row ml-5">
+    <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
+    <div class="col-sm-1">
+      <input type="text" class="form-control" id="gender">
+    </div>
+  </div>
+    <div class="form-group row ml-5">
+      <label for="birthDate" class="col-sm-2 col-form-label">Birthdate:</label>
+      <div class="col-sm-2">
+        <input type="date" class="form-control" id="birthDate">
+      </div>
+    </div>
+    <div class="form-group row ml-5">
+      <label for="emailAddress" class="col-sm-2 col-form-label">Email Address:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="emailAddress">
+      </div>
+    </div>
+    <div class="form-group row ml-5">
+      <label for="phone" class="col-sm-2 col-form-label">Phone Number:</label>
+      <div class="col-sm-4">
+        <input type="number" class="form-control" id="phone">
+      </div>
+    </div>
+      <div class="form-group row ml-5">
+        <label for="address" class="col-sm-2 col-form-label">Address:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="address">
+        </div>
+      </div>
+      <div style="text-align:right">
+    <button type="submit" class="btn btn-primary" style="background-color:#5c5c5c; border : 1px solid #5c5c5c">Submit</button>
+  </div>
+</form>
+
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Nominee Details
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <div class='parent' style="margin: 1rem; padding: 2rem 2rem;">
+  <img src="../static/images/PictureNum2.jpg" th:src="@{/images/PictureNum2.jpg}" alt="..." class="child" style="display: inline-block; padding: 1rem 1rem;">
+  <h2 class="child"> Nominee Details</h2>
+</div>
+      <form>
+
+  <div class="form-group row ml-5">
+    <label for="nomineeName" class="col-sm-2 col-form-label">Nominee Name:</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="nomineeName">
+    </div>
+  </div>
+    <div class="form-group row ml-5">
+      <label for="nomineeNric" class="col-sm-2 col-form-label">Nominee NRIC:</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" id="nomineeNric">
+      </div>
+    </div>
+
+    <div style="text-align:right">
+  <button type="submit" class="btn btn-primary" style="background-color:#5c5c5c; border : 1px solid #5c5c5c">Submit</button>
+</div>
+
+</form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Account Options
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+<div th:replace="components/footer :: base"></div>
+</footer>
+</body>
+
+</html>
