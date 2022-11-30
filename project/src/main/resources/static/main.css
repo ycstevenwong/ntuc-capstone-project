@@ -51,12 +51,12 @@ body {
 	height:100vh;
 }
 
-
 /* Carousel component */
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
 }
+
 .carousel-control-next{
     margin-right: -200px;
 }
@@ -68,6 +68,7 @@ body {
     width: 5vw;
     height: 5vw;
 }
+
 .carousel{
     width: 50%;
 }
@@ -82,9 +83,11 @@ body {
 .card-title {
     font-weight: bold;
 }
+
 .card-body {
     width: 70%;
 } 
+
 .card img {
     width: 30%;
     border-top-right-radius: 25px;
