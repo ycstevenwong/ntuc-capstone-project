@@ -1,5 +1,9 @@
 body {
+	
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    --footer-height:186px;
+    margin-bottom: var(--footer-height);
+    
 }
 
 .navbar {
@@ -46,6 +50,7 @@ body {
 	width:100vw;
 	height:100vh;
 }
+
 
 /* Carousel component */
 .carousel-control-next,

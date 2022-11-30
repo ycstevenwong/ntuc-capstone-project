@@ -35,4 +35,6 @@ public class AccountType {
     @OneToMany(mappedBy = "accountType")
     private Set<Account> accounts = new HashSet<>(0);
 
+    @Column(name = "valid_years_period")
+    private Integer validYearsOfPeriod;
 }

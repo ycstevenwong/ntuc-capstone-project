@@ -1,0 +1,8 @@
+.parent {
+  margin: 1rem;
+  padding: 2rem 2rem;
+}
+.child {
+  display: inline-block;
+  padding: 1rem 1rem;
+}

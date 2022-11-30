@@ -1,33 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="components/links :: base"></th:block>
     <title>View Account Type</title>
 </head>
 <body>
+    <th:block th:replace="components/nav :: base"></th:block>
     <div th:if="${totalAccountType==0}">
         <h1>No Account Type is available</h1>
     </div>
-    <table th:unless="${totalAccountType==0}">
-        <thead>
-            <tr>
-                <th>Account Name</th>
-                <th>Account Interest Rate</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="accountType : ${accountTypesList}">
-                <td th:text="${accountType.name}"></td>
-                <td th:text="${accountType.interestRate}"></td>
-                <td><a th:href="@{/admin/edit/__${accountType.id}__}">Edit</a></td>
-                <td><a th:href="@{/admin/delete/__${accountType.id}__}">Delete</a></td>
-            </tr>
-        </tbody>
-        
-    </table>
-    <p th:text="${errorMsg}"></p>
-    <a th:href="@{/admin/add}">Add Account</a>
+    <div class="row justify-content-center ">
+        <div class="col-auto w-75">
+            <table class="table table-striped text-center ">
+                <thead>
+                    <tr>
+                    <th scope="col">Account Name</th>
+                    <th scope="col">Account Interest Rate</th>
+                    <th scope="col" colspan="2">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="accountType : ${accountTypesList}" scope="row">
+                        <td th:text="${accountType.name}"></td>
+                        <td th:text="${accountType.interestRate}"></td>
+                        <td><a th:href="@{/editproduct/__${accountType.id}__}">Edit</a></td>
+                        <td><a th:href="@{/deleteproduct/__${accountType.id}__}">Delete</a></td>
+                    </tr>   
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h3 style="color: rgb(255, 0, 0); text-align: center;" th:text="${errorMsg}"></h3>
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">
+                    Add Account Type
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTitle">Add Account Type</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/addproduct}" th:object="${ac}" method="post">
+                    <input type="text" id="id" name="id" th:field="*{id}" hidden>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" value="John" th:field="*{name}">
+                            <p th:error="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="interestRate" class="col-sm-2 col-form-label">Interest Rate:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="interestRate" value="0.00" th:field="*{interestRate}">
+                            <p th:error="*{interestRate}" th:if="${#fields.hasErrors('interestRate')}"></p>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-success" value="Submit">
+            </div>
+        </div>
+                </form>
+    </div>
+    </div>
+    <th:block th:replace="components/footer :: base"></th:block>
+    <th:block th:replace="components/scripts :: base"></th:block>
 </body>
 </html>

@@ -1,11 +1,12 @@
-package com.example.project;
+package com.example.project.archive;
+// package com.example.project;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.stereotype.Controller;
+// import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-@RequestMapping("/transhist")
-public class TransHistController {
+// @Controller
+// @RequestMapping("/transhist")
+// public class TransHistController {
 //    @Autowired
 //    TransHistRepository transHistRepo;
 //
@@ -66,4 +67,4 @@ public class TransHistController {
 //        }
 //        return withdrawalAccount;
 //    }
-}
+// }

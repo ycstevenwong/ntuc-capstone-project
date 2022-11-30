@@ -38,4 +38,16 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", time='" + getTime() + "'" +
+                ", amount='" + getAmount() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", account='" + getAccount() + "'" +
+                "}";
+    }
+
 }
