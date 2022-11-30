@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<th:block th:replace="components/scripts :: base"></th:block>
+	<div th:replace="components/links :: base"></div>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
 <body>
  <div th:replace="Components :: nav"></div>
@@ -21,6 +23,6 @@
    <input type="submit" value="Save" />
   </form>
  </div>
- <div th:replace="Components :: footer"></div>
+ <div th:replace="components/footer :: base"></div>
 </body>
 </html>

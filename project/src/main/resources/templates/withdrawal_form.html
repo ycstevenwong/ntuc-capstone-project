@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
+  	<th:block th:replace="components/scripts :: base"></th:block>
+	<div th:replace="components/links :: base"></div>
     <meta charset="ISO-8859-1" />
     <title>Insert title here</title>
   </head>
@@ -29,5 +31,6 @@
         </table>
       </form>
     </div>
+    <div th:replace="components/footer :: base"></div>
   </body>
 </html>

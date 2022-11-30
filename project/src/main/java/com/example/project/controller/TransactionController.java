@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +39,7 @@ public class TransactionController {
 	TransactionRepo transactionRepo;
 
 	Boolean transactionCompletion = false;
-	Boolean isFirstLoad = true; 
+	Boolean isFirstLoad = true;
 
 	// End point for deposit logic that reroute back to main page
 	@GetMapping("/Deposit")
@@ -100,42 +105,34 @@ public class TransactionController {
 
 	// Main Display Page for transaction history
 	@GetMapping("/display")
-	public String display(@Param("accountNum") Long accountNum, Model model) {
-		List<Transaction> transactionList = (List<Transaction>) transactionRepo.findAll();
-		List<Transaction> filteredList = new ArrayList<>();
-		for (Transaction transactionRecord : transactionList) {
-			if (transactionRecord.getAccount().getAccountNumber().equals(accountNum))
-				filteredList.add(transactionRecord);
-		}
-		// sort based on time
-		Collections.sort(filteredList, new Comparator<Transaction>() {
-			public int compare(Transaction t1, Transaction t2) {
-				return t2.getTime().compareTo(t1.getTime());
-			}
-		});
-
-		// fetch all accounts available
-		List<Account> accountList = accountRepository.findAll();
-
+	public String display(@Param("accountNum") Long accountNum,
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "pageLimit", defaultValue = "10") Integer pageLimit,
+			Model model) {
+				
 		// fetch current account details
 		Optional<Account> account = accountRepository.findById(accountNum);
-		BigDecimal currentBalance = account.get().getBalance();
-		Customer accountDetails = account.get().getCustomer();
-		String accountType = account.get().getAccountType().getName();
-		String accountNRIC = account.get().getCustomer().getNric().substring(5);
+		account.ifPresent(x -> model.addAttribute("accountNumber", accountNum));
+		account.ifPresent(x -> model.addAttribute("currentBalance", x.getBalance()));
+		account.ifPresent(x -> model.addAttribute("accountNRIC", x.getCustomer().getNric().substring(5)));
+		account.ifPresent(x -> model.addAttribute("accountDetails", x.getCustomer()));
+		account.ifPresent(x -> model.addAttribute("accountType", x.getAccountType().getName()));
 
-		model.addAttribute("currentBalance", currentBalance);
-		model.addAttribute("transactionList", filteredList);
-		model.addAttribute("accountNumber", accountNum);
-		model.addAttribute("accountNRIC", accountNRIC);
+		// fetch all records for pagination
+		Pageable paging = PageRequest.of(page - 1, pageLimit, Sort.by(Direction.DESC, "time"));
 
-		model.addAttribute("accountList", accountList);
-		model.addAttribute("accountDetails", accountDetails);
-		model.addAttribute("accountType", accountType);
-		
+		Optional<Page<Transaction>> records = account.map(c -> transactionRepo.findAllTransactionsWithPagination(c, paging));
+		records.ifPresent(x -> model.addAttribute("transactionList", records.get()));	
+
 		// Boolean Condition for alert box
 		model.addAttribute("transactionCompletion", transactionCompletion);
 		model.addAttribute("isFirstLoad", isFirstLoad);
+		
+		// Pagination for table
+		model.addAttribute("page", page);
+		model.addAttribute("pageNumber", paging.getPageNumber() + 1);
+		model.addAttribute("pageLimit", pageLimit);
+		model.addAttribute("lastPage", records.map(as -> as.getTotalPages()).orElse(null));
 
 		return "TransactionHistory";
 	}

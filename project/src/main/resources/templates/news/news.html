@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <th:block th:replace="components/links :: base"></th:block>
     <title>View News</title>
 </head>
@@ -27,28 +24,8 @@
             </blockquote>
         </div>
     </div>
+    <th:block th:replace="components/footer :: base"></th:block>
     <th:block th:replace="components/scripts :: base"></th:block>
 
 </body>
-<!-- <script type="text/javascript">
-    jQuery(document).ready(function($) {
-    var alterClass = function() {
-        var ww = document.body.clientWidth;
-        if (ww < 768) {
-            $('#card').removeClass('container-fluid');
-            $('#cardImg').removeClass('ml-2');
-            $('#cardImg').addClass('card-img-top');
-        }else{
-            $('#card').addClass('container-fluid');
-            $('#cardImg').addClass('ml-2');
-            $('#cardImg').removeClass('card-img-top');
-        }
-    };
-    $(window).resize(function(){
-        alterClass();
-    });
-    //Fire it when the page first loads:
-    alterClass();
-    });
-</script> -->
 </html>
