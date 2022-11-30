@@ -76,7 +76,7 @@ public class AccountController {
         customer.ifPresent(c -> {
             model.addAttribute("customer", c);
             model.addAttribute("name", c.getName());
-            model.addAttribute("secretNric", c.getNric().substring(5, 9)); // Last 4 characters
+            model.addAttribute("secretNric", c.getNric().substring(c.getNric().length()-4)); // Last 4 characters
             model.addAttribute("birthDate", c.getBirthDate());
         });
 
