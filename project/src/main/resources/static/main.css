@@ -1,9 +1,10 @@
 body {
 	
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    --footer-height:186px;
-    margin-bottom: var(--footer-height);
-    
+    display: flex;
+  	min-height: 100vh;
+  	flex-direction: column;
+  	justify-content: space-between;
 }
 
 .navbar {
@@ -51,12 +52,12 @@ body {
 	height:100vh;
 }
 
-
 /* Carousel component */
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
 }
+
 .carousel-control-next{
     margin-right: -200px;
 }
@@ -68,6 +69,7 @@ body {
     width: 5vw;
     height: 5vw;
 }
+
 .carousel{
     width: 50%;
 }
@@ -82,19 +84,12 @@ body {
 .card.news > .card-title {
     font-weight: bold;
 }
-<<<<<<< Updated upstream
-.card-body {
-    width: 70%;
-} 
-.card img {
-=======
 
 .card.news > .card-body {
     width: 70%;
 } 
 
 .card.news img {
->>>>>>> Stashed changes
     width: 30%;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -132,3 +127,4 @@ body {
         
     } */
 }
+

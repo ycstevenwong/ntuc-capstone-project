@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-<<<<<<< Updated upstream
+  	<th:block th:replace="components/scripts :: base"></th:block>
+	<div th:replace="components/links :: base"></div>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-=======
->>>>>>> Stashed changes
+
     <title>Transaction History</title>
     <div th:replace="components/links :: base"></div>
     <link rel="stylesheet" th:href="@{/css/transactionHistory.css}" />
@@ -101,11 +101,7 @@
             <!-- Deposit button to toggle modal component-->
             <button
               type="button"
-<<<<<<< Updated upstream
               class=""
-=======
-              class="transaction btn btn-primary"
->>>>>>> Stashed changes
               data-toggle="modal"
               data-target="#deposit"
             >
@@ -114,11 +110,7 @@
             <!-- Withdraw button to toggle modal component-->
             <button
               type="button"
-<<<<<<< Updated upstream
-              class=""
-=======
               class="transaction btn btn-danger"
->>>>>>> Stashed changes
               data-toggle="modal"
               data-target="#withdraw"
             >
@@ -220,11 +212,7 @@
           })
         })
       })
-<<<<<<< Updated upstream
-    })
   </script>
-=======
-    </script>
-  </body>
->>>>>>> Stashed changes
+  <div th:replace="components/footer :: base"></div>
+ </body>
 </html>
