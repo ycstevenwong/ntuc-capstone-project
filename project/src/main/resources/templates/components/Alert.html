@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org">
+  <head> </head>
+
+  <body>
+    <div th:fragment="success" th:remove="tag">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success</strong> <th:block th:text="${message}"></th:block>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+          th:id="alertSuccess"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div th:fragment="danger" th:remove="tag">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error</strong> <th:block th:text="${message}"></th:block>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+          th:id="alertFail"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

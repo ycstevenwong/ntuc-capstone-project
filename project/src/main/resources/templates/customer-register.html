@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <h2>Register Page </h2>
+    <h2>Create New Customer:</h2>
     <hr/>
     <div>
         <form method="post" th:action="@{/customer/create}" th:object="${customer}">
@@ -15,22 +15,23 @@
                 <tr>
                     <td><span>Name:</span></td>
                     <td><input size="42" th:field="*{name}" type="text"/></td>
-                    <p style="color:red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+                    <td><span style="color:red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
                 </tr>
                 <tr>
                     <td><span>NRIC:</span></td>
                     <td><input size="42" th:field="*{nric}" type="text"/></td>
-                    <p style="color:red" th:errors="*{nric}" th:if="${#fields.hasErrors('nric')}"></p>
+                    <td><span style="color:red" th:errors="*{nric}" th:if="${#fields.hasErrors('nric')}"></span>
                 </tr>
                 <tr>
                     <td><span>Email:</span></td>
                     <td><input size="42" th:field="*{emailAddress}" type="text"/></td>
-                    <p style="color:red" th:errors="*{emailAddress}" th:if="${#fields.hasErrors('emailAddress')}"></p>
+                    <td><span style="color:red" th:errors="*{emailAddress}"
+                              th:if="${#fields.hasErrors('emailAddress')}"></span>
                 </tr>
                 <tr>
                     <td><span>Age:</span></td>
                     <td><input size="42" th:field="*{age}" type="number" min=18/></td>
-                    <p style="color:red" th:errors="*{age}" th:if="${#fields.hasErrors('age')}"></p>
+                    <td><span style="color:red" th:errors="*{age}" th:if="${#fields.hasErrors('age')}"></span>
                 </tr>
                 <tr>
                     <td><span>Gender:</span>
@@ -43,17 +44,19 @@
                 <tr>
                     <td><span>Birth:</span></td>
                     <td><input size="42" th:field="${customer.birthDate}" type="date"/></td>
-                    <p style="color:red" th:errors="*{birthDate}" th:if="${#fields.hasErrors('birthDate')}"></p>
+                    <td><span style="color:red" th:errors="*{birthDate}"
+                              th:if="${#fields.hasErrors('birthDate')}"></span>
                 </tr>
                 <tr>
                     <td><span>Phone:</span></td>
                     <td><input size="42" th:field="*{phone}" type="text"/></td>
-                    <p style="color:red" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></p>
+                    <td><span style="color:red" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></span>
                 </tr>
                 <tr>
                     <td><span>Address:</span></td>
                     <td><input size="42" th:field="*{address}" type="text"/></td>
-                    <p style="color:red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></p>
+                    <td><span style="color:red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td><span>Nominee NRIC (optional):</span></td>
