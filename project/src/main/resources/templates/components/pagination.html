@@ -12,16 +12,16 @@
             <a class="page-link" th:href="@{/{BASE_URL}/{num}(BASE_URL=${BASE_URL}, num=${num}, page=${1}, pageLimit=${pageLimit})}">First</a>
           </li>
           <li class="page-item">
-            <a class="page-link" th:href="@{''(${num}, page=${prevPage}, pageLimit=${pageLimit})}"><</a>
+            <a class="page-link" th:href="@{/{BASE_URL}/{num} (BASE_URL=${BASE_URL}, num=${num}, page=${prevPage}, pageLimit=${pageLimit})}"><</a>
           </li>
           <li class="page-item" style="text-decoration-line: underline">
             <p class="page-link" th:text="${pageNumber}"></p>
           </li>
           <li class="page-item">
-            <a class="page-link" th:href="@{''(${num}, page=${nextPage}, pageLimit=${pageLimit})}">></a>
+            <a class="page-link" th:href="@{/{BASE_URL}/{num} (BASE_URL=${BASE_URL}, num=${num}, page=${nextPage}, pageLimit=${pageLimit})}">></a>
           </li>
           <li class="page-item">
-            <a class="page-link" th:href="@{''(${num}, page=${lastPage}, pageLimit=${pageLimit})}">Last</a>
+            <a class="page-link" th:href="@{/{BASE_URL}/{num} (BASE_URL=${BASE_URL}, num=${num}, page=${lastPage}, pageLimit=${pageLimit})}">Last</a>
           </li>
         </ul>
       </div>
