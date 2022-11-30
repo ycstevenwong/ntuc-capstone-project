@@ -15,7 +15,7 @@
     </div>
     
 
-    <div id="card" class="card container-fluid big-card" th:each="news : ${newsList}">
+    <div id="news card" class="news card container-fluid big-card" th:each="news : ${newsList}">
         <img id="cardImg" class="ml-2" th:src="@{__${news.imageURL}__}" alt="" srcset="" onerror="this.onerror=null; this.src='/images/Carosel.png'">
         <div class="card-body">
             <div class="card-header">
