@@ -7,17 +7,17 @@ import com.example.project.model.AccountType;
 import com.example.project.model.Customer;
 import com.example.project.repository.AccountTypeRepo;
 import com.example.project.service.CustomerService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -35,7 +35,7 @@ public class CustomerController {
 
     @GetMapping("/create")
     public ModelAndView prepareCustomerCreation() {
-        ModelAndView mav = new ModelAndView("customer-register");
+        ModelAndView mav = new ModelAndView("register");
         mav.addObject("customer", new CustomerDto());
         mav.addObject("account", new AccountDto());
         return mav;
@@ -44,7 +44,7 @@ public class CustomerController {
     @PostMapping("/create")
     public ModelAndView createNewCustomer(@ModelAttribute("customer") @Valid CustomerDto customer, BindingResult result, @ModelAttribute("account") AccountDto account) {
         // validation
-        if (result.hasErrors()) return new ModelAndView("customer-register");
+        if (result.hasErrors()) return new ModelAndView("register");
         // Register Customer
         Customer c = Customer.builder().nric(customer.getNric()).name(customer.getName()).age(customer.getAge())
                 .gender(customer.getGender()).emailAddress(customer.getEmailAddress()).birthDate(customer.getBirthDate())
@@ -59,7 +59,33 @@ public class CustomerController {
             Account newAccount = Account.builder().accountType(aType.get()).balance(balance).status("Available").customer(newCustomer).build();
             cService.createAccount(newAccount);
         }
-        ModelAndView mav = new ModelAndView("customer-register-success");
-        return mav;
+        return new ModelAndView("customer-register-success");
+    }
+
+//    @GetMapping("/edit/{id}")
+//    public ModelAndView editCustomer(@PathVariable Long id) {
+////        ModelAndView mav = new ModelAndView("staff_application_edit");
+////        Application application = appService.findApplication(id);
+////        mav.addObject("application",application);
+////        return mav;
+//    }
+
+
+    @GetMapping("/view/page/{pageNo}")
+    public String viewAllPaginatedCustomers(@PathVariable(value = "pageNo") int pageNo, Model model){
+        int pageSize = 5;
+        Page<Customer> paginatedCustomers = cService.findPaginatedCustomers(pageNo, pageSize);
+        List<Customer> allCustomers = paginatedCustomers.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", paginatedCustomers.getTotalPages());
+        model.addAttribute("totalItems", paginatedCustomers.getTotalElements());
+        model.addAttribute("allCustomers", allCustomers);
+        return "view_all_customers";
+    }
+
+    @GetMapping("/view")
+    public String viewHomePage(Model model) {
+        return viewAllPaginatedCustomers(1, model);
     }
 }
