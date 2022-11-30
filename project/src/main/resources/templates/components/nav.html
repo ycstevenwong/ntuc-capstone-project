@@ -1,28 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymeleaf.org">
-<head>
+<html xmlns:th="http://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 
-<th:block th:replace="components/links :: base"></th:block>
+<head>
 </head>
+
 <body>
   <div th:fragment="base" th:remove="tag">
+    <th:block sec:authorize="isAnonymous()" th:replace=":: showLogin"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:replace=":: showLogout"></th:block>
+  </div>
+  <div th:fragment="brand" th:remove="tag">
+    <a class="navbar-brand" th:href="@{/}">
+      <img src="../static/images/logorembg.png"
+           th:src="@{/images/logorembg.png}"
+           style="height:auto; width:120px; padding-top: 0rem; padding-bottom: 0rem;" />
+    </a>
+  </div>
+  <div th:fragment="showLogin" th:remove="tag">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding: 0.1rem 0.1rem;">
-    <a class="navbar-brand" href="#"><img src="../static/images/logorembg.png" th:src="@{/images/logorembg.png}" style="height:auto; width:120px; padding-top: 0rem; padding-bottom: 0rem;"/></a>
- 
-   <button class="navbar-toggler" 
-       type="button" 
-       data-toggle="collapse" 
-       data-target="#navbarNav" 
-       aria-controls="navbarNav" 
-       aria-expanded="false" 
-       aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-      <div class="collapse navbar-collapse" id="navbarNav" >
-        <ul class="navbar-nav ml-auto" >
+      <th:block th:replace=":: brand"></th:block>
+      <div class="navbar ml-auto" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" th:href="@{/login}">Login<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div th:fragment="showLogout" th:remove="tag">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding: 0.1rem 0.1rem;">
+      <th:block th:replace=":: brand"></th:block>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
           <li th:class="'nav-item '+ ${isCurrentPage=='Customer'?'active':''}">
-            <a class="nav-link" href="#">Customer<span class="sr-only">(current)</span></a>
+            <a class="nav-link" th:href="@{/accounts}">Customer<span class="sr-only">(current)</span></a>
           </li>
           <li th:class="'nav-item '+ ${isCurrentPage=='Account'?'active':''}">
             <a class="nav-link" href="#">Account</a>
@@ -31,11 +52,10 @@
             <a class="nav-link" href="#">Product</a>
           </li>
           <li th:class="'nav-item '+ ${isCurrentPage=='Logout'?'active':''}">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" th:href="@{/logout}">Logout</a>
           </li>
         </ul>
       </div>
     </nav>
   </div>
-<th:block th:replace="components/scripts :: base"></th:block>
 </body>
