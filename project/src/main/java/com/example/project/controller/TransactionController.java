@@ -31,7 +31,7 @@ import com.example.project.repository.AccountRepo;
 import com.example.project.repository.TransactionRepo;
 
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/transactions")
 public class TransactionController {
 
 	@Autowired
@@ -51,7 +51,7 @@ public class TransactionController {
 		// Deposit Amount must be MORE THAN ZERO
 		if (amount.equals(new BigDecimal("0"))) {
 			transactionCompletion = false;
-			return "redirect:/account/" + accountNumber;
+			return "redirect:/transaction/" + accountNumber;
 		}
 
 		transactionCompletion = true;
@@ -70,7 +70,7 @@ public class TransactionController {
 		transactionRepo.save(transactionRecord);
 		accountRepository.save(account.get());
 
-		return "redirect:/account/" + accountNumber;
+		return "redirect:/transaction/" + accountNumber;
 	}
 
 	// End point for withdraw logic that reroute back to main page
@@ -84,7 +84,7 @@ public class TransactionController {
 		// Balance amount must be MORE THAN withdrawn amount
 		if (amount.compareTo(account.get().getBalance()) == 1) {
 			transactionCompletion = false;
-			return "redirect:/account/" + accountNumber;
+			return "redirect:/transaction/" + accountNumber;
 		}
 
 		transactionCompletion = true;
@@ -101,7 +101,7 @@ public class TransactionController {
 		transactionRepo.save(transactionRecord);
 		accountRepository.save(account.get());
 
-		return "redirect:/account/" + accountNumber;
+		return "redirect:/transaction/" + accountNumber;
 	}
 
 	// Main Display Page for transaction history
@@ -134,7 +134,7 @@ public class TransactionController {
 		model.addAttribute("pageNumber", paging.getPageNumber() + 1);
 		model.addAttribute("pageLimit", pageLimit);
 		model.addAttribute("lastPage", records.map(as -> as.getTotalPages()).orElse(null));
-		model.addAttribute("BASE_URL", "account");
+		model.addAttribute("BASE_URL", "transaction");
 
 		return "TransactionHistory";
 	}
