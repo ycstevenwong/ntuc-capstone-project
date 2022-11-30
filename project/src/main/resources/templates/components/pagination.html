@@ -5,24 +5,24 @@
     <!-- Pagination table -->
     <!-- Add in page object -->
     <div th:fragment="base" th:remove="tag">
-        <div
+      <div
         th:with="prevPage = ${page <= 1 ? 1 : page - 1}, nextPage = ${page >= lastPage ? lastPage : page + 1}">
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" th:href="@{display(accountNum=${accountNumber}, page=${1}, pageLimit=${pageLimit})}">First</a>
-          </li>          
+            <a class="page-link" th:href="@{/{BASE_URL}/{num}(BASE_URL=${BASE_URL}, num=${num}, page=${1}, pageLimit=${pageLimit})}">First</a>
+          </li>
           <li class="page-item">
-            <a class="page-link" th:href="@{display(accountNum=${accountNumber}, page=${prevPage}, pageLimit=${pageLimit})}"><</a>
+            <a class="page-link" th:href="@{''(${num}, page=${prevPage}, pageLimit=${pageLimit})}"><</a>
           </li>
           <li class="page-item" style="text-decoration-line: underline">
             <p class="page-link" th:text="${pageNumber}"></p>
           </li>
           <li class="page-item">
-            <a class="page-link" th:href="@{display(accountNum=${accountNumber}, page=${nextPage}, pageLimit=${pageLimit})}">></a>
+            <a class="page-link" th:href="@{''(${num}, page=${nextPage}, pageLimit=${pageLimit})}">></a>
           </li>
           <li class="page-item">
-            <a class="page-link" th:href="@{display(accountNum=${accountNumber}, page=${lastPage}, pageLimit=${pageLimit})}">Last</a>
-          </li> 
+            <a class="page-link" th:href="@{''(${num}, page=${lastPage}, pageLimit=${pageLimit})}">Last</a>
+          </li>
         </ul>
       </div>
     </div>
