@@ -34,7 +34,7 @@
 			<div class="form-group row">
 				<label for="interestRate" class="col-sm-12 col-form-label text-center label-size">Interest Rate:</label>
 				<div class="col-sm-12">
-					<input type="text" class="form-control" id="interestRate" value="0.00" th:field="*{interestRate}">
+					<input type="number" class="form-control" id="interestRate" value="0.01" th:field="*{interestRate}" min="0.01" step="0.01">
 					<p th:error="*{interestRate}" th:if="${#fields.hasErrors('interestRate')}"></p>
 				</div>
 			</div>

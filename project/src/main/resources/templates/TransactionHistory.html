@@ -17,16 +17,18 @@
   </head>
 
   <body>
+    <!-- Nav Bar -->
+    <th:block th:replace="components/nav :: base"></th:block>
     <!-- Alert box conditional check TODO-->
-    <!-- <div th:if="${!transactionCompletion && !isFirstLoad}">
+    <div th:if="${!transactionCompletion && !isFirstLoad}">
       <th:block
-        th:replace="components/alert :: danger (message='Transaction not committed.')"
+        th:replace="components/alert :: danger (message='Amount more than Balance. Transaction not committed. ')"
       ></th:block>
     </div>
 
     <div th:if="${transactionCompletion && !isFirstLoad}">
       <th:block th:replace="components/alert :: success (message='Transaction has been committed.')"></th:block>
-    </div> -->
+    </div>
 
     <!-- Main Content Here -->
     <div class="alignment parent__container">
@@ -101,7 +103,7 @@
             <!-- Deposit button to toggle modal component-->
             <button
               type="button"
-              class=""
+              class="btn btn-primary"
               data-toggle="modal"
               data-target="#deposit"
             >
@@ -110,7 +112,7 @@
             <!-- Withdraw button to toggle modal component-->
             <button
               type="button"
-              class=""
+              class="btn btn-danger"
               data-toggle="modal"
               data-target="#withdraw"
             >
@@ -166,20 +168,22 @@
         </thead>
         <tbody id="myTable">
           <tr th:each="trans: ${transactionList}">
-            <td th:text="${trans.getTime}"></td>
-            <!-- Red style for withdraw transactions -->
-            <div th:if="${trans.getDescription}=='WITHDRAW'">
-              <td style="color: red" th:text="${trans.getAmount}"></td>
+            <td th:text="${trans.time}"></td>
+            <div th:if="${trans.description}=='WITHDRAW'">
+              <td style="color: red" th:text="${trans.amount}"></td>
             </div>
             <div th:if="${trans.getDescription}=='DEPOSIT'">
-              <td th:text="${trans.getAmount}"></td>
+              <td th:text="${trans.amount}"></td>
             </div>
-            <!---->
-            <td th:text="${trans.getDescription}"></td>
-            <td th:text="${trans.getId}"></td>
+            <td th:text="${trans.description}"></td>
+            <td th:text="${trans.id}"></td>
           </tr>
         </tbody>
       </table>
+      <!-- Pagination table -->
+      <div style="display: flex; justify-content: center;">
+        <th:block th:replace="components/pagination :: base(page=${page})"></th:block>
+      </div>
     </div>
 
     <!-- ##Modal## -->
@@ -195,6 +199,8 @@
       (transactionModal='withdraw', transactionType='Withdraw',
         accountDetails=${accountDetails})"
     ></th:block>
+    <!-- Footer -->
+    <th:block th:replace="components/footer :: base"></th:block>
   </body>
 
   <script
@@ -222,10 +228,3 @@
   <div th:replace="components/footer :: base"></div>
  </body>
 </html>
-
-<!-- 
-<form th:action="trnf" >
-    <input type="text" name="asd">
-    <input type="text" name="accountNum">
-    <input type="submit" value="submit">
-</form> -->
