@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- <meta charset='utf-8'> -->
@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div th:text="${name}"></div>
+    <!-- <div th:text="${name}"></div> -->
     <th:block th:replace="components/nav :: base"></th:block>
     <div style="display: flex; flex-direction: row;">
         <th:block th:replace="components/icons :: box (value=1)"></th:block>
