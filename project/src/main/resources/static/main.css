@@ -104,6 +104,14 @@ body {
 .progress-bar h1{
     padding-left: 10%;
 }
+
+/* Account Type */
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+
 @media only screen and (max-width: 768px) {
     .card-body {
         padding: 0.5em 1.2em;
@@ -119,6 +127,12 @@ body {
     }
     .carousel{
         width: 100%;
+    }
+    .carousel-control-next{
+        margin-right: 0;
+    }
+    .carousel-control-prev{
+        margin-left: 0;
     }
 }
     @media only screen and (max-width: 1200px) {
