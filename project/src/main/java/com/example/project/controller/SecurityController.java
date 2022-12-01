@@ -19,7 +19,7 @@ public class SecurityController {
             return "login";
         }
 	 
-	    return "redirect:/accounts";
+	    return "redirect:/";
 	}
 }
 
