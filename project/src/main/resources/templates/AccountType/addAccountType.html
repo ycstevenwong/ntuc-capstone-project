@@ -12,10 +12,10 @@
 	<form th:action="@{/addproduct}" th:object="${ac}" method="post">
 		<input type="text" id="id" name="id" th:field="*{id}" hidden>
 		<label for="name">Name:</label><br>
-		<input type="text" id="name" name="name" th:field="*{name}"><br>
+		<input type="text" id="name" name="name" th:field="*{name}" required><br>
 		<p th:error="*{name}" th:if="${#fields.hasErrors('name')}"></p>
 		<label for="interestRate">Interest Rate:</label><br>
-		<input type="text" id="interestRate" name="interestRate" th:field="*{interestRate}"><br><br>
+		<input type="text" id="interestRate" name="interestRate" th:field="*{interestRate}" required><br><br>
 		<input type="submit" value="Submit">
 		<p th:error="*{interestRate}" th:if="${#fields.hasErrors('interestRate')}"></p>
 	</form>
