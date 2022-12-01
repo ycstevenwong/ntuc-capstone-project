@@ -20,7 +20,7 @@
 <body>
 	<th:block th:replace="components/nav :: base"></th:block>
 	<div class="form-center">
-		<form th:action="@{/saveproduct}" th:object="${ac}" th:method="put" class="mt-5">
+		<form th:action="@{/products/save}" th:object="${ac}" th:method="put" class="mt-5">
 
 			<input type="text" id="id" name="id" th:field="*{id}" hidden>
 			<div class="form-group row">

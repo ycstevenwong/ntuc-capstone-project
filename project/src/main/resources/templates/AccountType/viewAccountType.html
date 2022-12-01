@@ -9,11 +9,11 @@
 </head>
 <body>
     <th:block th:replace="components/nav :: base"></th:block>
-    <div th:if="${totalAccountType==0}">
-        <h1>No Account Type is available</h1>
-    </div>
     <div class="row justify-content-center mt-5">
         <div class="col-auto w-75">
+            <div th:if="${totalAccountType==0}">
+                <h1>No Account Type is available</h1>
+            </div>
             <table class="table table-striped text-center ">
                 <thead>
                     <tr>
@@ -26,8 +26,8 @@
                     <tr th:each="accountType : ${accountTypesList}" scope="row">
                         <td th:text="${accountType.name}"></td>
                         <td th:text="${accountType.interestRate}"></td>
-                        <td><a th:href="@{/editproduct/__${accountType.id}__}">Edit</a></td>
-                        <td><a th:href="@{/deleteproduct/__${accountType.id}__}">Delete</a></td>
+                        <td><a th:href="@{/products/edit/__${accountType.id}__}">Edit</a></td>
+                        <td><a th:href="@{/products/delete/__${accountType.id}__}">Delete</a></td>
                     </tr>   
                 </tbody>
             </table>
@@ -53,7 +53,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/addproduct}" th:object="${ac}" method="post">
+                <form th:action="@{/products/add}" th:object="${ac}" method="post">
                     <input type="text" id="id" name="id" th:field="*{id}" hidden>
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Name:</label>
