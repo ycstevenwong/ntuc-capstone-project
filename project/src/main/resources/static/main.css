@@ -1,3 +1,8 @@
+html {
+    visibility: visible;
+    opacity: 1;
+}
+
 body {
 	
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -83,6 +88,11 @@ body {
 .container-fluid{
     width: 80%;
 }
+
+.accounts.card, .accounts table {
+    margin-top: 2rem;
+}
+
 .card.news {
     flex-direction: row;
     align-items: center;
@@ -117,6 +127,46 @@ body {
     margin-left: 0;
 }
 
+.alignment {
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 2rem;
+}
+
+.table-title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.table-title-label {
+    flex: 1;
+    margin-top:auto;
+    margin-bottom: auto;
+}
+
+.table {
+    width: 100%;
+}
+
+.table td {
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    vertical-align: middle;
+}
+
+.table .table-options {
+    padding: 0;
+}
+
+.table-options .btn {
+    flex: 1;
+}
+
+.table-header {
+    background-color: #5e5858;
+    color: white;
+    text-align: center;
+}
 
 @media only screen and (max-width: 768px) {
     .card.news > .card-body {

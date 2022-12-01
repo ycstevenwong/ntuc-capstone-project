@@ -89,17 +89,20 @@ public class AccountController {
         Optional<Page<Account>> accounts = customer.map(c -> accountRepo.findAllCustomerAccountsWithPagination(c, paging));
 
         customer.ifPresent(c -> {
+            String nric = c.getNric();
             model.addAttribute("customer", c);
             model.addAttribute("name", c.getName());
-            model.addAttribute("secretNric", c.getNric().substring(c.getNric().length()-4)); // Last 4 characters
+            model.addAttribute("secretNric", nric.substring(nric.length() - 4)); // Last 4 characters
             model.addAttribute("birthDate", c.getBirthDate());
         });
 
         accounts.ifPresent(as -> model.addAttribute("accounts", as));
 
-        model.addAttribute("page", page);
-        model.addAttribute("pageLimit", pageLimit);
-        model.addAttribute("lastPage", accounts.map(as -> as.getTotalPages()).orElse(null));
+        // Pagination for table
+		model.addAttribute("page", page);
+		model.addAttribute("pageLimit", pageLimit);
+		model.addAttribute("lastPage", accounts.map(as -> as.getTotalPages()).orElse(1));
+		model.addAttribute("BASE_URL", "accounts");
 
         model.addAttribute("newAccount",new AccountDto());
         return "accounts";
