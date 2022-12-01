@@ -23,7 +23,7 @@ block {
   align-self: flex-end;
 }
 
-.card {
+.card.transaction {
   margin-top: 2rem;
 }
 

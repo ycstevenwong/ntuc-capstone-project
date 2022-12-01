@@ -17,7 +17,7 @@ body {
     font-weight: 700;
 }
 
-.btn {
+.btn.news {
     border-radius: 0.75rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -83,19 +83,19 @@ body {
 .container-fluid{
     width: 80%;
 }
-.card {
+.card.news {
     flex-direction: row;
     align-items: center;
 }
-.card-title {
+.card.news > .card-title {
     font-weight: bold;
 }
 
-.card-body {
+.card.news > .card-body {
     width: 70%;
 } 
 
-.card img {
+.card.news img {
     width: 30%;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -119,16 +119,16 @@ body {
 
 
 @media only screen and (max-width: 768px) {
-    .card-body {
+    .card.news > .card-body {
         padding: 0.5em 1.2em;
     }
-    .card-body .card-text {
+    .card.news > .card-body > .card-text {
         margin: 0;
     }
-    .card{
+    .card.news{
         flex-direction: column;
     }
-    .card img{
+    .card.news img{
         display: none;
     }
     .carousel{
