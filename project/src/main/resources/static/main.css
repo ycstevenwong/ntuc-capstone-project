@@ -7,6 +7,12 @@ body {
   	justify-content: space-between;
 }
 
+/* login page */
+.border-gray{
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+
 .navbar {
     font-weight: 700;
 }
