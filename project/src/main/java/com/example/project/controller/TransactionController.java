@@ -131,9 +131,8 @@ public class TransactionController {
 		
 		// Pagination for table
 		model.addAttribute("page", page);
-		model.addAttribute("pageNumber", paging.getPageNumber() + 1);
 		model.addAttribute("pageLimit", pageLimit);
-		model.addAttribute("lastPage", records.map(as -> as.getTotalPages()).orElse(null));
+		model.addAttribute("lastPage", records.map(as -> as.getTotalPages()).orElse(1));
 		model.addAttribute("BASE_URL", "transactions");
 
 		return "TransactionHistory";

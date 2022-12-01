@@ -83,9 +83,11 @@ public class AccountController {
 
         accounts.ifPresent(as -> model.addAttribute("accounts", as));
 
-        model.addAttribute("page", page);
-        model.addAttribute("pageLimit", pageLimit);
-        model.addAttribute("lastPage", accounts.map(as -> as.getTotalPages()).orElse(null));
+        // Pagination for table
+		model.addAttribute("page", page);
+		model.addAttribute("pageLimit", pageLimit);
+		model.addAttribute("lastPage", accounts.map(as -> as.getTotalPages()).orElse(1));
+		model.addAttribute("BASE_URL", "accounts");
 
         return "accounts";
     }
