@@ -1,16 +1,23 @@
 body {
 	
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    --footer-height:186px;
-    margin-bottom: var(--footer-height);
-    
+    display: flex;
+  	min-height: 100vh;
+  	flex-direction: column;
+  	justify-content: space-between;
 }
+
+/* login page */
+.border-gray{
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
 
 .navbar {
     font-weight: 700;
 }
 
-.btn {
+.btn.news {
     border-radius: 0.75rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -76,11 +83,11 @@ body {
 .container-fluid{
     width: 80%;
 }
-.card {
+.card.news {
     flex-direction: row;
     align-items: center;
 }
-.card-title {
+.card.news > .card-title {
     font-weight: bold;
 }
 
@@ -89,6 +96,11 @@ body {
 } 
 
 .card img {
+.card.news > .card-body {
+    width: 70%;
+} 
+
+.card.news img {
     width: 30%;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -103,21 +115,35 @@ body {
 .progress-bar h1{
     padding-left: 10%;
 }
+
+/* Account Type */
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+
 @media only screen and (max-width: 768px) {
-    .card-body {
+    .card.news > .card-body {
         padding: 0.5em 1.2em;
     }
-    .card-body .card-text {
+    .card.news > .card-body > .card-text {
         margin: 0;
     }
-    .card{
+    .card.news{
         flex-direction: column;
     }
-    .card img{
+    .card.news img{
         display: none;
     }
     .carousel{
         width: 100%;
+    }
+    .carousel-control-next{
+        margin-right: 0;
+    }
+    .carousel-control-prev{
+        margin-left: 0;
     }
 }
     @media only screen and (max-width: 1200px) {

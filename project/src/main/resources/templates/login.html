@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Login</title>
-    <th:block th:replace="components/links :: base"></th:block>
+    <th:block th:replace="components/scripts :: base"></th:block>
+	<div th:replace="components/links :: base"></div>
 </head>
 <body>
 <img th:src="@{~/images/background1.png}" id="background">
@@ -12,7 +11,7 @@
     <div>
        <img class="img-fluid" th:src="@{~/images/logo.png}" style="width:150px; height:150px" />
     </div>
-    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
+    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto" class="mt-5">
      
         <div th:if="${param.error}">
             <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
