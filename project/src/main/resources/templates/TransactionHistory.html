@@ -136,47 +136,46 @@
         </div>
       </div>
 
-      <!-- Search Filter -->
-      <div class="search__filter">
-        <input
-          class="form-control"
-          style="width: 15rem; margin-top: 2rem"
-          id="myInput"
-          type="text"
-          placeholder="Search Past Records..."
-        />
+      <div class="table-title row">
+          <h2 class="table-title-label">Transaction History</h2>
+          <!-- Search Filter -->
+          <div class="search__filter">
+            <input
+              class="form-control"
+              id="myInput"
+              type="text"
+              placeholder="Search Past Records..."
+            />
+          </div>
       </div>
-      <h2>Transaction History</h2>
       <!-- Transaction Table -->
-      <table class="table table-bordered table-striped">
-        <thead class="table-header">
-          <tr>
-            <th>Date/Time</th>
-            <th>Transaction Amount</th>
-            <th>Description</th>
-            <th>Transaction ID</th>
-          </tr>
-        </thead>
-        <tbody id="myTable">
-          <tr th:each="trans: ${transactionList}">
-            <td th:text="${trans.time}"></td>
-            <div th:if="${trans.description}=='WITHDRAW'">
-              <td style="color: red" th:text="${trans.amount}"></td>
-            </div>
-            <div th:if="${trans.getDescription}=='DEPOSIT'">
-              <td th:text="${trans.amount}"></td>
-            </div>
-            <td th:text="${trans.description}"></td>
-            <td th:text="${trans.id}"></td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- Pagination table -->
-      <div style="display: flex; justify-content: center">
-        <th:block
-          th:replace="components/pagination :: base(page=${page})"
-        ></th:block>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="table-header">
+            <tr>
+              <th>Date/Time</th>
+              <th>Transaction Amount</th>
+              <th>Description</th>
+              <th>Transaction ID</th>
+            </tr>
+          </thead>
+          <tbody id="myTable">
+            <tr th:each="trans: ${transactionList}">
+              <td th:text="${trans.time}"></td>
+              <div th:if="${trans.description}=='WITHDRAW'">
+                <td style="color: red" th:text="${trans.amount}"></td>
+              </div>
+              <div th:if="${trans.getDescription}=='DEPOSIT'">
+                <td th:text="${trans.amount}"></td>
+              </div>
+              <td th:text="${trans.description}"></td>
+              <td th:text="${trans.id}"></td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Pagination table -->
       </div>
+      <th:block th:replace="components/pagination :: base(page=${page})"></th:block>
     </div>
 
     <!-- ##Modal## -->

@@ -10,73 +10,104 @@
 
 <body>
 	<div th:replace="components/nav :: base(isCurrentPage='Account')"></div>
-    <h1>Accounts</h1>
-    <h3>Find Customer</h3>
-    <form th:action="@{/accounts}">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" th:value="${name}">
-        <br>
-        <label for="name">NRIC (last 4 characters)</label>
-        <input type="text" id="nric" name="nric" maxlength="4" th:value="${secretNric}">
-        <br>
-        <label for="name">Date Of Birth</label>
-        <input type="date" id="birthDate" name="birthDate" th:value="${birthDate}">
-        <br>
-        <input type="submit" value="submit">
-    </form>
-    <h3>Customer Profile</h3>
-    <div th:if="${customer}">
-        <p>Name: <span th:text="${customer.name}"></span></p>
-        <p>NRIC: <span th:text="*{secretNric}"></span></p>
-        <p>Gender: <span th:text="*{customer.gender}"></span></p>
-    </div>
-    <div th:unless="${customer}">
-        <p>No Customer Selected</p>
-    </div>
-    <h3>Customer Accounts</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Account Id</th>
-                <th>Type</th>
-                <th>Balance</th>
-                <th span="3">Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            <th:block th:each="account : ${accounts}">
-                <tr>
-                    <td><a href="#" th:text="${account.accountNumber}"></a></td>
-                    <td th:text="${account.accountType.name}"></td>
-                    <td th:text="${account.balance}"></td>
-                    <td><a href="#">Deposit</a></td>
-                    <td><a href="#">Withdraw</a></td>
-                    <td><a href="#">Close</a></td>
-                </tr>
-            </th:block>
-            <th:block th:if="${#lists.isEmpty(accounts)}">
-                <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </th:block>
-        </tbody>
-    </table>
-    <th:block th:unless="${#lists.isEmpty(accounts)}">
-        <div class="pagination" th:with="prevPage = ${page <= 1 ? 1 : page - 1}, nextPage = ${page >= lastPage ? lastPage : page + 1}">
-            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${1}, pageLimit=${pageLimit})}">&laquo;</a>
-            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${prevPage}, pageLimit=${pageLimit})}" th:text="${prevPage}"></a>
-            <span>...</span>
-            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${page}, pageLimit=${pageLimit})}" th:text="${page}"></a>
-            <span>...</span>
-            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${nextPage}, pageLimit=${pageLimit})}" th:text="${nextPage}"></a>
-            <a th:href="@{/accounts/{id}(id=${customer.id}, page=${lastPage}, pageLimit=${pageLimit})}">&raquo;</a>
+    <div class="alignment">
+        <h1>Accounts</h1>
+        <div class="card accounts">
+            <strong class="card-header">Find Customer</strong>
+            <form th:action="@{/accounts}" class="card-body">
+                <div class="form-group row">
+                    <label for="name" class="col col-form-label">Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="name" name="name" th:value="${name}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nric" class="col col-form-label">NRIC (last 4 characters)</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="nric" name="nric" maxlength="4" th:value="${secretNric}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="birthDate" class="col col-form-label">Date Of Birth</label>
+                    <div class="col-sm-4">
+                        <input type="date" id="birthDate" name="birthDate" th:value="${birthDate}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col"></div>
+                    <div class="col-sm-4">
+                        <input type="submit" value="Search" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
         </div>
-    </th:block>
+        <div class="card accounts">
+            <strong class="card-header">Customer Profile</strong>
+            <div th:if="${customer}" class="card-body">
+                <div class="row">
+                    <strong class="col-sm-2">Name</strong><span class="col-sm-10" th:text="${customer.name}"></span>
+                </div>
+                <div class="row">
+                    <strong class="col-sm-2">NRIC</strong><span class="col-sm-10" th:text="'****' + *{secretNric}"></span>
+                </div>
+                <div class="row">
+                    <strong class="col-sm-2">Gender</strong><span class="col-sm-10" th:text="*{customer.gender}"></span>
+                </div>
+            </div>
+            <div th:unless="${customer}" class="card-body">
+                <p>No Customer Selected</p>
+            </div>
+        </div>
+        <div class="table-title row">
+            <h2 class="table-title-label col">Customer Accounts</h2>
+            <button type="button" class="btn btn-primary">Add Account</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-header">
+                    <tr>
+                        <th>Account Id</th>
+                        <th>Type</th>
+                        <th>Balance</th>
+                        <th>Start Date</th>
+                        <th>Expiry Date</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="account : ${accounts}">
+                        <tr>
+                            <td><a th:href="@{/transactions/{accountNumber}(accountNumber=${account.accountNumber})}" th:text="${account.accountNumber}"></a></td>
+                            <td th:text="${account.accountType.name}"></td>
+                            <td th:text="${account.balance}"></td>
+                            <td th:text="${'Start'}"></td>
+                            <td th:text="${'End'}"></td>
+                            <td class="table-options">
+                                <div class="row">
+                                    <!-- Can use anchor or button -->
+                                    <a href="#" class="btn btn-primary" role="button">Close</a>
+                                    <a href="#" class="btn btn-primary" role="button">Renew</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </th:block>
+                    <th:block th:if="${#lists.isEmpty(accounts)}">
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td></td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+        <th:block th:unless="${#lists.isEmpty(accounts)}">
+            <th:block th:replace="components/pagination :: base(num=${customer.id})"></th:block>
+        </th:block>
+    </div>
     <div th:replace="components/footer :: base"></div>
 </body>
 
