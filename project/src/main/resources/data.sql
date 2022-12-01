@@ -110,11 +110,11 @@ VALUES ('12345685', '8', 'CLOSED');
 
 -- Insert Transactions Table
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
-VALUES ('1', '500', 'deposit', current_timestamp(), '12345678');
+VALUES (NULL, '500', 'DEPOSIT', current_timestamp(), '12345678');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
-VALUES ('2', '-500', 'withdraw', current_timestamp(), '12345679');
+VALUES (NULL, '-500', 'WITHDRAW', current_timestamp(), '12345679');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
-VALUES ('3', '1500', 'deposit', current_timestamp(), '12345680');
+VALUES (NULL, '1500', 'DEPOSIT', current_timestamp(), '12345680');
 INSERT INTO `project`.`transactions` (`transaction_id`, `transaction_amount`, `description`, `transaction_time`, `account_id`) 
-VALUES ('4', '-400', 'withdraw', current_timestamp(), '12345681');
+VALUES (NULL, '-400', 'WITHDRAW', current_timestamp(), '12345681');
 
