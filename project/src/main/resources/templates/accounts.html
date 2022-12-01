@@ -103,11 +103,10 @@
                     </th:block>
                 </tbody>
             </table>
-
-            <th:block th:unless="${#lists.isEmpty(accounts)}">
-                <th:block th:replace="components/pagination :: base(num=${customer.id})"></th:block>
-            </th:block>
         </div>
+        <th:block th:unless="${#lists.isEmpty(accounts)}">
+            <th:block th:replace="components/pagination :: base(num=${customer.id})"></th:block>
+        </th:block>
     </div>
     <div th:replace="components/footer :: base"></div>
 </body>
