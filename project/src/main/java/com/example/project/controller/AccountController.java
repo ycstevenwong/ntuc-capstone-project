@@ -1,8 +1,13 @@
 package com.example.project.controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import com.example.project.dto.AccountDto;
+import com.example.project.model.AccountType;
+import com.example.project.repository.AccountTypeRepo;
+import com.example.project.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,12 +18,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.model.Account;
 import com.example.project.model.Customer;
 import com.example.project.repository.AccountRepo;
 import com.example.project.repository.CustomerRepo;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
 
 @Controller
 public class AccountController {
@@ -27,6 +36,12 @@ public class AccountController {
 
     @Autowired
     private AccountRepo accountRepo;
+
+    @Resource
+    private CustomerService cService;
+
+    @Resource
+    private AccountTypeRepo aRepo;
 
     @GetMapping("/accounts")
     public String searchAccounts(
@@ -89,6 +104,22 @@ public class AccountController {
 		model.addAttribute("lastPage", accounts.map(as -> as.getTotalPages()).orElse(1));
 		model.addAttribute("BASE_URL", "accounts");
 
+        model.addAttribute("newAccount",new AccountDto());
         return "accounts";
     }
+
+    @PostMapping("accounts/add/{id}")
+    public ModelAndView addAccount(@PathVariable("id") Long customerId, AccountDto account){
+        Optional<Customer> customer= customerRepo.findById(customerId);
+        AccountType accountType = aRepo.findByName(account.getType()).orElse(null);
+        if(accountType!=null) {
+           customer.ifPresent(c -> {
+               Account newAccount = Account.builder().accountType(accountType).balance(new BigDecimal(account.getInitialBalance())).status("Available").customer(c).build();
+               cService.createAccount(newAccount);
+           });
+       }
+        return new ModelAndView("redirect:/accounts/"+ customerId);
+    }
+
+
 }

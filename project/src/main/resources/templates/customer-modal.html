@@ -11,99 +11,79 @@
         <form method="post" th:action="@{/customer/edit}" th:object="${customer}">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Customer Profile</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-                <div class="form-group row ml-5">
-                    <label for="id" class="col-sm-2 col-form-label">Customer ID: </label>
-                    <div class="col-sm-5">
+                <div class="mb-3">
+                    <label for="id" class="col-form-label">Customer ID: </label>
                         <input type="number" class="form-control" id="id" value="" name="id" readonly th:field="*{id}">
-                    </div>
                 </div>
 
                 <br>
 
-                <div class="form-group row ml-5">
-                    <label for="name" class="col-sm-2 col-form-label">Name: </label>
-                    <div class="col-sm-5">
+                <div class="mb-3">
+                    <label for="name" class="col-form-label">Name: </label>
                         <input type="text" class="form-control" id="name" value="" name="name" th:field="*{name}" required>
-                    </div>
                 </div>
 
                 <br>
-                <div class="form-group row ml-5">
-                    <label for="nric" class="col-sm-2 col-form-label">NRIC: </label>
-                    <div class="col-sm-5">
+                <div class="mb-3">
+                    <label for="nric" class="col-form-label">NRIC: </label>
                         <input th:field="*{nric}" type="text" maxlength="9" placeholder="eg.S12345678" id="nric" value="" name="nric" required>
-                    </div>
                 </div>
                 <br>
 
-                <div class="form-group row ml-5">
+                <div class="mb-3">
                     <label for="age" class="col-sm-2 col-form-label">Age:</label>
-                    <div class="col-sm-5">
                         <input type="number" class="form-control" value="18" required id="age" name="age" min=18 th:field="*{age} ">
-                    </div>
                 </div>
                 <br>
-                <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
 
+                <div class="mb-3">
+                <label for="gender" class="col-form-label">Gender:</label>
                 <label>
                     <select name="gender">
                         <option th:each="genderOpt : ${T(com.example.project.model.Gender).values()}"
                                 th:value="${genderOpt}" th:text="${genderOpt}" id="gender" name="gender"></option>
                     </select>
                 </label>
+                </div>
                 <br>
 
-                <div class="form-group row ml-5">
-                    <label for="birthday" class="col-sm-2 col-form-label">Date of Birth: </label>
-                    <div class="col-sm-5">
+                <div class="mb-3">
+                    <label for="birthday" class="col-form-label">Date of Birth: </label>
                         <input type="date" required class="birthday" id="birth" name="birth" th:field="${customer.birthDate}">
-                    </div>
                 </div>
                 <br>
 
-                <div class="form-group row ml-5">
-                    <label for="email" class="col-sm-2 col-form-label">Email Address: </label>
-                    <div class="col-sm-5">
+                <div class="mb-3">
+                    <label for="email" class="col-form-label">Email Address: </label>
                         <input type="email" class="form-control" id="email" name="email" required placeholder="example@email.com" th:field="*{emailAddress}" >
-                    </div>
                 </div>
                 <br>
 
-                <div class="form-group row ml-5">
-                    <label for="tel" class="col-sm-2 col-form-label">Phone number: </label>
-                    <div class="col-sm-5">
-                        <input size="42" th:field="*{phone}" type="text" maxlength="8" required placeholder="eg.82446057" id="phone" name="phone">
-                    </div>
+                <div class="mb-3">
+                    <label for="tel" class="col-form-label">Phone number: </label>
+                        <input th:field="*{phone}" type="text" maxlength="8" required placeholder="eg.82446057" id="phone" name="phone">
                 </div>
                 <br>
 
-                <div class="form-group row ml-5">
-                    <label for="address" class="col-sm-2 col-form-label">Address: </label>
-                    <div class="col-sm-5">
+                <div class="mb-3">
+                    <label for="address" class="col-form-label">Address: </label>
                         <input type="text" th:field="*{address}" class="form-control" id="address" required name="address" placeholder="Enter your local address">
-                    </div>
                 </div>
                 <br>
-                <div class="form-group row ml-5">
-                    <label for="nomname" class="col-sm-2 col-form-label">Nominee Name: </label>
-                    <div class="col-sm-5">
+                <div class="mb-3">
+                    <label for="nomname" class="col-form-label">Nominee Name: </label>
                         <input type="name" th:field="*{nomineeName}" class="form-control" id="nomineeName" name="nomineeName" placeholder="Input Name Here" >
-                    </div>
-
                 </div>
                 <br>
 
-                <div class="form-group row ml-5">
-                    <label for="nomineeNRIC" class="col-sm-2 col-form-label">Nominee NRIC: </label>
-                    <div class="col-sm-5">
-                        <input size="42" th:field="*{nomineeNric}" type="text" id="nomineeNric" name="nomineeNric">
-                    </div>
-
+                <div class="mb-3">
+                    <label for="nomineeNRIC" class="col-form-label">Nominee NRIC: </label>
+                        <input th:field="*{nomineeNric}" type="text" id="nomineeNric" name="nomineeNric">
                 </div>
 
             </div>
@@ -115,5 +95,6 @@
         </form>
     </div>
 </div>
+
 </body>
 </html>
