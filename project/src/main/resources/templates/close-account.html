@@ -12,16 +12,17 @@
 </head>
 <body>
 	<div th:replace="components/nav :: base(isCurrentPage='Account')"></div>
-    <h1>Close Accounts Functions Test</h1>
+    <h1>Close Accounts Functions Test <span id="successMsg" style="color: rgb(255, 0, 0); font-size: 16px" th:text="${successMsg}"></span></h1>
     <hr>
+<!--    <h4 id="successMsg" style="color: rgb(255, 0, 0); text-align: center;" th:text="${successMsg}"></h4>-->
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
             <tr>
                 <th>Index</th>
                 <th>Account Number</th>
-                <th>Test</th>
-                <th>Test</th>
+                <th>Start Date</th>
+                <th>Close Date</th>
                 <th>Test</th>
                 <th>Test</th>
                 <th>Operation</th>
@@ -31,8 +32,8 @@
                 <tr th:each="account, iterStat : ${accounts}">
                     <td th:text="${iterStat.count}"></td>
                     <td th:text="${account.accountNumber}"></td>
-                    <td>test</td>
-                    <td>test</td>
+                    <td th:text="${#dates.format(account.registerTime, 'yyyy-MM-dd')}"></td>
+                    <td th:id=" 'expiryTime'+${iterStat.count} " th:text="${#dates.format(account.expiryTime, 'yyyy-MM-dd')}"></td>
                     <td>test</td>
                     <td>test</td>
                     <td>
@@ -43,17 +44,19 @@
                                     th:customerNric="${account.customer.nric}"
                                     th:accountType="${account.accountType.name}"
                                     th:accountBalance="${account.balance}"
+                                    th:interestRate="${account.accountType.interestRate}"
                                     data-toggle="modal"
                                     data-target="#closeAccountModal">
                                 Close Account
                             </button>
 
-                            <button type="button" class="btn btn-danger"
+                            <button type="button" class="btn btn-danger" th:id=" 'renewBtn'+${iterStat.count} "
                                     th:accountNo="${account.accountNumber}"
                                     th:customerName="${account.customer.name}"
                                     th:customerNric="${account.customer.nric}"
                                     th:accountType="${account.accountType.name}"
                                     th:accountBalance="${account.balance}"
+                                    th:renewPeriod="${account.accountType.validYearsOfPeriod}"
                                     data-toggle="modal"
                                     data-target="#renewAccountModal">
                                 Renew Account
@@ -65,7 +68,7 @@
         </table>
 
         <!-- Close Account Modal -->
-        <form method="post" action="/closeAccount/confirmClose">
+        <form id="closeForm" method="post" action="/closeAccount/confirmClose">
             <div class="modal fade" data-backdrop="static" data-keyboard="false" id="closeAccountModal" tabindex="-1"
                   aria-labelledby="closeFunvtionModalLabel" aria-hidden="true" >
                 <div class="modal-dialog modal-lg">
@@ -113,18 +116,23 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-3 control-label">* Confirm to close the account</label>
-                                    <div class="col-9" style="margin-left: 600px;">
-                                        <input type="checkbox" required value="CLOSED" id="closeConfirm"
-                                               name="closeConfirm" style="width: 25px; height: 25px">
+                                    <label class="col-3 control-label">Interest Rate</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="interestRate">
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Customer Interest </label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" name="interest" id="accountInterest">
+                                    </div>
+                                </div>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" id="cancelBtn" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="closeSubmit">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -174,12 +182,47 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-3 control-label">* Confirm to renew the account</label>
-                                <div class="col-9" style="margin-left: 600px;">
-                                    <input type="checkbox" required value="AGREE" id="renewConfirm"
-                                           name="renewConfirm" style="width: 25px; height: 25px">
+                                <label class="col-3 control-label">Account Balance</label>
+                                <div class="col-9">
+                                    <input type="text" readonly class="form-control" id="renewAccountBalance">
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-3 control-label">Register Date</label>
+                                <div class="col-9">
+                                    <input type="text" readonly class="form-control" id="renewRegisterDate">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-3 control-label">Expiry Date</label>
+                                <div class="col-9">
+                                    <input type="text" readonly class="form-control" id="renewExpiryDate">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-3 control-label">Renew Period</label>
+                                <div class="col-9">
+                                    <input type="text" readonly class="form-control" id="renewPeriod">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-3 control-label">Balance After Renew</label>
+                                <div class="col-9">
+                                    <input type="text" readonly class="form-control" id="afterRenewBalance">
+                                </div>
+                            </div>
+
+<!--                            <div class="form-group">-->
+<!--                                <label class="col-3 control-label">* Confirm to renew the account</label>-->
+<!--                                <div class="col-9" style="margin-left: 600px;">-->
+<!--                                    <input type="checkbox" required value="AGREE" id="renewConfirm"-->
+<!--                                           name="renewConfirm" style="width: 25px; height: 25px">-->
+<!--                                </div>-->
+<!--                            </div>-->
 
 
                         </div>
@@ -197,6 +240,27 @@
     <script>
         $( document ).ready(function() {
 
+            let now = new Date()
+            for (let i = 1; i < $("table").find("tr").length; i++) {
+                let expiryId = "expiryTime" + i;
+                let expiryTime = $("#"+expiryId).text()
+                expiryTime = new Date(Date.parse(expiryTime))
+                if(expiryTime > now){
+                    let renewId = "renewBtn" + i;
+                    $("#" + renewId).attr("disabled",true)
+                }
+            }
+
+
+            // let expiryTime = $('.expiryTime').text()
+            // console.log(expiryTime)
+            // expiryTime = new Date(Date.parse(expiryTime))
+            // if(expiryTime > now){
+            //     $(".renewBtn").attr("disabled",true)
+            // }
+
+            $("#successMsg").show().delay(5000).hide(0);
+
             // closeAccountModal
             $('#closeAccountModal').on('show.bs.modal', function(event) {
                 let button = $(event.relatedTarget)
@@ -205,6 +269,7 @@
                 let customerNric = button.attr('customerNric')
                 let accountType = button.attr('accountType')
                 let accountBalance = button.attr('accountBalance')
+                let interestRate = button.attr('interestRate')
                 let modal = $(this)
 
                 modal.find('.modal-title').text('Close Account Application')
@@ -213,49 +278,18 @@
                 modal.find('#customerNric').val(customerNric)
                 modal.find('#accountType').val(accountType)
                 modal.find('#accountBalance').val(accountBalance)
+                modal.find('#interestRate').val(interestRate)
 
-                $('#closeConfirm').unbind('click').bind('click',function(){
-                    if($("#closeConfirm").prop("checked")){
-                        $.ajax({
-                            url: "/closeAccount/getInterest/" + accountNo,
-                            type: "GET",
-                            dataType: "json",
-                            success: function (data) {
-                                $("#ulInterest").remove()
-                                $('#inputInterest').remove()
-                                let ul = $("<ul id='ulInterest'></ul>")
-                                let li1 = "<li>Your balance is "+ modal.find('#accountBalance').val() +"</li>"
-                                ul.append(li1)
-                                let li2 = "<li>The card interest rate is "+ data.interestRate +"</li>"
-                                ul.append(li2)
-                                let li3 = "<li>Your interest after calculation is "+ data.interest +"</li>"
-                                ul.append(li3)
-                                let li4 = "<li>We will withdraw all your money</li>"
-                                ul.append(li4)
-
-                                $("#closeAccountBody").append(ul)
-
-                                let inputInterest = "<input type='hidden' name='interest' id='inputInterest' value="+ data.interest +">"
-                                $("#closeAccountBody").append(inputInterest)
-                            }
-                        })
-                    } else{
-                        $("#ulInterest").remove()
-                        $('#inputInterest').remove()
-                    }
-
-                })
-
-                $('#cancelBtn,#topCloseBtn').click(function () {
-                    if($("#closeConfirm").prop("checked")){
-                        $("#closeConfirm").prop("checked", false)
-                        $("#ulInterest").remove()
-                        $('#inputInterest').remove()
+                $.ajax({
+                    url: "/closeAccount/getInterest/" + accountNo,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        modal.find('#accountInterest').val(data.interest)
                     }
                 })
 
             })
-
 
             // Renew Account
 
@@ -265,6 +299,8 @@
                 let customerName = button.attr('customerName')
                 let customerNric = button.attr('customerNric')
                 let accountType = button.attr('accountType')
+                let accountBalance = button.attr('accountBalance')
+                let renewPeriod = button.attr('renewPeriod')
                 let modal = $(this)
 
                 modal.find('.modal-renew-title').text('Renew Account Application')
@@ -272,51 +308,22 @@
                 modal.find('#renewCustomerName').val(customerName)
                 modal.find('#renewCustomerNric').val(customerNric)
                 modal.find('#renewAccountType').val(accountType)
+                modal.find('#renewAccountBalance').val(accountBalance)
+                modal.find('#renewPeriod').val(renewPeriod + " year")
 
-                $('#renewConfirm').unbind('click').bind('click',function(){
-                    if($("#renewConfirm").prop("checked")){
-                        $.ajax({
-                            url: "/closeAccount/renewAccount/" + accountNo,
-                            type: "GET",
-                            dataType: "json",
-                            success: function (data) {
-                                $("#ulRenew").remove()
-                                $("#renewSubmit").attr("disabled", false)
+                $.ajax({
+                    url: "/closeAccount/renewAccount/" + accountNo,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        modal.find('#renewRegisterDate').val(data.registerDate)
+                        modal.find('#renewExpiryDate').val(data.expiryTime)
+                        modal.find('#renewPeriod').val(data.renewTime)
+                        modal.find('#afterRenewBalance').val(data.afterRenewBalance)
 
-
-                                let ul = $("<ul id='ulRenew'></ul>")
-                                let li1 = "<li>Your account register time is "+ data.registerDate +"</li>"
-                                ul.append(li1)
-                                let li2 = "<li>Your account expiry time is "+ data.expiryTime +"</li>"
-                                ul.append(li2)
-                                let li3;
-                                if(data.renewStatus){
-                                    li3 = "<li>After renew, Your account expiry time is "+ data.renewTime +"</li>"
-                                    ul.append(li3)
-                                }else{
-                                    li3 = "<li>You could not renew, because the account has expired</li>"
-                                    ul.append(li3)
-                                    $("#renewSubmit").attr("disabled", true)
-                                }
-
-                                $("#renewAccountBody").append(ul)
-
-                            }
-                        })
-                    } else{
-                        $("#ulRenew").remove()
-                        $("#renewSubmit").attr("disabled", false)
-                    }
-
-                })
-
-                $('#renewCancel,#renewCloseBtn').click(function () {
-                    if($("#renewConfirm").prop("checked")){
-                        $("#renewConfirm").prop("checked", false)
-                        $("#ulRenew").remove()
-                        $("#renewSubmit").attr("disabled", false)
                     }
                 })
+
 
             })
 

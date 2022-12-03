@@ -1,5 +1,6 @@
 package com.example.project.serviceImpl;
 
+import java.sql.Timestamp;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -44,9 +45,7 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public BigDecimal calculateInterest(Account account) {
         LocalDateTime registerTime = account.getRegisterTime().toLocalDateTime();
-        Integer validYearsOfPeriod = account.getAccountType().getValidYearsOfPeriod();
-        Integer totalYears = validYearsOfPeriod + account.getNumberOfRenew() * validYearsOfPeriod;
-        LocalDateTime expiryTime = registerTime.plusYears(totalYears);
+        LocalDateTime expiryTime = account.getExpiryTime().toLocalDateTime();
         LocalDateTime now = LocalDateTime.now();
 
         BigDecimal interestRate = new BigDecimal(String.valueOf(account.getAccountType().getInterestRate()));
@@ -70,18 +69,21 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public LocalDate calculateExpiryTime(LocalDate registerDate, Account account) {
+    public Timestamp calculateExpiryTime(Timestamp registerDate, Account account) {
+        LocalDateTime registerDateTime = account.getRegisterTime().toLocalDateTime();
         Integer validYearsOfPeriod = account.getAccountType().getValidYearsOfPeriod();
-        Integer totalYears = validYearsOfPeriod + account.getNumberOfRenew() * validYearsOfPeriod;
-        LocalDate expiryDate = registerDate.plusYears(totalYears);
-        return expiryDate;
+        LocalDateTime expiryDateTime = registerDateTime.plusYears(validYearsOfPeriod);
+        Timestamp expiryTime = Timestamp.valueOf(expiryDateTime);
+        return expiryTime;
     }
 
     @Override
-    public LocalDate calculateRenewTime(LocalDate expiryDate, Account account) {
+    public Timestamp calculateRenewTime(Account account) {
         Integer validYearsOfPeriod = account.getAccountType().getValidYearsOfPeriod();
-        LocalDate renewDate = expiryDate.plusYears(validYearsOfPeriod);
-        return renewDate;
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime renewDateTime = now.plusYears(validYearsOfPeriod);
+        Timestamp renewTime = Timestamp.valueOf(renewDateTime);
+        return renewTime;
     }
 
 }

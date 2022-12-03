@@ -70,7 +70,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
-                .permitAll();
+                .permitAll()
+            //  When close account, will cause 403 problem, add this to disable CSRF protection
+            .and()
+            .csrf()
+            .disable();
     }
      
      

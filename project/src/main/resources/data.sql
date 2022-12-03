@@ -82,24 +82,24 @@ VALUES ('2', '0.10', 'Recurring Deposit', '1');
 
 
 -- Insert Accounts Table
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345678', '5000', 'OPEN', '1', '1', '2021-11-28 09:32:03', '0');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345679', '15000', 'OPEN', '1', '2', '2020-11-28 09:32:03', '0');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345680', '25000', 'OPEN', '1', '3', '2022-05-28 09:32:03', '0');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345681', '9000', 'OPEN', '1', '4', '2022-04-18 09:32:03', '0');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345682', '0', 'CLOSED', '1', '5', '2022-03-28 09:32:03', '0');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345683', '6000', 'OPEN', '1', '6', '2022-1-28 09:32:03', '0');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345684', '7000', 'OPEN', '1', '7', '2021-01-11 09:32:03', '0');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345685', '8000', 'CLOSED', '1', '8', '2019-03-11 09:32:03', '0');
-INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `renew_times`)
-VALUES ('12345686', '9000', 'OPEN', '1', '9', '2021-07-07 09:32:03', '0');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345678', '5000', 'OPEN', '1', '1', '2021-11-28 09:32:03', '2023-11-28 09:32:03');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345679', '15000', 'OPEN', '1', '2', '2020-11-28 09:32:03', '2022-11-28 09:32:03');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345680', '25000', 'OPEN', '1', '3', '2022-05-28 09:32:03', '2024-05-28 09:32:03');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345681', '9000', 'OPEN', '1', '4', '2022-04-18 09:32:03', '2024-04-18 09:32:03');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345682', '0', 'CLOSED', '1', '5', '2022-03-28 09:32:03', '2024-03-28 09:32:03');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345683', '6000', 'OPEN', '2', '6', '2022-1-28 09:32:03', '2023-1-28 09:32:03');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345684', '7000', 'OPEN', '2', '7', '2021-01-11 09:32:03', '2022-01-11 09:32:03');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345685', '8000', 'CLOSED', '2', '8', '2019-03-11 09:32:03', '2020-03-11 09:32:03');
+INSERT INTO `project`.`accounts` (`account_number`, `balance`, `status`, `account_type_id`, `customer_id`, `register_time`, `expiry_time`)
+VALUES ('12345686', '9000', 'OPEN', '2', '9', '2021-07-07 09:32:03', '2022-07-07 09:32:03');
 
 
 -- Insert Dormant Accounts Table

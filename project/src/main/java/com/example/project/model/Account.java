@@ -42,11 +42,11 @@ public class Account {
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     private List<Transaction> transactions = new ArrayList<>(0);
 
-    @Column(name = "register_time", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "register_time", nullable = false, updatable = false)
     private Timestamp registerTime;
 
-    @Column(name = "renew_times")
-    private Integer numberOfRenew;
+    @Column(name = "expiry_time", nullable = false)
+    private Timestamp expiryTime;
 
 
     @Override
@@ -59,7 +59,7 @@ public class Account {
                 ", accountType='" + getAccountType() + "'" +
                 ", transactions='" + getTransactions() + "'" +
                 ", registerTime='" + getRegisterTime() + "'" +
-                ", numberOfRenew='" + getNumberOfRenew() + "'" +
+                ", numberOfRenew='" + getExpiryTime() + "'" +
                 "}";
     }
 

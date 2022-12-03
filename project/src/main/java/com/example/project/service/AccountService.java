@@ -5,6 +5,7 @@ package com.example.project.service;
  * @Version 1.0
  */
 
+import java.sql.Timestamp;
 import java.util.List;
 import com.example.project.model.Account;
 import java.math.BigDecimal;
@@ -28,9 +29,9 @@ public interface AccountService {
 
     public BigDecimal calculateInterest(Account account);
 
-    public LocalDate calculateExpiryTime(LocalDate registerDate, Account account);
+    public Timestamp calculateExpiryTime(Timestamp registerDate, Account account);
 
-    public LocalDate calculateRenewTime(LocalDate expiryDate, Account account);
+    public Timestamp calculateRenewTime(Account account);
 
 
 }
