@@ -5,10 +5,6 @@
 	<div th:replace="components/links :: base"></div>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div th:replace="components/nav :: base(isCurrentPage='Account')"></div>
@@ -22,7 +18,7 @@
                 <th>Index</th>
                 <th>Account Number</th>
                 <th>Start Date</th>
-                <th>Close Date</th>
+                <th>Expiry Date</th>
                 <th>Test</th>
                 <th>Test</th>
                 <th>Operation</th>
@@ -57,6 +53,8 @@
                                     th:accountType="${account.accountType.name}"
                                     th:accountBalance="${account.balance}"
                                     th:renewPeriod="${account.accountType.validYearsOfPeriod}"
+                                    th:registerDate="${#dates.format(account.registerTime, 'yyyy-MM-dd')}"
+                                    th:expiryDate="${#dates.format(account.expiryTime, 'yyyy-MM-dd')}"
                                     data-toggle="modal"
                                     data-target="#renewAccountModal">
                                 Renew Account
@@ -70,11 +68,11 @@
         <!-- Close Account Modal -->
         <form id="closeForm" method="post" action="/closeAccount/confirmClose">
             <div class="modal fade" data-backdrop="static" data-keyboard="false" id="closeAccountModal" tabindex="-1"
-                  aria-labelledby="closeFunvtionModalLabel" aria-hidden="true" >
+                  aria-labelledby="closeFunctionModalLabel" aria-hidden="true" >
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="closeFunvtionModalLabel"></h4>
+                            <h4 class="modal-title" id="closeFunctionModalLabel"></h4>
                             <button type="button" class="close" id="topCloseBtn" data-dismiss="modal"
                                     aria-hidden="true">x</button>
                         </div>
@@ -210,20 +208,18 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-3 control-label">Renew Date</label>
+                                <div class="col-9">
+                                    <input type="text" readonly class="form-control" id="renewDate">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-3 control-label">Balance After Renew</label>
                                 <div class="col-9">
                                     <input type="text" readonly class="form-control" id="afterRenewBalance">
                                 </div>
                             </div>
-
-<!--                            <div class="form-group">-->
-<!--                                <label class="col-3 control-label">* Confirm to renew the account</label>-->
-<!--                                <div class="col-9" style="margin-left: 600px;">-->
-<!--                                    <input type="checkbox" required value="AGREE" id="renewConfirm"-->
-<!--                                           name="renewConfirm" style="width: 25px; height: 25px">-->
-<!--                                </div>-->
-<!--                            </div>-->
-
 
                         </div>
                         <div class="modal-footer">
@@ -239,7 +235,7 @@
 
     <script>
         $( document ).ready(function() {
-
+            // If today is before the expiry date, disabled the renew button
             let now = new Date()
             for (let i = 1; i < $("table").find("tr").length; i++) {
                 let expiryId = "expiryTime" + i;
@@ -251,14 +247,7 @@
                 }
             }
 
-
-            // let expiryTime = $('.expiryTime').text()
-            // console.log(expiryTime)
-            // expiryTime = new Date(Date.parse(expiryTime))
-            // if(expiryTime > now){
-            //     $(".renewBtn").attr("disabled",true)
-            // }
-
+            // Show successful message when operation is finished
             $("#successMsg").show().delay(5000).hide(0);
 
             // closeAccountModal
@@ -292,7 +281,6 @@
             })
 
             // Renew Account
-
             $('#renewAccountModal').on('show.bs.modal', function(event) {
                 let button = $(event.relatedTarget)
                 let accountNo = button.attr("accountNo")
@@ -301,6 +289,8 @@
                 let accountType = button.attr('accountType')
                 let accountBalance = button.attr('accountBalance')
                 let renewPeriod = button.attr('renewPeriod')
+                let registerDate = button.attr('registerDate')
+                let expiryDate = button.attr('expiryDate')
                 let modal = $(this)
 
                 modal.find('.modal-renew-title').text('Renew Account Application')
@@ -309,24 +299,22 @@
                 modal.find('#renewCustomerNric').val(customerNric)
                 modal.find('#renewAccountType').val(accountType)
                 modal.find('#renewAccountBalance').val(accountBalance)
-                modal.find('#renewPeriod').val(renewPeriod + " year")
+                modal.find('#renewPeriod').val(renewPeriod + " year(s)")
+                modal.find('#renewRegisterDate').val(registerDate)
+                modal.find('#renewExpiryDate').val(expiryDate)
 
                 $.ajax({
                     url: "/closeAccount/renewAccount/" + accountNo,
                     type: "GET",
                     dataType: "json",
                     success: function (data) {
-                        modal.find('#renewRegisterDate').val(data.registerDate)
-                        modal.find('#renewExpiryDate').val(data.expiryTime)
-                        modal.find('#renewPeriod').val(data.renewTime)
+                        modal.find('#renewDate').val(data.renewTime)
                         modal.find('#afterRenewBalance').val(data.afterRenewBalance)
 
                     }
                 })
 
-
             })
-
 
         });
 

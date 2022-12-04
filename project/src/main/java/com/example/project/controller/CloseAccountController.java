@@ -85,20 +85,14 @@ public class CloseAccountController {
     @ResponseBody
     public Map<String, Object> renewDetails(@PathVariable("accountNumber") Long accountNumber){
         Account account = accountService.selectAccountByAccountNumber(accountNumber);
-        LocalDate registerDate = account.getRegisterTime().toLocalDateTime().toLocalDate();
-        Timestamp expiryTime = accountService.calculateExpiryTime(account.getRegisterTime(), account);
-        LocalDate expiryDate = expiryTime.toLocalDateTime().toLocalDate();
         Timestamp renewTime = accountService.calculateRenewTime(account);
         LocalDate renewDate = renewTime.toLocalDateTime().toLocalDate();
         BigDecimal interest = accountService.calculateInterest(account);
         BigDecimal afterRenewBalance = account.getBalance().add(interest);
 
         Map<String, Object> map = new HashMap<>();
-        map.put("registerDate", registerDate);
-        map.put("expiryTime", expiryDate);
         map.put("renewTime", renewDate);
         map.put("afterRenewBalance", afterRenewBalance);
-
         return map;
     }
 
@@ -106,7 +100,6 @@ public class CloseAccountController {
     public String confirmRenew(String accountNumber, RedirectAttributes redirectAttributes){
         Long accountNo = Long.valueOf(accountNumber);
         Account account = accountService.selectAccountByAccountNumber(accountNo);
-        account.setExpiryTime(accountService.calculateRenewTime(account));
         BigDecimal interest = accountService.calculateInterest(account);
         //deposit the interest
         Transaction transactionRecord = new Transaction();
@@ -116,6 +109,7 @@ public class CloseAccountController {
         transactionRepo.save(transactionRecord);
         BigDecimal renewBalance = account.getBalance().add(interest);
         account.setBalance(renewBalance);
+        account.setExpiryTime(accountService.calculateRenewTime(account));
         accountService.saveAccount(account);
         String successMsg = "Renew account successfully! Your initial balance will be " + renewBalance + "SGD";
         redirectAttributes.addFlashAttribute("successMsg", successMsg);
