@@ -1,12 +1,16 @@
 package com.example.project.controller;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import com.example.project.dto.AccountDto;
 import com.example.project.model.AccountType;
 import com.example.project.repository.AccountTypeRepo;
+import com.example.project.service.AccountService;
 import com.example.project.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,6 +46,10 @@ public class AccountController {
 
     @Resource
     private AccountTypeRepo aRepo;
+
+    @Resource
+    private AccountService accountService;
+
 
     @GetMapping("/accounts")
     public String searchAccounts(
@@ -104,7 +112,10 @@ public class AccountController {
 		model.addAttribute("lastPage", accounts.map(as -> as.getTotalPages()).orElse(1));
 		model.addAttribute("BASE_URL", "accounts");
 
+		// For newly added accounts
+        List<AccountType> allAccountTypes = aRepo.findAll();
         model.addAttribute("newAccount",new AccountDto());
+        model.addAttribute("accountTypes",allAccountTypes);
         return "accounts";
     }
 
@@ -114,7 +125,9 @@ public class AccountController {
         AccountType accountType = aRepo.findByName(account.getType()).orElse(null);
         if(accountType!=null) {
            customer.ifPresent(c -> {
-               Account newAccount = Account.builder().accountType(accountType).balance(new BigDecimal(account.getInitialBalance())).status("Available").customer(c).build();
+               Account newAccount = Account.builder().accountType(accountType).balance(new BigDecimal(account.getInitialBalance())).status("OPEN").customer(c).registerTime(Timestamp.valueOf(LocalDateTime.now())).build();
+               Timestamp expiryTime = accountService.calculateExpiryTime(newAccount.getRegisterTime(), newAccount);
+               newAccount.setExpiryTime(expiryTime);
                cService.createAccount(newAccount);
            });
        }
