@@ -2,6 +2,7 @@ package com.example.project.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import com.example.project.dto.AccountDto;
@@ -104,7 +105,10 @@ public class AccountController {
 		model.addAttribute("lastPage", accounts.map(as -> as.getTotalPages()).orElse(1));
 		model.addAttribute("BASE_URL", "accounts");
 
+		// For newly added accounts
+        List<AccountType> allAccountTypes = aRepo.findAll();
         model.addAttribute("newAccount",new AccountDto());
+        model.addAttribute("accountTypes",allAccountTypes);
         return "accounts";
     }
 
@@ -114,7 +118,7 @@ public class AccountController {
         AccountType accountType = aRepo.findByName(account.getType()).orElse(null);
         if(accountType!=null) {
            customer.ifPresent(c -> {
-               Account newAccount = Account.builder().accountType(accountType).balance(new BigDecimal(account.getInitialBalance())).status("Available").customer(c).build();
+               Account newAccount = Account.builder().accountType(accountType).balance(new BigDecimal(account.getInitialBalance())).status("OPEN").customer(c).build();
                cService.createAccount(newAccount);
            });
        }

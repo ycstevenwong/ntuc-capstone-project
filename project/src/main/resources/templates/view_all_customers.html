@@ -11,6 +11,11 @@
 </head>
 <body>
 <div th:replace="components/nav :: base(isCurrentPage='Customer')"></div>
+<div th:if="${message =='Account created!'}">
+    <th:block
+            th:replace="components/alert :: success (message='You have successfully created a customer!')"
+    ></th:block>
+</div>
 <div>
     <h1 style="font-size:30px; text-align: center; padding-top: 5px; padding-bottom: 5px;">Customer Overview </h1>
     <a th:href="@{/customer/create}">
@@ -29,8 +34,8 @@
                 <th>Gender</th>
                 <th>Email</th>
                 <th>Address</th>
-                <th>Nominee Name (If any)</th>
-                <th>Nominee NRIC (If any)</th>
+                <th>Nominee Name</th>
+                <th>Nominee NRIC</th>
                 <th>Registration Time</th>
                 <th style="text-align: center">Operations</th>
             </tr>
