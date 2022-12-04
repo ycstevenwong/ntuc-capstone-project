@@ -6,6 +6,7 @@ import com.example.project.model.Account;
 import com.example.project.model.AccountType;
 import com.example.project.model.Customer;
 import com.example.project.repository.AccountTypeRepo;
+import com.example.project.service.AccountService;
 import com.example.project.service.CustomerService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -29,6 +32,9 @@ import java.util.Optional;
 public class CustomerController {
     @Resource
     private CustomerService cService;
+
+    @Resource
+    private AccountService accountService;
 
     @Resource
     private AccountTypeRepo aRepo;
@@ -56,8 +62,12 @@ public class CustomerController {
         if (aType.isPresent()) {
             // set defualt balance if the user does not input the deposit
             BigDecimal balance = account.getInitialBalance().isBlank() ? new BigDecimal("0.00") : new BigDecimal(account.getInitialBalance());
-            Account newAccount = Account.builder().accountType(aType.get()).balance(balance).status("Available").customer(newCustomer).build();
+            Account newAccount = Account.builder().accountType(aType.get()).balance(balance).status("OPEN").customer(newCustomer).registerTime(Timestamp.valueOf(LocalDateTime.now())).build();
+
+            Timestamp expiryTime = accountService.calculateExpiryTime(newAccount.getRegisterTime(), newAccount);
+            newAccount.setExpiryTime(expiryTime);
             cService.createAccount(newAccount);
+
         }
         return new ModelAndView("redirect:/customer/view");
     }
