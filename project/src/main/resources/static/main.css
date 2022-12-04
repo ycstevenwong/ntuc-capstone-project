@@ -154,6 +154,10 @@ body {
     vertical-align: middle;
 }
 
+.account-table td {
+    text-align: center;
+}
+
 .table .table-options {
     padding: 0;
 }
