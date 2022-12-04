@@ -71,7 +71,6 @@ public class CustomerController {
         if (aType.isPresent()) {
             // set defualt balance if the user does not input the deposit
             BigDecimal balance = account.getInitialBalance().isBlank() ? new BigDecimal("0.00") : new BigDecimal(account.getInitialBalance());
-            Account newAccount = Account.builder().accountType(aType.get()).balance(balance).status("OPEN").customer(newCustomer).build();
             Account newAccount = Account.builder().accountType(aType.get()).balance(balance).status("OPEN").customer(newCustomer).registerTime(Timestamp.valueOf(LocalDateTime.now())).build();
 
             Timestamp expiryTime = accountService.calculateExpiryTime(newAccount.getRegisterTime(), newAccount);
