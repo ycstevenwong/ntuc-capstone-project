@@ -200,170 +200,171 @@
         </table>
 
         <!-- Close Account Modal -->
-        <form id="closeForm" method="post" th:action="@{/accounts/confirmClose/}+${customer.id}">
-            <div class="modal fade" data-backdrop="static" data-keyboard="false" id="closeAccountModal" tabindex="-1"
-                 aria-labelledby="closeFunctionModalLabel" aria-hidden="true" >
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="closeFunctionModalLabel"></h4>
-                            <button type="button" class="close" id="topCloseBtn" data-dismiss="modal"
-                                    aria-hidden="true">x</button>
-                        </div>
-                        <div class="modal-body" id="closeAccountBody" style="margin-left: 35px">
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Account Number</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="accountNumber"
-                                           name="accountNumber">
-                                </div>
+        <th:block th:if="${customer}">
+            <form id="closeForm" method="post" th:action="@{/accounts/confirmClose/}+${customer.id}">
+                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="closeAccountModal" tabindex="-1"
+                     aria-labelledby="closeFunctionModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="closeFunctionModalLabel"></h4>
+                                <button type="button" class="close" id="topCloseBtn" data-dismiss="modal"
+                                        aria-hidden="true">x</button>
                             </div>
-                            <div class="form-group">
-                                <label class="col-3 control-label">Customer Name</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="customerName">
+                            <div class="modal-body" id="closeAccountBody" style="margin-left: 35px">
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Account Number</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="accountNumber"
+                                               name="accountNumber">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Customer NRIC</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="customerNric">
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Customer Name</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="customerName">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Account Type</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="accountType">
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Customer NRIC</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="customerNric">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Account Balance</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="accountBalance">
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Account Type</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="accountType">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Interest Rate</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="interestRate">
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Account Balance</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="accountBalance">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Customer Interest </label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" name="interest" id="accountInterest">
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Interest Rate</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="interestRate">
+                                    </div>
                                 </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" id="cancelBtn" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary" id="closeSubmit">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-
-        <!--  Renew Account Modal -->
-        <form method="post" th:action="@{/accounts/confirmRenew/}+${customer.id}">
-            <div class="modal fade" data-backdrop="static" data-keyboard="false" id="renewAccountModal" tabindex="-1"
-                 aria-labelledby="renewModalLabel" aria-hidden="true" >
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-renew-title" id="renewModalLabel"></h4>
-                            <button type="button" class="close" data-dismiss="modal" id="renewCloseBtn"
-                                    aria-hidden="true">x</button>
-                        </div>
-                        <div class="modal-body" id="renewAccountBody" style="margin-left: 35px">
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Account Number</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewAccountNumber"
-                                           name="accountNumber">
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Customer Interest </label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" name="interest" id="accountInterest">
+                                    </div>
                                 </div>
+    
                             </div>
-                            <div class="form-group">
-                                <label class="col-3 control-label">Customer Name</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewCustomerName">
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" id="cancelBtn" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="closeSubmit">Submit</button>
                             </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Customer NRIC</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewCustomerNric">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Account Type</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewAccountType">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Account Balance</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewAccountBalance">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Register Date</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewRegisterDate">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Expiry Date</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewExpiryDate">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Renew Period</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewPeriod">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Renew Date</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="renewDate">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-3 control-label">Balance After Renew</label>
-                                <div class="col-9">
-                                    <input type="text" readonly class="form-control" id="afterRenewBalance">
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" id="renewCancel" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary" id="renewSubmit">Submit</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+
+            <!--  Renew Account Modal -->
+            <form method="post" th:action="@{/accounts/confirmRenew/}+${customer.id}">
+                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="renewAccountModal" tabindex="-1"
+                     aria-labelledby="renewModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-renew-title" id="renewModalLabel"></h4>
+                                <button type="button" class="close" data-dismiss="modal" id="renewCloseBtn"
+                                        aria-hidden="true">x</button>
+                            </div>
+                            <div class="modal-body" id="renewAccountBody" style="margin-left: 35px">
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Account Number</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewAccountNumber"
+                                               name="accountNumber">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Customer Name</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewCustomerName">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Customer NRIC</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewCustomerNric">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Account Type</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewAccountType">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Account Balance</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewAccountBalance">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Register Date</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewRegisterDate">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Expiry Date</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewExpiryDate">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Renew Period</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewPeriod">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Renew Date</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="renewDate">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label class="col-3 control-label">Balance After Renew</label>
+                                    <div class="col-9">
+                                        <input type="text" readonly class="form-control" id="afterRenewBalance">
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" id="renewCancel" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="renewSubmit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </th:block>
     </div>
     <th:block th:unless="${#lists.isEmpty(accounts)}">
         <th:block th:replace="components/pagination :: base(num=${customer.id})"></th:block>
