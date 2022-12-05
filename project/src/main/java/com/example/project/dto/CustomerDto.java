@@ -60,5 +60,20 @@ public class CustomerDto {
 
     private String nomineeName;
 
-
+    @Override
+    public String toString() {
+        return "CustomerDto{" +
+                "id=" + id +
+                ", nric='" + nric + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", gender=" + gender +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", birthDate=" + birthDate +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", nomineeNric='" + nomineeNric + '\'' +
+                ", nomineeName='" + nomineeName + '\'' +
+                '}';
+    }
 }

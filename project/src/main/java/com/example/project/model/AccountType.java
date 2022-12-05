@@ -1,12 +1,10 @@
 package com.example.project.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 @Table(name = "account_types")
 public class AccountType {
 
@@ -36,8 +35,10 @@ public class AccountType {
     private double interestRate;
 
     @OneToMany(mappedBy = "accountType")
+    @ToString.Exclude
     private Set<Account> accounts = new HashSet<>(0);
 
     @Column(name = "valid_years_period")
     private Integer validYearsOfPeriod;
+
 }

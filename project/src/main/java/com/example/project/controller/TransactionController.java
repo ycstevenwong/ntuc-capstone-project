@@ -105,7 +105,7 @@ public class TransactionController {
 	}
 
 	// Main Display Page for transaction history
-	@GetMapping("/{accountNum}")
+	@GetMapping("/customer/accounts/{accountNum}")
 	public String display(@PathVariable("accountNum") Long accountNum,
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "pageLimit", defaultValue = "10") Integer pageLimit,

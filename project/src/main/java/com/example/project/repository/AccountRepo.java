@@ -23,7 +23,7 @@ public interface AccountRepo extends JpaRepository<Account, Long> {
     @Query("select a from Account a where a.customer = :customer")
     Iterable<Account> findAllCustomerAccounts(@Param("customer") Customer customer);
 
-    @Query("select a from Account a where a.customer = :customer")
+    @Query("select a from Account a where a.customer = :customer and lower(a.status) <> 'closed' ")
     Page<Account> findAllCustomerAccountsWithPagination(@Param("customer") Customer customer, Pageable pageable);
 
     @Query(value="SELECT * FROM accounts a WHERE a.account_type_id = :id",nativeQuery=true)

@@ -152,7 +152,7 @@
                     <div class="form-group row ml-5">
                         <label for="nomname" class="col-sm-2 col-form-label">Nominee Name: </label>
                         <div class="col-sm-5">
-                            <input type="name" th:field="*{nomineeName}" class="form-control" id="nomname" placeholder="Your Name Here" >
+                            <input type="text" th:field="*{nomineeName}" class="form-control" placeholder="Your Name Here" >
                         </div>
 
                     </div>
@@ -184,16 +184,12 @@
             <div class="accordion-body" th:object="${account}">
                 <div class="form-group row ml-5">
                     <label for="gender" class="col-sm-2 col-form-label">Account Type:</label>
-                    <div class="form-group row ml-5">
+                    <div class="form-group row ml-5" th:each="types:${accountTypes}" >
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="Account Type"  th:field="${account.type}" value="Saving Deposit">Saving Deposit
-                        </label>
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="Account Type" th:field="${account.type}" value="Recurring Deposit">Recurring Deposit
+                            <input type="radio" class="form-check-input" name="Account Type"  th:field="${account.type}" th:value="${types.name}" th:text="${types.name}">
                         </label>
                     </div>
                 </div>
-
                     <br>
                     <div class="form-group row ml-5">
                         <label for="initialdeposit" class="col-sm-2 col-form-label">Initial Deposit: </label>
@@ -205,7 +201,7 @@
                     <br>
 
                     <div class="form-group row ml-5 right-wrapper">
-                        <button type="submit" class="btn btn-primary btn-right">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-right" >Submit</button>
                     </div>
                 <br>
 
@@ -234,4 +230,5 @@
         }
     });
 </script> -->
+
 </html>
