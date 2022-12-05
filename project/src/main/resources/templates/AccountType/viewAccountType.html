@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <th:block th:replace="components/links :: base"></th:block>
     <title>Products</title>
+    <th:block th:replace="components/links :: base"></th:block>
 </head>
 <body>
 <th:block th:replace="components/nav :: base"></th:block>
@@ -33,8 +30,8 @@
                     <td th:text="${accountType.validYearsOfPeriod} + ' year(s)' "></td>
                     <td>
                         <div class="btn-group">
-                            <a role="button" class="btn btn-primary" th:ref="@{/editproduct/__${accountType.id}__}">Edit</a>
-                        <a role="button" class="btn btn-danger" th:ref="@{/deleteproduct/__${accountType.id}__}">Delete</a>
+                            <a role="button" class="btn btn-primary" th:href="@{/products/edit/__${accountType.id}__}">Edit</a>
+                        <a role="button" class="btn btn-danger" th:href="@{/products/delete/__${accountType.id}__}">Delete</a>
                         </div>
                         <!-- <td><a th:href="@{/deleteproduct/__${accountType.id}__}">Delete</a></td> -->
                     </td>
@@ -64,7 +61,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/addproduct}" th:object="${ac}" method="post">
+                <form th:action="@{/products/add}" th:object="${ac}" method="post">
                     <input type="text" id="id" name="id" th:field="*{id}" hidden>
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Name:</label>
