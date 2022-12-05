@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -32,7 +34,7 @@ public class CustomerDto {
     @NotEmpty(message = "You can not leave the Name blank!")
     private String name;
 
-    @NotNull(message = "Please fill in your Age!")
+    @Range(min = 18, max = 100, message = "Minimum age to register is 18. Maximum age to register is 100.")
     private Long age;
 
     @Enumerated(EnumType.STRING)

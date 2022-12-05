@@ -1,224 +1,424 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
     <th:block th:replace="components/scripts :: base"></th:block>
     <div th:replace="components/links :: base"></div>
-</head>
-<style>
-    .right-wrapper{
-        display: flex;
-        flex-direction: row;
+  </head>
+  <style>
+    .right-wrapper {
+      display: flex;
+      flex-direction: row;
     }
-    .btn-right{
-        margin: 0 0 0 auto;
-        width: 150px;
+    .btn-right {
+      margin: 0 0 0 auto;
+      width: 150px;
     }
-    .col-form-label{
-        font-size: large;
+    .col-form-label {
+      font-size: large;
     }
-</style>
-<body>
-<div th:replace="components/nav :: base(isCurrentPage='Customer')"></div>
-<h1 style="font-size:30px; text-align: center; padding-top: 5px; padding-bottom: 5px;">Register Customer</h1>
-<form method="post" th:action="@{/customer/create}" th:object="${customer}">
-<div class="accordion" id="accordionExample">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <img th:src="@{/images/Number1.png}" alt="" srcset="" style="width: 80px;">
+  </style>
+  <body>
+    <div th:replace="components/nav :: base(isCurrentPage='Customer')"></div>
+    <h1
+      style="
+        font-size: 30px;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      "
+    >
+      Register Customer
+    </h1>
+    <form
+      id="form"
+      method="post"
+      th:action="@{/customer/create}"
+      th:object="${customer}"
+    >
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              <img
+                th:src="@{/images/Number1.png}"
+                alt=""
+                srcset=""
+                style="width: 80px"
+              />
 
-                <h3 style="color:#345C97; margin-bottom:0;"><b>Customer Details</b></h3>
+              <h3 style="color: #345c97; margin-bottom: 0">
+                <b>Customer Details</b>
+              </h3>
             </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
             <div class="accordion-body">
-
-                    <div class="form-group row ml-5">
-                        <label for="name" class="col-sm-2 col-form-label">Holder Name: </label>
-                        <div class="col-sm-5">
-                            <input type="text" th:field="*{name}"  class="form-control" id="name" placeholder="Your Name Here">
-                        </div>
-                        <div class="col-sm-5">
-                            <span style="color:red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group row ml-5">
-                        <label for="nric" class="col-sm-2 col-form-label">NRIC: </label>
-                        <div class="col-sm-5">
-                            <input th:field="*{nric}" type="text" maxlength="9" placeholder="eg.S12345678">
-                        </div>
-                        <div class="col-sm-5">
-                            <span style="color:red" th:errors="*{nric}" th:if="${#fields.hasErrors('nric')}"></span>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="form-group row ml-5">
-                        <label for="age" class="col-sm-2 col-form-label">Age:</label>
-                        <div class="col-sm-5">
-                            <input type="number" class="form-control" value="18" id="age" min=18 th:field="*{age} ">
-                        </div>
-                        <div class="col-sm-5">
-                            <span style="color:red" th:errors="*{age}" th:if="${#fields.hasErrors('age')}"></span>
-                        </div>
-                    </div>
-                    <br>
-
-
-                <div class="form-group row ml-5">
-                    <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
-                    <div class="col-sm-5">
-                <label>
-                    <select name="gender">
-                        <option th:each="genderOpt : ${T(com.example.project.model.Gender).values()}"
-                                th:value="${genderOpt}" th:text="${genderOpt}"></option>
-                    </select>
+              <div class="form-group row ml-5">
+                <label for="name" class="col-sm-2 col-form-label"
+                  >Holder Name:
                 </label>
-                        </div>
+                <div class="col-sm-5">
+                  <input
+                    type="text"
+                    th:field="*{name}"
+                    class="form-control"
+                    id="name"
+                    placeholder="Your Name Here"
+                  />
                 </div>
-                <br>
+                <div class="col-sm-5">
+                  <span
+                    style="color: red"
+                    th:errors="*{name}"
+                    th:if="${#fields.hasErrors('name')}"
+                  ></span>
+                </div>
+              </div>
+              <br />
+              <div class="form-group row ml-5">
+                <label for="nric" class="col-sm-2 col-form-label">NRIC: </label>
+                <div class="col-sm-5">
+                  <input
+                    th:field="*{nric}"
+                    type="text"
+                    maxlength="9"
+                    placeholder="eg.S12345678"
+                  />
+                </div>
+                <div class="col-sm-5">
+                  <span
+                    style="color: red"
+                    th:errors="*{nric}"
+                    th:if="${#fields.hasErrors('nric')}"
+                  ></span>
+                </div>
+              </div>
+              <br />
 
-                    <div class="form-group row ml-5">
-                        <label for="birthday" class="col-sm-2 col-form-label">Date of Birth: </label>
-                        <div class="col-sm-5">
-                            <input type="date" class="birthday" id="birthday" th:field="${customer.birthDate}">
-                        </div>
-                        <div class="col-sm-5">
-                           <span style="color:red" th:errors="*{birthDate}"
-                                 th:if="${#fields.hasErrors('birthDate')}"></span>
-                        </div>
-                    </div>
-                    <br>
+              <div class="form-group row ml-5">
+                <label for="age" class="col-sm-2 col-form-label">Age:</label>
+                <div class="col-sm-5">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="age"
+                    name="age"
+                    th:field="*{age}"
+                    readonly
+                  />
+                </div>
+                <div class="col-sm-5">
+                  <span
+                    style="color: red"
+                    th:errors="*{age}"
+                    th:if="${#fields.hasErrors('age')}"
+                  ></span>
+                </div>
+              </div>
+              <br />
 
-                    <div class="form-group row ml-5">
-                        <label for="email" class="col-sm-2 col-form-label">Email Address: </label>
-                        <div class="col-sm-5">
-                            <input type="email" class="form-control" id="email" placeholder="example@email.com" th:field="*{emailAddress}" >
-                        </div>
-                        <div class="col-sm-5">
-                            <span style="color:red" th:errors="*{emailAddress}"
-                                  th:if="${#fields.hasErrors('emailAddress')}"></span>
-                        </div>
+              <div class="form-group row ml-5">
+                <label for="gender" class="col-sm-2 col-form-label"
+                  >Gender:</label
+                >
+                <div class="col-sm-5">
+                  <label>
+                    <select name="gender">
+                      <option
+                        th:each="genderOpt : ${T(com.example.project.model.Gender).values()}"
+                        th:value="${genderOpt}"
+                        th:text="${genderOpt}"
+                      ></option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+              <br />
 
+              <div class="form-group row ml-5">
+                <label for="birthday" class="col-sm-2 col-form-label"
+                  >Date of Birth:
+                </label>
+                <div class="col-sm-5">
+                  <input
+                    type="date"
+                    class="birthday"
+                    id="birthday"
+                    th:field="${customer.birthDate}"
+                  />
+                </div>
+                <div class="col-sm-5">
+                  <span
+                    style="color: red"
+                    th:errors="*{birthDate}"
+                    th:if="${#fields.hasErrors('birthDate')}"
+                  ></span>
+                </div>
+              </div>
+              <br />
 
-                    </div>
-                    <br>
+              <div class="form-group row ml-5">
+                <label for="email" class="col-sm-2 col-form-label"
+                  >Email Address:
+                </label>
+                <div class="col-sm-5">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="example@email.com"
+                    th:field="*{emailAddress}"
+                  />
+                </div>
+                <div class="col-sm-5">
+                  <span
+                    style="color: red"
+                    th:errors="*{emailAddress}"
+                    th:if="${#fields.hasErrors('emailAddress')}"
+                  ></span>
+                </div>
+              </div>
+              <br />
 
-                    <div class="form-group row ml-5">
-                        <label for="tel" class="col-sm-2 col-form-label">Phone number: </label>
-                        <div class="col-sm-5">
-                            <input size="42" th:field="*{phone}" type="text" maxlength="8" placeholder="eg.82446057">
-                        </div>
-                        <div class="col-sm-5">
-                            <span style="color:red" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></span>
-                        </div>
-                    </div>
-                    <br>
+              <div class="form-group row ml-5">
+                <label for="tel" class="col-sm-2 col-form-label"
+                  >Phone number:
+                </label>
+                <div class="col-sm-5">
+                  <input
+                    size="42"
+                    th:field="*{phone}"
+                    type="text"
+                    maxlength="8"
+                    placeholder="eg.82446057"
+                  />
+                </div>
+                <div class="col-sm-5">
+                  <span
+                    style="color: red"
+                    th:errors="*{phone}"
+                    th:if="${#fields.hasErrors('phone')}"
+                  ></span>
+                </div>
+              </div>
+              <br />
 
-                    <div class="form-group row ml-5">
-                        <label for="address" class="col-sm-2 col-form-label">Address: </label>
-                        <div class="col-sm-5">
-                            <input type="text" th:field="*{address}" class="form-control" id="address" placeholder="Enter your local address">
-                        </div>
-                        <div class="col-sm-5">
-                            <span style="color:red" th:errors="*{address}" th:if="${#fields.hasErrors('address')}"></span>
-                        </div>
-
-                    </div>
-                    <br>
-                    <div class="form-group row ml-5 right-wrapper">
-                        <button class="collapsed btn btn-primary btn-right" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Continue</button>
-                    </div>
-
+              <div class="form-group row ml-5">
+                <label for="address" class="col-sm-2 col-form-label"
+                  >Address:
+                </label>
+                <div class="col-sm-5">
+                  <input
+                    type="text"
+                    th:field="*{address}"
+                    class="form-control"
+                    id="address"
+                    placeholder="Enter your local address"
+                  />
+                </div>
+                <div class="col-sm-5">
+                  <span
+                    style="color: red"
+                    th:errors="*{address}"
+                    th:if="${#fields.hasErrors('address')}"
+                  ></span>
+                </div>
+              </div>
+              <br />
+              <div class="form-group row ml-5 right-wrapper">
+                <button
+                  class="collapsed btn btn-primary btn-right"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  Continue
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <img th:src="@{/images/Number2.png}" alt="" srcset="" style="width: 80px;">
-                <h3 style="color:#345C97; margin-bottom:0"><b>Nominee Details(Optional)</b></h3>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              <img
+                th:src="@{/images/Number2.png}"
+                alt=""
+                srcset=""
+                style="width: 80px"
+              />
+              <h3 style="color: #345c97; margin-bottom: 0">
+                <b>Nominee Details(Optional)</b>
+              </h3>
             </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample"
+          >
             <div class="accordion-body">
-
-                    <div class="form-group row ml-5">
-                        <label for="nomname" class="col-sm-2 col-form-label">Nominee Name: </label>
-                        <div class="col-sm-5">
-                            <input type="text" th:field="*{nomineeName}" class="form-control" placeholder="Your Name Here" >
-                        </div>
-
-                    </div>
-                    <br>
-
-                    <div class="form-group row ml-5">
-                        <label for="nomineeNRIC" class="col-sm-2 col-form-label">Nominee NRIC: </label>
-                        <div class="col-sm-5">
-                            <input size="42" th:field="*{nomineeNric}" type="text">
-                        </div>
-
-                    </div>
-                    <br>
-
-                <div class="form-group row ml-5 right-wrapper">
-                    <button class="collapsed btn btn-primary btn-right" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Continue</button>
+              <div class="form-group row ml-5">
+                <label for="nomname" class="col-sm-2 col-form-label"
+                  >Nominee Name:
+                </label>
+                <div class="col-sm-5">
+                  <input
+                    type="text"
+                    th:field="*{nomineeName}"
+                    class="form-control"
+                    placeholder="Your Name Here"
+                  />
                 </div>
+              </div>
+              <br />
+
+              <div class="form-group row ml-5">
+                <label for="nomineeNRIC" class="col-sm-2 col-form-label"
+                  >Nominee NRIC:
+                </label>
+                <div class="col-sm-5">
+                  <input size="42" th:field="*{nomineeNric}" type="text" />
+                </div>
+              </div>
+              <br />
+
+              <div class="form-group row ml-5 right-wrapper">
+                <button
+                  class="collapsed btn btn-primary btn-right"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  Continue
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <img th:src="@{/images/Number3.png}" alt="" srcset="" style="width: 80px;">
-                <h3 style="color:#345C97; margin-bottom:0"><b>Account Options(Optional)</b></h3>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              <img
+                th:src="@{/images/Number3.png}"
+                alt=""
+                srcset=""
+                style="width: 80px"
+              />
+              <h3 style="color: #345c97; margin-bottom: 0">
+                <b>Account Options(Optional)</b>
+              </h3>
             </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample"
+          >
             <div class="accordion-body" th:object="${account}">
-                <div class="form-group row ml-5">
-                    <label for="gender" class="col-sm-2 col-form-label">Account Type:</label>
-                    <div class="form-group row ml-5" th:each="types:${accountTypes}" >
-                        <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="Account Type"  th:field="${account.type}" th:value="${types.name}" th:text="${types.name}">
-                        </label>
-                    </div>
+              <div class="form-group row ml-5">
+                <label for="gender" class="col-sm-2 col-form-label"
+                  >Account Type:</label
+                >
+                <div
+                  class="form-group row ml-5"
+                  th:each="types:${accountTypes}"
+                >
+                  <label class="form-check-label">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="Account Type"
+                      th:field="${account.type}"
+                      th:value="${types.name}"
+                      th:text="${types.name}"
+                    />
+                  </label>
                 </div>
-                    <br>
-                    <div class="form-group row ml-5">
-                        <label for="initialdeposit" class="col-sm-2 col-form-label">Initial Deposit: </label>
-                        <div class="col-sm-5">
-                            <input type="number" class="form-control" min="1" id="initialdeposit" th:field="${account.initialBalance}" >
-                        </div>
+              </div>
+              <br />
+              <div class="form-group row ml-5">
+                <label for="initialdeposit" class="col-sm-2 col-form-label"
+                  >Initial Deposit:
+                </label>
+                <div class="col-sm-5">
+                  <input
+                    type="number"
+                    class="form-control"
+                    min="1"
+                    id="initialdeposit"
+                    th:field="${account.initialBalance}"
+                  />
+                </div>
+              </div>
+              <br />
 
-                    </div>
-                    <br>
-
-                    <div class="form-group row ml-5 right-wrapper">
-                        <button type="submit" class="btn btn-primary btn-right" >Submit</button>
-                    </div>
-                <br>
-
+              <div class="form-group row ml-5 right-wrapper">
+                <button type="submit" class="btn btn-primary btn-right">
+                  Submit
+                </button>
+              </div>
+              <br />
             </div>
+          </div>
         </div>
-    </div>
-</div>
-</form>
-<br>
-<form id="back" th:action="@{/customer/view}">
-    <div class="col-xs-12 col-sm-6 col-md-6">
+      </div>
+    </form>
+    <br />
+    <form id="back" th:action="@{/customer/view}">
+      <div class="col-xs-12 col-sm-6 col-md-6">
         <button type="submit" class="btn btn-primary btn-right">Back</button>
-    </div>
-</form>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<!-- <script>
+      </div>
+    </form>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"
+  ></script>
+  <!-- <script>
     $("#collapseAll").click( function() {
         let button = document.getElementById("continue-btn");
         if(!$('.accordion-header').hasClass("active")){
@@ -231,4 +431,27 @@
     });
 </script> -->
 
+  <script>
+    // Compute age
+    $(document).ready(function () {
+      $('body').on('input', '#birthday', function () {
+        var input = document.getElementById('age')
+
+        var today = new Date()
+        var birthday = $(this).val()
+        var birthDate = new Date(birthday)
+        var computed_age = parseInt(today.getFullYear() - birthDate.getFullYear());
+        
+        console.log(computed_age)
+        var formInfo = document.getElementById('form')
+
+        if (computed_age > 0 && computed_age <100) {
+            input.value = computed_age
+            formInfo.elements['age'].value = computed_age;
+        }else{
+            formInfo.elements['age'].value = 0;
+        }
+      })
+    })
+  </script>
 </html>
