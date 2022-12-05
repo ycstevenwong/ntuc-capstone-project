@@ -39,6 +39,11 @@ body {
     vertical-align: middle;
 }
 
+.btn-text {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+
 .box {
     border-radius: 0;
 }
@@ -170,6 +175,22 @@ body {
     background-color: #5e5858;
     color: white;
     text-align: center;
+}
+
+.table.table-bordered th {
+    border-style: none solid;
+    border-color: #808080;
+    vertical-align: middle;
+}
+
+.table.table-bordered td {
+    border-style: none solid;
+    border-color: #e6e6e6;
+}
+
+.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: rgba(0, 80, 255, 0.075);
 }
 
 @media only screen and (max-width: 768px) {

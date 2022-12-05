@@ -92,27 +92,30 @@ public class CustomerController {
         return new ModelAndView("redirect:/customer/view");
     }
 
-    @GetMapping("/view/page/{pageNo}")
-    public String viewAllPaginatedCustomers(@PathVariable(value = "pageNo") int pageNo, Model model,Object message){
-        // default page size
-        int pageSize = 5;
+    @GetMapping("/view")
+    public String viewAllPaginatedCustomers(
+        @RequestParam(value = "page", defaultValue = "1") Integer page,
+        @RequestParam(value = "pageLimit", defaultValue = "10") Integer pageLimit,
+        Model model,
+        Object message
+    ) {
         isFirstLoad = false;
-        Page<Customer> paginatedCustomers = cService.findPaginatedCustomers(pageNo, pageSize);
+
+        Page<Customer> paginatedCustomers = cService.findPaginatedCustomers(page, pageLimit);
         List<Customer> allCustomers = paginatedCustomers.getContent();
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPages", paginatedCustomers.getTotalPages());
-        model.addAttribute("totalItems", paginatedCustomers.getTotalElements());
-        model.addAttribute("allCustomers", allCustomers);
-        model.addAttribute("customer", new CustomerDto());
+
         model.addAttribute("message", message);
         model.addAttribute("isFirstLoad",isFirstLoad);
-        return "view_all_customers";
-    }
+        model.addAttribute("allCustomers", allCustomers);
+        model.addAttribute("customer", new CustomerDto());
 
-    @GetMapping("/view")
-    public String viewHomePage(Model model, HttpServletRequest request) {
-        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
-        Object message = null; if(inputFlashMap!=null) message = inputFlashMap.get("message");
-        return viewAllPaginatedCustomers(1, model,message);
+        // Pagination for table
+        int numPages = paginatedCustomers.getTotalPages();
+		model.addAttribute("page", page);
+		model.addAttribute("pageLimit", pageLimit);
+		model.addAttribute("lastPage", numPages > 0 ? numPages : 1);
+		model.addAttribute("BASE_URL", "customer/view");
+
+        return "view_all_customers";
     }
 }
