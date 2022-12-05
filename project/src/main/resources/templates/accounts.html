@@ -117,7 +117,7 @@
             <tbody>
             <th:block th:each="account, iterStat : ${accounts}">
                 <tr>
-                    <td><a th:href="@{/transactions/customer/accounts/{accountNumber}(accountNumber=${account.accountNumber})}" th:text="${account.accountNumber}"></a></td>
+                    <td><a th:href="@{/customer/accounts/{accountNumber}(accountNumber=${account.accountNumber})}" th:text="${account.accountNumber}"></a></td>
                     <td th:text="${account.accountType.name}"></td>
                     <td th:text="${account.balance}"></td>
                     <td th:text="${#dates.format(account.registerTime, 'yyyy-MM-dd')}"></td>

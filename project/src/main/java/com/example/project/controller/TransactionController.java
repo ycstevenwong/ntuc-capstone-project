@@ -31,7 +31,7 @@ import com.example.project.repository.AccountRepo;
 import com.example.project.repository.TransactionRepo;
 
 @Controller
-@RequestMapping("/transactions")
+@RequestMapping("/customer/accounts")
 public class TransactionController {
 
 	@Autowired
@@ -51,7 +51,7 @@ public class TransactionController {
 		// Deposit Amount must be MORE THAN ZERO
 		if (amount.equals(new BigDecimal("0"))) {
 			transactionCompletion = false;
-			return "redirect:/transactions/" + accountNumber;
+			return "redirect:/customer/accounts/" + accountNumber;
 		}
 
 		transactionCompletion = true;
@@ -70,7 +70,7 @@ public class TransactionController {
 		transactionRepo.save(transactionRecord);
 		accountRepository.save(account.get());
 
-		return "redirect:/transactions/" + accountNumber;
+		return "redirect:/customer/accounts/" + accountNumber;
 	}
 
 	// End point for withdraw logic that reroute back to main page
@@ -84,7 +84,7 @@ public class TransactionController {
 		// Balance amount must be MORE THAN withdrawn amount
 		if (amount.compareTo(account.get().getBalance()) == 1) {
 			transactionCompletion = false;
-			return "redirect:/transactions/" + accountNumber;
+			return "redirect:/customer/accounts/" + accountNumber;
 		}
 
 		transactionCompletion = true;
@@ -101,11 +101,11 @@ public class TransactionController {
 		transactionRepo.save(transactionRecord);
 		accountRepository.save(account.get());
 
-		return "redirect:/transactions/" + accountNumber;
+		return "redirect:/customer/accounts/" + accountNumber;
 	}
 
 	// Main Display Page for transaction history
-	@GetMapping("/customer/accounts/{accountNum}")
+	@GetMapping("/{accountNum}")
 	public String display(@PathVariable("accountNum") Long accountNum,
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "pageLimit", defaultValue = "10") Integer pageLimit,
@@ -133,7 +133,7 @@ public class TransactionController {
 		model.addAttribute("page", page);
 		model.addAttribute("pageLimit", pageLimit);
 		model.addAttribute("lastPage", records.map(as -> as.getTotalPages()).orElse(1));
-		model.addAttribute("BASE_URL", "transactions");
+		model.addAttribute("BASE_URL", "/customer/accounts");
 
 		return "TransactionHistory";
 	}
