@@ -37,6 +37,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 
 @Controller
+@RequestMapping("/customer")
 public class AccountController {
     @Autowired
     private CustomerRepo customerRepo;
@@ -59,16 +60,13 @@ public class AccountController {
     @Autowired
     TransactionRepo transactionRepo;
 
-
-
-
-    @GetMapping("/accounts")
+    @GetMapping
     public String searchAccounts(
         Model model,
-        @RequestParam("name") Optional<String> nameParam,
         @RequestParam("nric") Optional<String> nricParam,
         @RequestParam("birthDate") @DateTimeFormat(pattern="rrrr-mm-dd") Optional<String> birthDateParam
     ) {
+        System.out.println("POP");
         // TODO: Replace with DateFormatter
         String nric = nricParam.orElse(null);
         LocalDate birthDate;
@@ -82,7 +80,7 @@ public class AccountController {
             birthDate
         );
 
-        Optional<String> redirect = customer.map(c -> "redirect:/accounts/" + c.getId() + "?page=1");
+        Optional<String> redirect = customer.map(c -> "redirect:/customer/" + c.getId() + "?page=1");
         if (redirect.isPresent()) {
             return redirect.get();
         } else {
@@ -92,7 +90,7 @@ public class AccountController {
         }
     }
 
-    @GetMapping("/accounts/{id}")
+    @GetMapping("/{id}")
     public String showCustomerAccounts(
         Model model,
         @PathVariable("id") Long customerId,
@@ -118,7 +116,7 @@ public class AccountController {
 		model.addAttribute("page", page);
 		model.addAttribute("pageLimit", pageLimit);
 		model.addAttribute("lastPage", accounts.map(as -> as.getTotalPages()).orElse(1));
-		model.addAttribute("BASE_URL", "accounts");
+		model.addAttribute("BASE_URL", "customer");
 
 		// For newly added accounts
         List<AccountType> allAccountTypes = aRepo.findAll();
@@ -127,7 +125,7 @@ public class AccountController {
         return "accounts";
     }
 
-    @PostMapping("accounts/add/{id}")
+    @PostMapping("/add/{id}")
     public ModelAndView addAccount(@PathVariable("id") Long customerId, AccountDto account){
         Optional<Customer> customer= customerRepo.findById(customerId);
         AccountType accountType = aRepo.findByName(account.getType()).orElse(null);
@@ -141,10 +139,10 @@ public class AccountController {
                cService.createAccount(newAccount);
            });
        }
-        return new ModelAndView("redirect:/accounts/"+ customerId);
+        return new ModelAndView("redirect:/customer/"+ customerId);
     }
 
-    @RequestMapping("/accounts/getInterest/{accountNumber}")
+    @RequestMapping("/getInterest/{accountNumber}")
     @ResponseBody
     public Map<String,Object> listDetailByNumber(@PathVariable("accountNumber") Long accoNumber){
         Account account = accountService.selectAccountByAccountNumber(accoNumber);
@@ -155,7 +153,7 @@ public class AccountController {
         return map;
     }
 
-    @PostMapping("/accounts/confirmClose/{customerId}")
+    @PostMapping("/confirmClose/{customerId}")
     public String confirmClose(@PathVariable("customerId") Long customerId, String accountNumber, String interest, RedirectAttributes redirectAttributes){
         Long accountNo = Long.valueOf(accountNumber);
         Account account = accountService.selectAccountByAccountNumber(accountNo);
@@ -183,10 +181,10 @@ public class AccountController {
         account.setBalance(new BigDecimal("0"));
         accountService.saveAccount(account);
         dormantAccountService.moveClosedAccountInfoIntoDormant(account);
-        return "redirect:/accounts/"+ customerId;
+        return "redirect:/customer/"+ customerId;
     }
 
-    @RequestMapping("/accounts/renewAccount/{accountNumber}")
+    @RequestMapping("/renewAccount/{accountNumber}")
     @ResponseBody
     public Map<String, Object> renewDetails(@PathVariable("accountNumber") Long accountNumber){
         Account account = accountService.selectAccountByAccountNumber(accountNumber);
@@ -201,7 +199,7 @@ public class AccountController {
         return map;
     }
 
-    @PostMapping("accounts/confirmRenew/{customerId}")
+    @PostMapping("/confirmRenew/{customerId}")
     public String confirmRenew(@PathVariable("customerId") Long customerId, String accountNumber, RedirectAttributes redirectAttributes){
         Long accountNo = Long.valueOf(accountNumber);
         Account account = accountService.selectAccountByAccountNumber(accountNo);
@@ -219,7 +217,7 @@ public class AccountController {
         String successMsg = "Renew account successfully! Your initial balance will be " + renewBalance + "SGD";
         redirectAttributes.addFlashAttribute("successMsg", successMsg);
 
-        return "redirect:/accounts/"+ customerId;
+        return "redirect:/customer/"+ customerId;
     }
 
 

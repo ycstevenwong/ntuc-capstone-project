@@ -46,12 +46,7 @@
         <h2 class="table-title-label col">Accounts</h2>
 <!--        <button type="button" class="btn btn-primary">Add Account</button>-->
         <div th:if="${customer}">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Add Account
-            </button>
-
-            <form method="post" th:action="@{/accounts/add/}+${customer.id}" th:object="${newAccount}">
+            <form method="post" th:action="@{/customer/add/}+${customer.id}" th:object="${newAccount}">
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
                     <div class="modal-dialog">
@@ -171,7 +166,7 @@
 
         <!-- Close Account Modal -->
         <th:block th:if="${customer}">
-            <form id="closeForm" method="post" th:action="@{/accounts/confirmClose/}+${customer.id}">
+            <form id="closeForm" method="post" th:action="@{/customer/confirmClose/}+${customer.id}">
                 <div class="modal fade" data-backdrop="static" data-keyboard="false" id="closeAccountModal" tabindex="-1"
                      aria-labelledby="closeFunctionModalLabel" aria-hidden="true" >
                     <div class="modal-dialog modal-lg">
@@ -243,7 +238,7 @@
             </form>
 
             <!--  Renew Account Modal -->
-            <form method="post" th:action="@{/accounts/confirmRenew/}+${customer.id}">
+            <form method="post" th:action="@{/customer/confirmRenew/}+${customer.id}">
                 <div class="modal fade" data-backdrop="static" data-keyboard="false" id="renewAccountModal" tabindex="-1"
                      aria-labelledby="renewModalLabel" aria-hidden="true" >
                     <div class="modal-dialog modal-lg">
@@ -336,6 +331,12 @@
             </form>
         </th:block>
     </div>
+    <div th:if="${customer}" class="col text-center" style="margin-bottom: 1rem;">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Add Account
+        </button>
+    </div>
     <th:block th:unless="${#lists.isEmpty(accounts)}">
         <th:block th:replace="components/pagination :: base(num=${customer.id})"></th:block>
     </th:block>
@@ -385,7 +386,7 @@
             modal.find('#interestRate').val(interestRate)
 
             $.ajax({
-                url: "/accounts/getInterest/" + accountNo,
+                url: "/customer/getInterest/" + accountNo,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -419,7 +420,7 @@
             modal.find('#renewExpiryDate').val(expiryDate)
 
             $.ajax({
-                url: "/accounts/renewAccount/" + accountNo,
+                url: "/customer/renewAccount/" + accountNo,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {

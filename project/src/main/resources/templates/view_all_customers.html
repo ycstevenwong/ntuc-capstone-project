@@ -19,7 +19,7 @@
     <h1 class="heading">Customers</h1>
     <div class="card search">
         <strong class="card-header">Find Customer</strong>
-        <form th:action="@{/accounts}" class="card-body">
+        <form th:action="@{/customer}" class="card-body">
             <label for="nric" class="col col-form-label">NRIC (last 4 characters)</label>
             <div class="col-sm-4">
                 <input type="text" id="nric" name="nric" maxlength="4" th:value="${secretNric}" required>
@@ -56,7 +56,7 @@
             <tbody>
             <tr th:each="c:${allCustomers}">
                 <td>
-                    <a th:href="@{/accounts/}+${c.getId()}" th:text="${c.getId()}"></a>
+                    <a th:href="@{/customer/}+${c.getId()}" th:text="${c.getId()}"></a>
                 </td>
                 <td th:text="${c.getName()}"></td>
                 <td th:text="${c.getNric()}"></td>
