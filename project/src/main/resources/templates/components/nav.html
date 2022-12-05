@@ -43,13 +43,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li th:class="'nav-item '+ ${isCurrentPage=='Customer'?'active':''}">
-            <a class="nav-link" th:href="@{/customer/view}">Customer<span class="sr-only">(current)</span></a>
-          </li>
-          <li th:class="'nav-item '+ ${isCurrentPage=='Account'?'active':''}">
-            <a class="nav-link" th:href="@{/accounts}">Account</a>
+            <a class="nav-link" th:href="@{/customer/view}">Customers<span class="sr-only">(current)</span></a>
           </li>
           <li th:class="'nav-item '+ ${isCurrentPage=='Product'?'active':''}">
-            <a class="nav-link" th:href="@{/products/view}">Product</a>
+            <a class="nav-link" th:href="@{/products/view}">Products</a>
           </li>
           <li th:class="'nav-item '+ ${isCurrentPage=='Logout'?'active':''}">
             <a class="nav-link" th:href="@{/logout}">Logout</a>

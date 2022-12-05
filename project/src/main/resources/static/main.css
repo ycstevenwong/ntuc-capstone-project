@@ -12,6 +12,13 @@ body {
   	justify-content: space-between;
 }
 
+.heading {
+    font-size:30px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 /* login page */
 .border-gray{
     background-color: rgba(255, 255, 255, 0.7);
@@ -37,6 +44,11 @@ body {
 .icon {
     font-weight: 700;
     vertical-align: middle;
+}
+
+.btn-text {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: 700;
 }
 
 .box {
@@ -93,6 +105,10 @@ body {
     margin-top: 2rem;
 }
 
+.search.card {
+    margin-bottom: 2rem;
+}
+
 .card.news {
     flex-direction: row;
     align-items: center;
@@ -130,7 +146,7 @@ body {
 .alignment {
     padding-left: 4rem;
     padding-right: 4rem;
-    padding-top: 2rem;
+    /* padding-top: 2rem; */
 }
 
 .table-title {
@@ -154,10 +170,6 @@ body {
     vertical-align: middle;
 }
 
-.account-table td {
-    text-align: center;
-}
-
 .table .table-options {
     padding: 0;
 }
@@ -170,6 +182,26 @@ body {
     background-color: #5e5858;
     color: white;
     text-align: center;
+}
+
+.table.table-bordered th {
+    border-style: none solid;
+    border-color: #808080;
+    vertical-align: middle;
+}
+
+.table.table-bordered td {
+    border-style: none solid;
+    border-color: #e6e6e6;
+}
+
+.table-hover tbody tr:hover {
+    color: #212529 !important;
+    background-color: rgba(0, 80, 255, 0.075) !important;
+}
+
+.table-bordered > :not(caption) > * {
+    border-width: 0;
 }
 
 @media only screen and (max-width: 768px) {

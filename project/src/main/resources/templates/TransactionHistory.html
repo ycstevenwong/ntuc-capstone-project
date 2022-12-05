@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Transaction History</title>
+    <title>Account</title>
     <th:block th:replace="components/scripts :: base"></th:block>
     <div th:replace="components/links :: base"></div>
     <link rel="stylesheet" th:href="@{/css/transactionHistory.css}" />
@@ -25,6 +25,7 @@
 
     <!-- Main Content Here -->
     <div class="alignment parent__container">
+      <h1 class="heading">Account</h1>
       <!-- Customer basic profile here -->
       <div class="transaction card">
         <!-- Card Header Customer Profile -->
@@ -150,7 +151,7 @@
       </div>
       <!-- Transaction Table -->
       <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped table-hover text-center">
           <thead class="table-header">
             <tr>
               <th>Date/Time</th>
