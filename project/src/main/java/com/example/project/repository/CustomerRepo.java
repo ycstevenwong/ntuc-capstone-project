@@ -14,9 +14,8 @@ import com.example.project.model.Customer;
  * @Version 1.0
  */
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
-    @Query("select c from Customer c where c.name like %:name% and substring(c.nric, length(c.nric) - 3) = :nricLast4Chars and c.birthDate = :birthDate")
+    @Query("select c from Customer c where substring(c.nric, length(c.nric) - 3) = :nricLast4Chars and c.birthDate = :birthDate")
     Optional<Customer> findCustomer(
-        @Param("name") String name,
         @Param("nricLast4Chars") String nricLast4Chars,
         @Param("birthDate") LocalDate birthDate
     );

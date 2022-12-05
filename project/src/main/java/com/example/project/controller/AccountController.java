@@ -70,7 +70,6 @@ public class AccountController {
         @RequestParam("birthDate") @DateTimeFormat(pattern="rrrr-mm-dd") Optional<String> birthDateParam
     ) {
         // TODO: Replace with DateFormatter
-        String name = nameParam.orElse(null);
         String nric = nricParam.orElse(null);
         LocalDate birthDate;
         try {
@@ -79,7 +78,6 @@ public class AccountController {
             birthDate = null;
         }
         Optional<Customer> customer = customerRepo.findCustomer(
-            name,
             nric,
             birthDate
         );
@@ -88,7 +86,6 @@ public class AccountController {
         if (redirect.isPresent()) {
             return redirect.get();
         } else {
-            model.addAttribute("name", name);
             model.addAttribute("secretNric", nric);
             model.addAttribute("birthDate", birthDate);
             return "accounts";

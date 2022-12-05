@@ -105,6 +105,10 @@ body {
     margin-top: 2rem;
 }
 
+.search.card {
+    margin-bottom: 2rem;
+}
+
 .card.news {
     flex-direction: row;
     align-items: center;

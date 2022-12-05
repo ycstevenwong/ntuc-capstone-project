@@ -26,27 +26,6 @@
 <div class="alignment">
     <h1 class="heading">Customer</h1>
     <div class="card accounts">
-        <strong class="card-header">Find Customer</strong>
-        <form th:action="@{/accounts}" class="card-body">
-            <label for="name" class="col col-form-label">Name</label>
-            <div class="col-sm-4">
-                <input type="text" id="name" name="name" th:value="${name}">
-            </div>
-            <label for="nric" class="col col-form-label">NRIC (last 4 characters)</label>
-            <div class="col-sm-4">
-                <input type="text" id="nric" name="nric" maxlength="4" th:value="${secretNric}">
-            </div>
-            <label for="birthDate" class="col col-form-label">Date Of Birth</label>
-            <div class="col-sm-4">
-                <input type="date" id="birthDate" name="birthDate" th:value="${birthDate}">
-            </div>
-            <br>
-            <div class="col-sm-4">
-                <input type="submit" value="Search" class="btn btn-primary">
-            </div>
-        </form>
-    </div>
-    <div class="card accounts">
         <strong class="card-header">Customer Profile</strong>
         <div th:if="${customer}" class="card-body">
             <div class="row">
@@ -64,7 +43,7 @@
         </div>
     </div>
     <div class="table-title row">
-        <h2 class="table-title-label col">Customer Accounts</h2>
+        <h2 class="table-title-label col">Accounts</h2>
 <!--        <button type="button" class="btn btn-primary">Add Account</button>-->
         <div th:if="${customer}">
             <!-- Button trigger modal -->
