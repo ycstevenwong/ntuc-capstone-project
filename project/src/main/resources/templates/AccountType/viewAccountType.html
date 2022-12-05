@@ -13,14 +13,14 @@
     <h1>No Account Type is available</h1>
 </div>
 <div class="row justify-content-center ">
-    <div class="col-auto w-75">
-        <table class="table table-striped text-center ">
-            <thead>
+    <div class="col-auto w-75 table-responsive">
+        <table class="table table-bordered table-striped table-hover text-center">
+            <thead class="table-header">
             <tr>
                 <th scope="col">Account Name</th>
                 <th scope="col">Account Interest Rate</th>
                 <th scope="col">Valid Period</th>
-                <th scope="col" colspan="2">Options</th>
+                <th scope="col">Options</th>
             </tr>
             </thead>
             <tbody>
@@ -28,8 +28,13 @@
                 <td th:text="${accountType.name}"></td>
                 <td th:text="${accountType.interestRate}"></td>
                 <td th:text="${accountType.validYearsOfPeriod} + ' year(s)' "></td>
-                <td><a th:href="@{/editproduct/__${accountType.id}__}">Edit</a></td>
-                <td><a th:href="@{/deleteproduct/__${accountType.id}__}">Delete</a></td>
+                <td>
+                    <div class="btn-group">
+                        <a role="button" class="btn btn-primary" th:ref="@{/editproduct/__${accountType.id}__}">Edit</a>
+                       <a role="button" class="btn btn-danger" th:ref="@{/deleteproduct/__${accountType.id}__}">Delete</a>
+                    </div>
+                    <!-- <td><a th:href="@{/deleteproduct/__${accountType.id}__}">Delete</a></td> -->
+                </td>
             </tr>
             </tbody>
         </table>
