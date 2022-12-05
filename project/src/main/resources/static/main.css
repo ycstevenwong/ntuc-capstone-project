@@ -159,7 +159,7 @@ body {
     vertical-align: middle;
 }
 
-.account-table td {
+.table td {
     text-align: center;
 }
 
@@ -191,6 +191,10 @@ body {
 .table-hover tbody tr:hover {
     color: #212529;
     background-color: rgba(0, 80, 255, 0.075);
+}
+
+.table-bordered > :not(caption) > * {
+    border-width: 0;
 }
 
 @media only screen and (max-width: 768px) {
