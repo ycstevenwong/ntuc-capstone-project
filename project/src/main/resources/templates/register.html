@@ -198,7 +198,7 @@
                     <div class="form-group row ml-5">
                         <label for="initialdeposit" class="col-sm-2 col-form-label">Initial Deposit: </label>
                         <div class="col-sm-5">
-                            <input type="number" class="form-control" id="initialdeposit" th:field="${account.initialBalance}" >
+                            <input type="number" class="form-control" min="1" id="initialdeposit" th:field="${account.initialBalance}" >
                         </div>
 
                     </div>
