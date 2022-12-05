@@ -97,14 +97,16 @@ public class CustomerController {
         @RequestParam(value = "page", defaultValue = "1") Integer page,
         @RequestParam(value = "pageLimit", defaultValue = "10") Integer pageLimit,
         Model model,
-        Object message
+        HttpServletRequest request
     ) {
-        isFirstLoad = false;
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+        Object message = null; if(inputFlashMap!=null) message = inputFlashMap.get("message");
+        model.addAttribute("message", message);
 
         Page<Customer> paginatedCustomers = cService.findPaginatedCustomers(page, pageLimit);
         List<Customer> allCustomers = paginatedCustomers.getContent();
+        isFirstLoad = false;
 
-        model.addAttribute("message", message);
         model.addAttribute("isFirstLoad",isFirstLoad);
         model.addAttribute("allCustomers", allCustomers);
         model.addAttribute("customer", new CustomerDto());
