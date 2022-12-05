@@ -154,17 +154,6 @@
                     <td th:id=" 'expiryTime'+${iterStat.count} " th:text="${#dates.format(account.expiryTime, 'yyyy-MM-dd')}"></td>
                     <td class="table-options">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger"
-                                    th:accountNo="${account.accountNumber}"
-                                    th:customerName="${account.customer.name}"
-                                    th:customerNric="${account.customer.nric}"
-                                    th:accountType="${account.accountType.name}"
-                                    th:accountBalance="${account.balance}"
-                                    th:interestRate="${account.accountType.interestRate}"
-                                    data-toggle="modal"
-                                    data-target="#closeAccountModal">
-                                Close Account
-                            </button>
 
                             <button type="button" class="btn btn-primary" th:id=" 'renewBtn'+${iterStat.count} "
                                     th:accountNo="${account.accountNumber}"
@@ -179,6 +168,19 @@
                                     data-target="#renewAccountModal">
                                 Renew Account
                             </button>
+
+                            <button type="button" class="btn btn-danger"
+                                    th:accountNo="${account.accountNumber}"
+                                    th:customerName="${account.customer.name}"
+                                    th:customerNric="${account.customer.nric}"
+                                    th:accountType="${account.accountType.name}"
+                                    th:accountBalance="${account.balance}"
+                                    th:interestRate="${account.accountType.interestRate}"
+                                    data-toggle="modal"
+                                    data-target="#closeAccountModal">
+                                Close Account
+                            </button>
+
                         </div>
                     </td>
                 </tr>
@@ -383,7 +385,8 @@
             if(expiryTime > now){
                 let renewId = "renewBtn" + i;
                 $("#" + renewId).attr("disabled",true)
-                $("#" + renewId).text("Cannot Renew Account")
+                // $("#" + renewId).text("Cannot Renew Account")
+                $("#" + renewId).css({"backgroundColor":"#B9B8B8", "border-color": "#B9B8B8"})
             }
         }
 
