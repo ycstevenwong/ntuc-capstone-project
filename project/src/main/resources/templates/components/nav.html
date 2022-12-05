@@ -45,9 +45,6 @@
           <li th:class="'nav-item '+ ${isCurrentPage=='Customer'?'active':''}">
             <a class="nav-link" th:href="@{/customer/view}">Customer<span class="sr-only">(current)</span></a>
           </li>
-          <li th:class="'nav-item '+ ${isCurrentPage=='Account'?'active':''}">
-            <a class="nav-link" th:href="@{/accounts}">Account</a>
-          </li>
           <li th:class="'nav-item '+ ${isCurrentPage=='Product'?'active':''}">
             <a class="nav-link" th:href="@{/products/view}">Product</a>
           </li>
